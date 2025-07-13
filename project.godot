@@ -1,4 +1,4 @@
-; Engine configuration file.
+Engine configuration file.
 ; It's best edited using the editor UI and not directly,
 ; since the parameters that go here are not all obvious.
 ;
@@ -30,7 +30,11 @@ gdscript/warnings/unsafe_call_argument=2
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/gdterm/plugin.cfg", "res://addons/godot-vim/plugin.cfg")
+enabled=PackedStringArray("res://addons/gdterm/plugin.cfg)
+[display]
+
+window/size/viewport_width=1280
+window/size/viewport_height=720
 
 [rendering]
 
