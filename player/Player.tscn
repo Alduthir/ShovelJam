@@ -17,16 +17,19 @@ animations = [{
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_x8kxw"]
 height = 90.0
 
-[node name="Player" type="Area2D"]
+[node name="Player" type="Area2D" groups=["Player"]]
+collision_mask = 0
 script = ExtResource("1_3c3w1")
-speed = null
 metadata/_edit_group_ = true
 
 [node name="Sprite" type="AnimatedSprite2D" parent="."]
+unique_name_in_owner = true
 scale = Vector2(0.25, 0.25)
 sprite_frames = SubResource("SpriteFrames_83hs8")
 animation = &"Idle"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape" type="CollisionShape2D" parent="."]
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_x8kxw")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
