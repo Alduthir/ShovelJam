@@ -10,6 +10,7 @@ signal hit
 @onready var player_animation : AnimatedSprite2D = %Sprite as AnimatedSprite2D
 @onready var player_collision : CollisionShape2D = %CollisionShape as CollisionShape2D
 @onready var shoot_cooldown : Timer = %ShootCooldownTimer as Timer
+@onready var damage_cooldown : Timer = %DamageCooldownTimer as Timer
 @onready var bullet_sound : AudioStreamPlayer2D = %BulletAudioStream as AudioStreamPlayer2D
 
 @onready var screen_size : Vector2 = get_viewport_rect().size
@@ -21,6 +22,7 @@ var sprite_size : Vector2
 var screen_size_to_adjust : Vector2
 
 var can_shoot : bool = true
+var can_take_damage : bool = true
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -63,12 +65,10 @@ func shoot() -> void:
 		pass
 	elif Input.is_action_pressed("shoot") and can_shoot:
 		can_shoot = false
-		var bullet : Bullet = bullet_scene.instantiate()
+		var bullet : PlayerBullet = bullet_scene.instantiate()
 		# TODO: if nose tipping is added, add that tipping rotation to the bullet's rotation
 		bullet.position = position + Vector2(100, 0)
 		
-		bullet_sound.stream = bullet.sound
-		bullet_sound.play()
 		
 		add_sibling(bullet)
 		shoot_cooldown.start()
@@ -76,10 +76,23 @@ func shoot() -> void:
 		can_shoot = true
 
 func _on_body_entered(body: Node2D) -> void:
+	if !can_take_damage:
+		pass
+	can_take_damage = false
 	hit.emit()
-	# TODO: take damage, destroy minor enemies and bullets on hit, give cooldown
-	# all obstacles, enemies, bullets we can get hit by, should have an int/float for damage
-	body.set_deferred("disabled", true)
+
+	if body is DamageEntityBase:
+		var damage_base : DamageEntityBase = body as DamageEntityBase
+		health -= damage_base.damage
+		if health <= 0:
+			print("you died")
+			hide()
+			# TODO: death logic here
+			
+		print(health)
+		# TODO blink plane to show invunerability frames, add timer to set hit to active again
+		await damage_cooldown.timeout
+		can_take_damage = true
 	
 func start(pos: Vector2) -> void:
 	position = pos

@@ -1,0 +1,42 @@
+[gd_scene load_steps=6 format=3 uid="uid://dif4grrfalpcq"]
+
+[ext_resource type="Texture2D" uid="uid://b0kcao2di1jed" path="res://player/sprites/player-plane.jpg" id="1_u46us"]
+[ext_resource type="Script" uid="uid://cn1nsruw0ivrq" path="res://enemies/default_enemy.gd" id="1_vc073"]
+[ext_resource type="PackedScene" uid="uid://c5hybfksjbosb" path="res://enemies/default_enemy_bullet.tscn" id="2_bodb7"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_vc073"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_u46us")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_u46us"]
+radius = 20.0
+height = 180.0
+
+[node name="DefaultEnemy" type="RigidBody2D" groups=["Enemy"]]
+gravity_scale = 0.0
+script = ExtResource("1_vc073")
+health = 20.0
+speed = 150
+shoot_cooldown_min = 3.0
+shoot_cooldown_max = 6.0
+bullet_scene = ExtResource("2_bodb7")
+damage = 50.0
+metadata/_edit_group_ = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+rotation = -3.14159
+scale = Vector2(0.5, 0.5)
+sprite_frames = SubResource("SpriteFrames_vc073")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_u46us")
+
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="."]
