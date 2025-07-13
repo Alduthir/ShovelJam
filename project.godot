@@ -43,7 +43,7 @@ gdscript/warnings/unsafe_call_argument=2
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/gdterm/plugin.cfg", "res://addons/godot-vim/plugin.cfg")
+enabled=PackedStringArray("res://addons/gdterm/plugin.cfg")
 
 [input]
 
