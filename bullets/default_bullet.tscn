@@ -1,0 +1,41 @@
+[gd_scene load_steps=6 format=3 uid="uid://ja4082f8vsu4"]
+
+[ext_resource type="Script" uid="uid://djw4tdrbsapmb" path="res://bullets/scripts/DefaultBullet.gd" id="1_x7rqm"]
+[ext_resource type="Texture2D" uid="uid://dpcs1p2djotfx" path="res://bullets/sprites/bullet.png" id="2_5262s"]
+[ext_resource type="AudioStream" uid="uid://d1xphawr0d34g" path="res://bullets/audio/shoot.wav" id="2_urytm"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_1pvg4"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_5262s")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5262s"]
+size = Vector2(56, 8)
+
+[node name="DefaultBullet" type="RigidBody2D" groups=["Player"]]
+collision_mask = 0
+gravity_scale = 0.0
+script = ExtResource("1_x7rqm")
+damage = 10
+speed = 600
+sound = ExtResource("2_urytm")
+metadata/_edit_group_ = true
+
+[node name="Sprite" type="AnimatedSprite2D" parent="."]
+unique_name_in_owner = true
+scale = Vector2(0.05, 0.05)
+sprite_frames = SubResource("SpriteFrames_1pvg4")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -3)
+shape = SubResource("RectangleShape2D_5262s")
+
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="."]
+
+[connection signal="screen_exited" from="VisibleOnScreenEnabler2D" to="." method="_on_visible_on_screen_enabler_2d_screen_exited"]
