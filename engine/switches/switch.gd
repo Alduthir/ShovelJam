@@ -1,8 +1,11 @@
 class_name Switch extends Area2D
 
 var is_turned_on := true : set = set_turned_on
+var switch_on_texture := preload("res://engine/switches/switch_on.png")
+var switch_off_texture := preload("res://engine/switches/switch_off.png")
 
 @onready var sprite : Sprite2D = %Sprite2D as Sprite2D
+
 signal switch_flipped
 
 func _ready() -> void:
@@ -19,6 +22,6 @@ func set_turned_on(new_value: bool) -> void:
 
 func set_switch_color() -> void:
 	if is_turned_on:
-		sprite.modulate = Color.from_rgba8(0,255,0)
+		sprite.texture = switch_on_texture
 	else: 
-		sprite.modulate = Color.from_rgba8(255,255,255)
+		sprite.texture = switch_off_texture
