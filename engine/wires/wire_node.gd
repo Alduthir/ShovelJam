@@ -21,7 +21,7 @@ var is_connected := false
 func _ready() -> void:
 	modulate = Color.from_rgba8(red, green, blue)
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if Input.is_action_just_released("lmb"):
 		dragging = false
 		for child in get_children():
@@ -37,7 +37,7 @@ func _process(delta: float) -> void:
 			line.add_point(get_local_mouse_position())
 
 
-func _on_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
+func _on_input_event(_viewport: Node, _event: InputEvent, _shape_idx: int) -> void:
 	if Input.is_action_just_pressed("lmb") and is_connected == false:
 		dragging = true
 		line = Line2D.new()
