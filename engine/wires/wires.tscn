@@ -1,0 +1,39 @@
+[gd_scene load_steps=3 format=3 uid="uid://qkrhe31vbry5"]
+
+[ext_resource type="Script" uid="uid://w07t6a2gfpkc" path="res://engine/wires/wires.gd" id="1_bjppx"]
+[ext_resource type="PackedScene" uid="uid://j0lo8jsdj0nf" path="res://engine/wires/WireNode.tscn" id="2_l72k0"]
+
+[node name="Wires" type="Node2D"]
+script = ExtResource("1_bjppx")
+
+[node name="WireNode" parent="." node_paths=PackedStringArray("linked_node") instance=ExtResource("2_l72k0")]
+position = Vector2(38, 24)
+linked_node = NodePath("../WireNode5")
+
+[node name="WireNode2" parent="." node_paths=PackedStringArray("linked_node") instance=ExtResource("2_l72k0")]
+position = Vector2(38, 64)
+green = 255
+blue = 0
+linked_node = NodePath("../WireNode6")
+
+[node name="WireNode3" parent="." node_paths=PackedStringArray("linked_node") instance=ExtResource("2_l72k0")]
+position = Vector2(38, 104)
+red = 255
+blue = 0
+linked_node = NodePath("../WireNode4")
+
+[node name="WireNode4" parent="." node_paths=PackedStringArray("linked_node") instance=ExtResource("2_l72k0")]
+position = Vector2(280, 24)
+red = 255
+blue = 0
+linked_node = NodePath("../WireNode3")
+
+[node name="WireNode5" parent="." node_paths=PackedStringArray("linked_node") instance=ExtResource("2_l72k0")]
+position = Vector2(280, 64)
+linked_node = NodePath("../WireNode")
+
+[node name="WireNode6" parent="." node_paths=PackedStringArray("linked_node") instance=ExtResource("2_l72k0")]
+position = Vector2(280, 104)
+green = 255
+blue = 0
+linked_node = NodePath("../WireNode2")
