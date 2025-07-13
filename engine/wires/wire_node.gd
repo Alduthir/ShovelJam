@@ -16,7 +16,9 @@ class_name WireNode extends Area2D
 var line : Line2D = null
 var has_mouse := false
 var dragging := false
-var is_connected := false
+var is_connected := false : set = set_connected
+
+signal line_connected
 
 func _ready() -> void:
 	modulate = Color.from_rgba8(red, green, blue)
@@ -52,3 +54,8 @@ func _on_mouse_entered() -> void:
 
 func _on_mouse_exited() -> void:
 	has_mouse = false
+
+func set_connected(new_value: bool) -> void:
+	is_connected = new_value
+	if is_connected:
+		line_connected.emit()

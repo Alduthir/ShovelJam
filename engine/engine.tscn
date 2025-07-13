@@ -1,16 +1,26 @@
-[gd_scene load_steps=4 format=3 uid="uid://br05f64km1gja"]
+[gd_scene load_steps=6 format=3 uid="uid://br05f64km1gja"]
 
+[ext_resource type="Script" uid="uid://cfhd032g6w06r" path="res://engine/engine.gd" id="1_bq62t"]
 [ext_resource type="PackedScene" uid="uid://qkrhe31vbry5" path="res://engine/wires/wires.tscn" id="1_l22x7"]
 [ext_resource type="PackedScene" uid="uid://witytlvjln5p" path="res://engine/pump/pump.tscn" id="2_fisw6"]
-[ext_resource type="PackedScene" uid="uid://xacteqntlc0g" path="res://engine/spin/spinwheel.tscn" id="3_h3hk1"]
+[ext_resource type="PackedScene" uid="uid://xacteqntlc0g" path="res://engine/gears/gears.tscn" id="3_h3hk1"]
+[ext_resource type="PackedScene" uid="uid://dcxgbpbmp8dbj" path="res://engine/switches/switches.tscn" id="4_rkv7k"]
 
-[node name="Engine" type="Node"]
+[node name="Reactor" type="Node"]
+script = ExtResource("1_bq62t")
 
 [node name="Wires" parent="." instance=ExtResource("1_l22x7")]
-position = Vector2(93, 579)
+unique_name_in_owner = true
+position = Vector2(70, 577)
 
 [node name="Pump" parent="." instance=ExtResource("2_fisw6")]
-position = Vector2(131, 285)
+unique_name_in_owner = true
+position = Vector2(782, 639)
 
-[node name="Spinwheel" parent="." instance=ExtResource("3_h3hk1")]
-position = Vector2(849, 300)
+[node name="Gears" parent="." instance=ExtResource("3_h3hk1")]
+unique_name_in_owner = true
+position = Vector2(517, 642)
+
+[node name="Switches" parent="." instance=ExtResource("4_rkv7k")]
+unique_name_in_owner = true
+position = Vector2(1067, 576)

@@ -1,3 +1,25 @@
-[gd_scene format=3 uid="uid://dcxgbpbmp8dbj"]
+[gd_scene load_steps=3 format=3 uid="uid://dcxgbpbmp8dbj"]
+
+[ext_resource type="PackedScene" uid="uid://bjissbr1va8t7" path="res://engine/switches/Switch.tscn" id="1_m5y1i"]
+[ext_resource type="Script" uid="uid://b18wx356w672m" path="res://engine/switches/switches.gd" id="1_o4w26"]
 
 [node name="Switches" type="Node2D"]
+script = ExtResource("1_o4w26")
+
+[node name="Switch1" parent="." instance=ExtResource("1_m5y1i")]
+position = Vector2(32, 32)
+
+[node name="Switch2" parent="." instance=ExtResource("1_m5y1i")]
+position = Vector2(96, 32)
+
+[node name="Switch3" parent="." instance=ExtResource("1_m5y1i")]
+position = Vector2(160, 32)
+
+[node name="Switch4" parent="." instance=ExtResource("1_m5y1i")]
+position = Vector2(32, 96)
+
+[node name="Switch5" parent="." instance=ExtResource("1_m5y1i")]
+position = Vector2(96, 96)
+
+[node name="Switch6" parent="." instance=ExtResource("1_m5y1i")]
+position = Vector2(160, 96)
