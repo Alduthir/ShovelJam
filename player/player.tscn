@@ -1,14 +1,14 @@
 [gd_scene load_steps=6 format=3 uid="uid://dgsri73h5qq53"]
 
-[ext_resource type="Script" uid="uid://bs8xji23fhs6m" path="res://player/scripts/Player.gd" id="1_3c3w1"]
-[ext_resource type="PackedScene" uid="uid://ja4082f8vsu4" path="res://bullets/default_bullet.tscn" id="2_83hs8"]
-[ext_resource type="Texture2D" uid="uid://b0kcao2di1jed" path="res://player/sprites/player/player-plane.jpg" id="2_wnvi2"]
+[ext_resource type="Script" uid="uid://bs8xji23fhs6m" path="res://player/scripts/player.gd" id="1_g1dw6"]
+[ext_resource type="PackedScene" uid="uid://ja4082f8vsu4" path="res://bullets/default_bullet.tscn" id="2_yw30f"]
+[ext_resource type="Texture2D" uid="uid://b0kcao2di1jed" path="res://player/sprites/player-plane.jpg" id="3_qjkh3"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_83hs8"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("2_wnvi2")
+"texture": ExtResource("3_qjkh3")
 }],
 "loop": true,
 "name": &"Idle",
@@ -20,8 +20,8 @@ height = 90.0
 
 [node name="Player" type="Area2D" groups=["Player"]]
 collision_mask = 0
-script = ExtResource("1_3c3w1")
-bullet_scene = ExtResource("2_83hs8")
+script = ExtResource("1_g1dw6")
+bullet_scene = ExtResource("2_yw30f")
 metadata/_edit_group_ = true
 
 [node name="Sprite" type="AnimatedSprite2D" parent="."]
@@ -38,7 +38,11 @@ shape = SubResource("CapsuleShape2D_x8kxw")
 [node name="ShootCooldownTimer" type="Timer" parent="."]
 unique_name_in_owner = true
 
+[node name="DamageCooldownTimer" type="Timer" parent="."]
+unique_name_in_owner = true
+wait_time = 3.0
+
 [node name="BulletAudioStream" type="AudioStreamPlayer2D" parent="."]
 unique_name_in_owner = true
 
-[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]

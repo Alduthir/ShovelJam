@@ -1,3 +1,11 @@
-[gd_scene format=3 uid="uid://bms73m1kyij77"]
+[gd_scene load_steps=3 format=3 uid="uid://bms73m1kyij77"]
+
+[ext_resource type="PackedScene" uid="uid://ladjpfd0okxd" path="res://enemies/enemy_spawner.tscn" id="1_pi5jr"]
+[ext_resource type="PackedScene" uid="uid://dgsri73h5qq53" path="res://player/player.tscn" id="2_74kyy"]
 
 [node name="Testlevel" type="Node2D"]
+
+[node name="EnemySpawner" parent="." instance=ExtResource("1_pi5jr")]
+
+[node name="Player" parent="." instance=ExtResource("2_74kyy")]
+collision_mask = 1
