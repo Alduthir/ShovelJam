@@ -1,19 +1,16 @@
-[gd_scene format=3 uid="uid://br05f64km1gja"]
+[gd_scene load_steps=4 format=3 uid="uid://br05f64km1gja"]
 
-[node name="Engine" type="Control"]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+[ext_resource type="PackedScene" uid="uid://qkrhe31vbry5" path="res://engine/wires/wires.tscn" id="1_l22x7"]
+[ext_resource type="PackedScene" uid="uid://witytlvjln5p" path="res://engine/pump/pump.tscn" id="2_fisw6"]
+[ext_resource type="PackedScene" uid="uid://xacteqntlc0g" path="res://engine/spin/spinwheel.tscn" id="3_h3hk1"]
 
-[node name="PanelContainer" type="PanelContainer" parent="."]
-layout_mode = 1
-anchors_preset = 12
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_top = -150.0
-grow_horizontal = 2
-grow_vertical = 0
+[node name="Engine" type="Node"]
+
+[node name="Wires" parent="." instance=ExtResource("1_l22x7")]
+position = Vector2(93, 579)
+
+[node name="Pump" parent="." instance=ExtResource("2_fisw6")]
+position = Vector2(131, 285)
+
+[node name="Spinwheel" parent="." instance=ExtResource("3_h3hk1")]
+position = Vector2(849, 300)
