@@ -1,26 +1,63 @@
-[gd_scene load_steps=6 format=3 uid="uid://br05f64km1gja"]
+[gd_scene load_steps=10 format=3 uid="uid://br05f64km1gja"]
 
 [ext_resource type="Script" uid="uid://cfhd032g6w06r" path="res://engine/engine.gd" id="1_bq62t"]
 [ext_resource type="PackedScene" uid="uid://qkrhe31vbry5" path="res://engine/wires/wires.tscn" id="1_l22x7"]
+[ext_resource type="Texture2D" uid="uid://c5ssm3ukpupxm" path="res://engine/dashboard.png" id="2_cwfde"]
 [ext_resource type="PackedScene" uid="uid://witytlvjln5p" path="res://engine/pump/pump.tscn" id="2_fisw6"]
 [ext_resource type="PackedScene" uid="uid://xacteqntlc0g" path="res://engine/gears/gears.tscn" id="3_h3hk1"]
+[ext_resource type="Texture2D" uid="uid://bwx5wif5fibmo" path="res://engine/hexagons.png" id="4_i0x48"]
+[ext_resource type="Texture2D" uid="uid://dqj8s1i0b4xa3" path="res://engine/light_container.png" id="4_n1y8t"]
 [ext_resource type="PackedScene" uid="uid://dcxgbpbmp8dbj" path="res://engine/switches/switches.tscn" id="4_rkv7k"]
+[ext_resource type="Texture2D" uid="uid://c8s8gqdmj5hna" path="res://engine/light_red.png" id="5_i0x48"]
 
 [node name="Reactor" type="Node"]
 script = ExtResource("1_bq62t")
 
+[node name="Dashboard" type="Sprite2D" parent="."]
+position = Vector2(638, 649)
+texture = ExtResource("2_cwfde")
+
+[node name="Hexagons" type="Sprite2D" parent="Dashboard"]
+modulate = Color(0.592157, 1, 1, 0.141176)
+texture = ExtResource("4_i0x48")
+
+[node name="LightContainer" type="Sprite2D" parent="Dashboard"]
+position = Vector2(0, -61)
+texture = ExtResource("4_n1y8t")
+
+[node name="Light1" type="Sprite2D" parent="Dashboard/LightContainer"]
+unique_name_in_owner = true
+position = Vector2(-33, -2)
+texture = ExtResource("5_i0x48")
+
+[node name="Light2" type="Sprite2D" parent="Dashboard/LightContainer"]
+unique_name_in_owner = true
+position = Vector2(-12, -2)
+texture = ExtResource("5_i0x48")
+
+[node name="Light3" type="Sprite2D" parent="Dashboard/LightContainer"]
+unique_name_in_owner = true
+position = Vector2(10, -2)
+texture = ExtResource("5_i0x48")
+
+[node name="Light4" type="Sprite2D" parent="Dashboard/LightContainer"]
+unique_name_in_owner = true
+position = Vector2(31, -2)
+texture = ExtResource("5_i0x48")
+
 [node name="Wires" parent="." instance=ExtResource("1_l22x7")]
 unique_name_in_owner = true
-position = Vector2(70, 577)
+position = Vector2(243, 587)
 
 [node name="Pump" parent="." instance=ExtResource("2_fisw6")]
 unique_name_in_owner = true
-position = Vector2(782, 639)
+position = Vector2(757, 675)
 
 [node name="Gears" parent="." instance=ExtResource("3_h3hk1")]
 unique_name_in_owner = true
-position = Vector2(517, 642)
+position = Vector2(524, 661)
+scale = Vector2(0.9, 0.9)
 
 [node name="Switches" parent="." instance=ExtResource("4_rkv7k")]
 unique_name_in_owner = true
-position = Vector2(1067, 576)
+position = Vector2(1000, 612)

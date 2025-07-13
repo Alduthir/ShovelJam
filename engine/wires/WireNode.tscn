@@ -1,19 +1,21 @@
 [gd_scene load_steps=4 format=3 uid="uid://j0lo8jsdj0nf"]
 
-[ext_resource type="Texture2D" uid="uid://bso0rmnc02kdv" path="res://icon.svg" id="1_j0040"]
 [ext_resource type="Script" uid="uid://cavi5axvh4uj4" path="res://engine/wires/wire_node.gd" id="1_pgr4y"]
+[ext_resource type="Texture2D" uid="uid://ocllfd5d3mfs" path="res://engine/wires/wire_blue.png" id="2_pgr4y"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pgr4y"]
-size = Vector2(72, 26)
+size = Vector2(40, 21)
 
 [node name="WireNode" type="Area2D"]
 script = ExtResource("1_pgr4y")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.571, 0.2)
-texture = ExtResource("1_j0040")
+unique_name_in_owner = true
+scale = Vector2(3, 3)
+texture = ExtResource("2_pgr4y")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-4, 0)
 shape = SubResource("RectangleShape2D_pgr4y")
 
 [connection signal="input_event" from="." to="." method="_on_input_event"]

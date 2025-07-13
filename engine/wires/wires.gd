@@ -13,7 +13,7 @@ func _ready() -> void:
 func check_lines()->void:
 	var all_lines_connected := true
 	for wire_node : WireNode in wire_nodes:
-		if wire_node.is_connected == false and wire_node.linked_node.is_connected == false:
+		if wire_node.is_connected == false:
 			all_lines_connected = false
 	
 	if all_lines_connected:

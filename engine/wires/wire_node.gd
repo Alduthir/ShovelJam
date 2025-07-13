@@ -1,15 +1,9 @@
 class_name WireNode extends Area2D
 
-@export_category("Bounds")
-@export var line_min_x := 0
-@export var line_max_x := 400
-@export var line_min_y := 570
-@export var line_max_y := 720
-
-@export_category("Color")
-@export_range(0,255,1) var red := 0
-@export_range(0,255,1) var green := 0
-@export_range(0,255,1) var blue := 255
+@export_category("Appearance")
+@export_color_no_alpha var color : Color
+@export var texture : Texture2D = preload("res://engine/wires/wire_blue.png")
+@export var is_flipped := false
 
 @export var linked_node : WireNode
 
@@ -17,35 +11,55 @@ var line : Line2D = null
 var has_mouse := false
 var dragging := false
 var is_connected := false : set = set_connected
+var line_max_length := 220.0
+var previous_mouse_position := Vector2.ZERO
+var draw_length := 0.0
+
+@onready var sprite : Sprite2D = %Sprite2D
+@onready var polygon : Polygon2D = %Polygon2D
 
 signal line_connected
 
 func _ready() -> void:
-	modulate = Color.from_rgba8(red, green, blue)
-
+	sprite.texture = texture
+	if is_flipped:
+		sprite.flip_h = true
+	
+	
 func _process(_delta: float) -> void:
 	if Input.is_action_just_released("lmb"):
+		draw_length = 0.0
 		dragging = false
 		for child in get_children():
 			if child is Line2D:
 				if linked_node.has_mouse:
 					is_connected = true
+					linked_node.is_connected = true
 				elif is_connected == false: 
 					child.queue_free()
 					
 	if line != null and dragging:
-		var mouse_position := get_global_mouse_position()
-		if mouse_position.x < line_max_x and mouse_position.x > line_min_x and mouse_position.y < line_max_y and mouse_position.y > line_min_y:
+		draw_length += previous_mouse_position.distance_to(get_global_mouse_position())
+		previous_mouse_position = get_global_mouse_position()
+		if draw_length < line_max_length:
 			line.add_point(get_local_mouse_position())
+		else : 
+			for child in get_children():
+				if child is Line2D:
+					child.queue_free()
 
 
 func _on_input_event(_viewport: Node, _event: InputEvent, _shape_idx: int) -> void:
 	if Input.is_action_just_pressed("lmb") and is_connected == false:
 		dragging = true
 		line = Line2D.new()
-		line.default_color = Color.from_rgba8(red, green, blue)
+		line.z_index += 1
+		line.width = 20
+		line.default_color = color
 		line.add_point(get_local_mouse_position())
 		add_child(line)
+		draw_length = 0.0
+		previous_mouse_position = get_global_mouse_position()
 
 
 func _on_mouse_entered() -> void:

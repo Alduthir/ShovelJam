@@ -1,28 +1,36 @@
-[gd_scene load_steps=4 format=3 uid="uid://witytlvjln5p"]
+[gd_scene load_steps=6 format=3 uid="uid://witytlvjln5p"]
 
 [ext_resource type="Script" uid="uid://c3a2roh7mjmrg" path="res://engine/pump/pump.gd" id="1_1tavt"]
-[ext_resource type="Texture2D" uid="uid://bso0rmnc02kdv" path="res://icon.svg" id="1_eujfs"]
+[ext_resource type="Texture2D" uid="uid://ckvrmp0emaxpr" path="res://engine/pump/pump.png" id="2_bu2x2"]
+[ext_resource type="Texture2D" uid="uid://u7fkb4edcbn3" path="res://engine/gauge.png" id="3_hmo0t"]
+[ext_resource type="Texture2D" uid="uid://cm3sccsmo1epp" path="res://engine/pump/pump_button_up.png" id="3_kib3l"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_bu2x2"]
-radius = 11.0
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hmo0t"]
+size = Vector2(79, 64)
 
 [node name="Pump" type="Node2D"]
+position = Vector2(-3, -48)
 script = ExtResource("1_1tavt")
 
-[node name="Gauge" type="Sprite2D" parent="."]
+[node name="Speedometer" type="Sprite2D" parent="."]
+texture = ExtResource("2_bu2x2")
+
+[node name="Gauge" type="Sprite2D" parent="Speedometer"]
 unique_name_in_owner = true
-scale = Vector2(1, 1e-05)
-texture = ExtResource("1_eujfs")
+position = Vector2(0, 5)
+rotation = 2.18166
+texture = ExtResource("3_hmo0t")
+offset = Vector2(0, -10)
 
 [node name="Button" type="Area2D" parent="."]
-position = Vector2(88, 0)
+position = Vector2(132, 0)
 
-[node name="Sprite2D" type="Sprite2D" parent="Button"]
-modulate = Color(0, 1, 0, 1)
-scale = Vector2(0.25, 0.1875)
-texture = ExtResource("1_eujfs")
+[node name="ButtonSprite" type="Sprite2D" parent="Button"]
+unique_name_in_owner = true
+texture = ExtResource("3_kib3l")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Button"]
-shape = SubResource("CircleShape2D_bu2x2")
+position = Vector2(-1.5, -3)
+shape = SubResource("RectangleShape2D_hmo0t")
 
 [connection signal="input_event" from="Button" to="." method="_on_button_input_event"]
