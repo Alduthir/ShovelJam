@@ -19,12 +19,10 @@ animations = [{
 radius = 4.0
 height = 54.0
 
-[node name="DefaultEnemyBullet" type="RigidBody2D"]
-gravity_scale = 0.0
+[node name="DefaultEnemyBullet" type="Area2D" groups=["Enemy"]]
 script = ExtResource("1_tx3qe")
-speed = 300
-damage = 20.0
-metadata/_edit_group_ = true
+speed = 250
+damage = 10.0
 
 [node name="Sprite" type="AnimatedSprite2D" parent="."]
 unique_name_in_owner = true
@@ -33,10 +31,16 @@ rotation = 3.14159
 scale = Vector2(0.05, 0.05)
 sprite_frames = SubResource("SpriteFrames_uf6f4")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape" type="CollisionShape2D" parent="."]
+unique_name_in_owner = true
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_csqkx")
 
 [node name="AudioPlayer" type="AudioStreamPlayer2D" parent="."]
 unique_name_in_owner = true
 stream = ExtResource("3_uf6f4")
+
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="."]
+enable_node_path = NodePath("")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]

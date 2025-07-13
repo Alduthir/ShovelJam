@@ -1,1 +1,1 @@
-extends PlayerBullet
+extends PlayerBulletBase

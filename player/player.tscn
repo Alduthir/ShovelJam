@@ -45,4 +45,4 @@ wait_time = 3.0
 [node name="BulletAudioStream" type="AudioStreamPlayer2D" parent="."]
 unique_name_in_owner = true
 
-[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]

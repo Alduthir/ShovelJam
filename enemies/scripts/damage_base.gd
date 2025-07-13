@@ -1,4 +1,4 @@
 class_name DamageEntityBase
-extends RigidBody2D
+extends Area2D
 
 @export var damage : float

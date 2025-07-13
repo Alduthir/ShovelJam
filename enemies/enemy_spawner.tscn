@@ -1,28 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://ladjpfd0okxd"]
 
+[ext_resource type="Script" uid="uid://bytprrpsyx1tg" path="res://enemies/enemy_spawner.gd" id="1_mjbfh"]
 [ext_resource type="PackedScene" uid="uid://dif4grrfalpcq" path="res://enemies/default_enemy.tscn" id="2_531ly"]
-
-[sub_resource type="GDScript" id="GDScript_mjbfh"]
-script/source = "extends Node
-
-@export var enemy_scenes : Array[PackedScene]
-
-@onready var enemy_spawn_location : PathFollow2D = %EnemySpawnLocation as PathFollow2D
-@onready var enemy_spawn_timer : Timer = %EnemySpawnTimer as Timer
-
-
-
-func _on_enemy_spawn_timer_timeout() -> void:
-	var enemy_to_spawn : PackedScene = enemy_scenes.pick_random()
-	var enemy : EnemyBase = enemy_to_spawn.instantiate() as EnemyBase
-	
-	enemy_spawn_location.progress_ratio = randf()
-	enemy.position = enemy_spawn_location.position
-	
-	enemy.linear_velocity = Vector2(-enemy.speed, 0)
-	
-	add_child(enemy)
-"
 
 [sub_resource type="Curve2D" id="Curve2D_agn4h"]
 _data = {
@@ -31,7 +10,7 @@ _data = {
 point_count = 2
 
 [node name="EnemySpawner" type="Node"]
-script = SubResource("GDScript_mjbfh")
+script = ExtResource("1_mjbfh")
 enemy_scenes = Array[PackedScene]([ExtResource("2_531ly")])
 
 [node name="EnemyPath" type="Path2D" parent="."]

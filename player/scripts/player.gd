@@ -65,24 +65,23 @@ func shoot() -> void:
 		pass
 	elif Input.is_action_pressed("shoot") and can_shoot:
 		can_shoot = false
-		var bullet : PlayerBullet = bullet_scene.instantiate()
+		var bullet : PlayerBulletBase = bullet_scene.instantiate()
 		# TODO: if nose tipping is added, add that tipping rotation to the bullet's rotation
 		bullet.position = position + Vector2(100, 0)
-		
 		
 		add_sibling(bullet)
 		shoot_cooldown.start()
 		await shoot_cooldown.timeout
 		can_shoot = true
 
-func _on_body_entered(body: Node2D) -> void:
+func _on_area_entered(area: Area2D) -> void:
 	if !can_take_damage:
 		pass
 	can_take_damage = false
 	hit.emit()
 
-	if body is DamageEntityBase:
-		var damage_base : DamageEntityBase = body as DamageEntityBase
+	if area is DamageEntityBase:
+		var damage_base : DamageEntityBase = area as DamageEntityBase
 		health -= damage_base.damage
 		if health <= 0:
 			print("you died")

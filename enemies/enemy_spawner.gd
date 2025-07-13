@@ -14,6 +14,4 @@ func _on_enemy_spawn_timer_timeout() -> void:
 	enemy_spawn_location.progress_ratio = randf()
 	enemy.position = enemy_spawn_location.position
 	
-	enemy.linear_velocity = Vector2(-enemy.speed, 0)
-	
 	add_child(enemy)
