@@ -15,7 +15,6 @@ Engineconfigurationfile.config_version=5
 config/name="shoveljam"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 config/icon="res://icon.svg"
-"<<<<<<<HEAD[debug]gdscript/warnings/unused_variable"=2
 gdscript/warnings/unused_local_constant=2
 gdscript/warnings/unused_private_class_variable=2
 gdscript/warnings/unused_parameter=2
