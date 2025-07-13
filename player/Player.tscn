@@ -1,0 +1,32 @@
+[gd_scene load_steps=5 format=3 uid="uid://dgsri73h5qq53"]
+
+[ext_resource type="Script" uid="uid://bs8xji23fhs6m" path="res://player/scripts/player.gd" id="1_3c3w1"]
+[ext_resource type="Texture2D" uid="uid://b0kcao2di1jed" path="res://player/sprites/player-plane.jpg" id="2_wnvi2"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_83hs8"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_wnvi2")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_x8kxw"]
+height = 90.0
+
+[node name="Player" type="Area2D"]
+script = ExtResource("1_3c3w1")
+speed = null
+metadata/_edit_group_ = true
+
+[node name="Sprite" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.25, 0.25)
+sprite_frames = SubResource("SpriteFrames_83hs8")
+animation = &"Idle"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_x8kxw")
