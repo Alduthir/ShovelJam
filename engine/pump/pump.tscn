@@ -15,7 +15,6 @@ scale = Vector2(1, 1e-05)
 texture = ExtResource("1_eujfs")
 
 [node name="Button" type="Area2D" parent="."]
-unique_name_in_owner = true
 position = Vector2(88, 0)
 
 [node name="Sprite2D" type="Sprite2D" parent="Button"]
