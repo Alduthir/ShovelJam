@@ -10,13 +10,12 @@ class_name WireNode extends Area2D
 var line : Line2D = null
 var has_mouse := false
 var dragging := false
-var is_connected := false : set = set_connected
+var is_line_connected := false : set = set_connected
 var line_max_length := 220.0
 var previous_mouse_position := Vector2.ZERO
 var draw_length := 0.0
 
 @onready var sprite : Sprite2D = %Sprite2D
-@onready var polygon : Polygon2D = %Polygon2D
 
 signal line_connected
 
@@ -33,9 +32,9 @@ func _process(_delta: float) -> void:
 		for child in get_children():
 			if child is Line2D:
 				if linked_node.has_mouse:
-					is_connected = true
-					linked_node.is_connected = true
-				elif is_connected == false: 
+					is_line_connected = true
+					linked_node.is_line_connected = true
+				elif is_line_connected == false: 
 					child.queue_free()
 					
 	if line != null and dragging:
@@ -50,7 +49,7 @@ func _process(_delta: float) -> void:
 
 
 func _on_input_event(_viewport: Node, _event: InputEvent, _shape_idx: int) -> void:
-	if Input.is_action_just_pressed("lmb") and is_connected == false:
+	if Input.is_action_just_pressed("lmb") and is_line_connected == false:
 		dragging = true
 		line = Line2D.new()
 		line.z_index += 1
@@ -70,6 +69,6 @@ func _on_mouse_exited() -> void:
 	has_mouse = false
 
 func set_connected(new_value: bool) -> void:
-	is_connected = new_value
+	is_line_connected = new_value
 	if is_connected:
 		line_connected.emit()

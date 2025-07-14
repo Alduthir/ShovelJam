@@ -1,18 +1,16 @@
 class_name Player
 extends Area2D
-signal hit
 
 @export var speed : int = 400
-@export var health : float = 100
 @export var bullet_scene : PackedScene
 @export var special_scene : PackedScene
+@export var ship_reactor : ShipReactor
 
 @onready var player_animation : AnimatedSprite2D = %Sprite as AnimatedSprite2D
 @onready var player_collision : CollisionShape2D = %CollisionShape as CollisionShape2D
 @onready var shoot_cooldown : Timer = %ShootCooldownTimer as Timer
 @onready var damage_cooldown : Timer = %DamageCooldownTimer as Timer
 @onready var bullet_sound : AudioStreamPlayer2D = %BulletAudioStream as AudioStreamPlayer2D
-
 @onready var screen_size : Vector2 = get_viewport_rect().size
 
 var player_frame : int
@@ -24,10 +22,14 @@ var screen_size_to_adjust : Vector2
 var can_shoot : bool = true
 var can_take_damage : bool = true
 
+func _ready() -> void:
+	screen_size.y -= 150 #account for the lower part of the screen being UI
+	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	move(delta)
 	shoot()
+	
 
 
 func move(delta: float) -> void:
@@ -46,15 +48,18 @@ func move(delta: float) -> void:
 		player_animation.play()
 	else:
 		player_animation.stop()
+		return
 
-	position += velocity * delta
+	var multiplier := 0.25 * ship_reactor.completed_puzzles.size()
+	position += (velocity * delta) * multiplier
 	# TODO: make more efficient if we notice a big performance dip
 	if player_frame != player_animation.get_frame() or player_animation_name != player_animation.animation:
 		player_frame = player_animation.get_frame()
 		player_animation_name = player_animation.animation
 		sprite_size = player_animation.sprite_frames.get_frame_texture(player_animation_name, player_frame).get_size() * player_animation.get_scale()
-		
-	position = position.clamp(sprite_size / 2, screen_size - (sprite_size / 2))
+	
+	position.x = position.clamp(sprite_size / 2, screen_size - (sprite_size / 2)).x
+	position.y = position.clamp(sprite_size / 2 + Vector2(0,50), screen_size - (sprite_size / 2)).y
 
 	# TODO: if player goes up or down, rotate a slight bit to have nose of plane
 	# dip up or down, shooting and everything else may be changed in that direction too
@@ -78,17 +83,15 @@ func _on_area_entered(area: Area2D) -> void:
 	if !can_take_damage:
 		pass
 	can_take_damage = false
-	hit.emit()
 
 	if area is DamageEntityBase:
 		var damage_base : DamageEntityBase = area as DamageEntityBase
-		health -= damage_base.damage
-		if health <= 0:
+		PlayerUi.current_health -= damage_base.damage
+		if PlayerUi.current_health <= 0:
 			print("you died")
 			hide()
 			# TODO: death logic here
 			
-		print(health)
 		# TODO blink plane to show invunerability frames, add timer to set hit to active again
 		await damage_cooldown.timeout
 		can_take_damage = true

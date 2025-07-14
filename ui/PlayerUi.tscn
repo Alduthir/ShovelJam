@@ -1,0 +1,33 @@
+[gd_scene load_steps=5 format=3 uid="uid://uyv67lxbxcgr"]
+
+[ext_resource type="Script" uid="uid://dvcu1ewsi3rue" path="res://ui/player_ui.gd" id="1_4hp81"]
+[ext_resource type="Texture2D" uid="uid://cs3dm3mvjmsvw" path="res://ui/topbar.png" id="1_uprdb"]
+[ext_resource type="Texture2D" uid="uid://44k45ifu4id3" path="res://ui/healthbar_container.png" id="2_4hp81"]
+[ext_resource type="Texture2D" uid="uid://2j4eagrmlj4v" path="res://ui/healthbar_filler.png" id="3_l0ks0"]
+
+[node name="PlayerUI" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_4hp81")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("1_uprdb")
+
+[node name="HealthBar" type="TextureProgressBar" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+offset_left = 200.0
+offset_top = 2.0
+offset_right = 589.0
+offset_bottom = 46.0
+texture_under = ExtResource("2_4hp81")
+texture_progress = ExtResource("3_l0ks0")
+texture_progress_offset = Vector2(29, 4)

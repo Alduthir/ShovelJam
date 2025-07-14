@@ -4,18 +4,18 @@
 [ext_resource type="Texture2D" uid="uid://ocllfd5d3mfs" path="res://engine/wires/wire_blue.png" id="2_pgr4y"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pgr4y"]
-size = Vector2(40, 21)
+size = Vector2(29, 15)
 
 [node name="WireNode" type="Area2D"]
 script = ExtResource("1_pgr4y")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 unique_name_in_owner = true
-scale = Vector2(3, 3)
+scale = Vector2(2, 2)
 texture = ExtResource("2_pgr4y")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-4, 0)
+position = Vector2(-1.5, 0.5)
 shape = SubResource("RectangleShape2D_pgr4y")
 
 [connection signal="input_event" from="." to="." method="_on_input_event"]
