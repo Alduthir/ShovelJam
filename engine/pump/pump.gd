@@ -5,7 +5,7 @@ class_name Pump extends Node2D
 
 var button_pressed : Texture = preload("res://engine/pump/pump_button_down.png")
 var button_released : Texture = preload("res://engine/pump/pump_button_up.png")
-
+var is_completed := false
 var empty_rotation_degrees := -125.0
 var full_rotation_degrees := 125.0
 
@@ -19,6 +19,8 @@ func _process(delta: float) -> void:
 		gauge.rotation_degrees = move_toward(gauge.rotation_degrees, -125, delta * 20)	
 
 func _on_button_input_event(_viewport: Node, _event: InputEvent, _shape_idx: int) -> void:
+	if is_completed:
+		return
 	if Input.is_action_just_pressed("lmb"):
 		button_sprite.texture = button_pressed
 		
@@ -28,12 +30,18 @@ func _on_button_input_event(_viewport: Node, _event: InputEvent, _shape_idx: int
 			if tween != null:
 				tween.stop()
 			tween = create_tween()
-			var new_val := mini(gauge.rotation_degrees + random_degree, full_rotation_degrees)
+			var new_val := minf(gauge.rotation_degrees + random_degree, full_rotation_degrees)
 			tween.tween_property(gauge, "rotation_degrees", new_val, 0.05).set_trans(Tween.TRANS_BOUNCE)
 			#gauge.rotation_degrees = mini(gauge.rotation_degrees + random_degree, full_rotation_degrees)
 		
 		if gauge.rotation_degrees >= full_rotation_degrees:
 			puzzle_completed.emit()
+			is_completed = true
 		
 	elif  Input.is_action_just_released("lmb"):
 		button_sprite.texture = button_released
+
+func reset_puzzle()->void:
+	gauge.rotation_degrees = empty_rotation_degrees
+	is_completed = false
+	button_sprite.texture = button_released

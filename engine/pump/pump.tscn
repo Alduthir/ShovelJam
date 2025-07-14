@@ -9,7 +9,6 @@
 size = Vector2(79, 64)
 
 [node name="Pump" type="Node2D"]
-position = Vector2(-3, -48)
 script = ExtResource("1_1tavt")
 
 [node name="Speedometer" type="Sprite2D" parent="."]

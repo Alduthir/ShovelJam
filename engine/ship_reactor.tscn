@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=3 uid="uid://br05f64km1gja"]
 
-[ext_resource type="Script" uid="uid://cfhd032g6w06r" path="res://engine/engine.gd" id="1_bq62t"]
+[ext_resource type="Script" uid="uid://cfhd032g6w06r" path="res://engine/ship_reactor.gd" id="1_bq62t"]
 [ext_resource type="PackedScene" uid="uid://qkrhe31vbry5" path="res://engine/wires/wires.tscn" id="1_l22x7"]
 [ext_resource type="Texture2D" uid="uid://c5ssm3ukpupxm" path="res://engine/dashboard.png" id="2_cwfde"]
 [ext_resource type="PackedScene" uid="uid://witytlvjln5p" path="res://engine/pump/pump.tscn" id="2_fisw6"]
@@ -10,7 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://dcxgbpbmp8dbj" path="res://engine/switches/switches.tscn" id="4_rkv7k"]
 [ext_resource type="Texture2D" uid="uid://c8s8gqdmj5hna" path="res://engine/light_red.png" id="5_i0x48"]
 
-[node name="Reactor" type="Node"]
+[node name="ShipReactor" type="Node2D"]
 script = ExtResource("1_bq62t")
 
 [node name="Dashboard" type="Sprite2D" parent="."]

@@ -6,6 +6,7 @@ signal hit
 @export var health : float = 100
 @export var bullet_scene : PackedScene
 @export var special_scene : PackedScene
+@export var ship_reactor : ShipReactor
 
 @onready var player_animation : AnimatedSprite2D = %Sprite as AnimatedSprite2D
 @onready var player_collision : CollisionShape2D = %CollisionShape as CollisionShape2D
@@ -24,10 +25,14 @@ var screen_size_to_adjust : Vector2
 var can_shoot : bool = true
 var can_take_damage : bool = true
 
+func _ready() -> void:
+	screen_size.y -= 150 #account for the lower part of the screen being UI
+	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	move(delta)
 	shoot()
+	
 
 
 func move(delta: float) -> void:
@@ -46,15 +51,18 @@ func move(delta: float) -> void:
 		player_animation.play()
 	else:
 		player_animation.stop()
+		return
 
-	position += velocity * delta
+	var multiplier := 0.25 * ship_reactor.completed_puzzles.size()
+	position += (velocity * delta) * multiplier
 	# TODO: make more efficient if we notice a big performance dip
 	if player_frame != player_animation.get_frame() or player_animation_name != player_animation.animation:
 		player_frame = player_animation.get_frame()
 		player_animation_name = player_animation.animation
 		sprite_size = player_animation.sprite_frames.get_frame_texture(player_animation_name, player_frame).get_size() * player_animation.get_scale()
-		
-	position = position.clamp(sprite_size / 2, screen_size - (sprite_size / 2))
+	
+	position.x = position.clamp(sprite_size / 2, screen_size - (sprite_size / 2)).x
+	position.y = position.clamp(sprite_size / 2 + Vector2(0,50), screen_size - (sprite_size / 2)).y
 
 	# TODO: if player goes up or down, rotate a slight bit to have nose of plane
 	# dip up or down, shooting and everything else may be changed in that direction too
