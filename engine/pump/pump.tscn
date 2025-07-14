@@ -18,7 +18,7 @@ texture = ExtResource("2_bu2x2")
 [node name="Gauge" type="Sprite2D" parent="Speedometer"]
 unique_name_in_owner = true
 position = Vector2(0, 5)
-rotation = 2.18166
+rotation = -2.18166
 texture = ExtResource("3_hmo0t")
 offset = Vector2(0, -10)
 

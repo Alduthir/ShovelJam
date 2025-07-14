@@ -55,7 +55,7 @@ position = Vector2(757, 675)
 
 [node name="Gears" parent="." instance=ExtResource("3_h3hk1")]
 unique_name_in_owner = true
-position = Vector2(524, 661)
+position = Vector2(529, 652)
 scale = Vector2(0.9, 0.9)
 
 [node name="Switches" parent="." instance=ExtResource("4_rkv7k")]
