@@ -17,6 +17,10 @@ run/main_scene="uid://bms73m1kyij77"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 config/icon="res://icon.svg"
 
+[autoload]
+
+PlayerUi="*res://ui/PlayerUi.tscn"
+
 [debug]
 
 gdscript/warnings/unused_variable=2

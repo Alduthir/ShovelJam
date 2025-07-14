@@ -13,4 +13,5 @@
 [node name="Player" parent="." node_paths=PackedStringArray("ship_reactor") instance=ExtResource("2_74kyy")]
 position = Vector2(110, 217)
 collision_mask = 1
+speed = null
 ship_reactor = NodePath("../ShipReactor")

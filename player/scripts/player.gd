@@ -1,9 +1,7 @@
 class_name Player
 extends Area2D
-signal hit
 
 @export var speed : int = 400
-@export var health : float = 100
 @export var bullet_scene : PackedScene
 @export var special_scene : PackedScene
 @export var ship_reactor : ShipReactor
@@ -13,7 +11,6 @@ signal hit
 @onready var shoot_cooldown : Timer = %ShootCooldownTimer as Timer
 @onready var damage_cooldown : Timer = %DamageCooldownTimer as Timer
 @onready var bullet_sound : AudioStreamPlayer2D = %BulletAudioStream as AudioStreamPlayer2D
-
 @onready var screen_size : Vector2 = get_viewport_rect().size
 
 var player_frame : int
@@ -86,17 +83,15 @@ func _on_area_entered(area: Area2D) -> void:
 	if !can_take_damage:
 		pass
 	can_take_damage = false
-	hit.emit()
 
 	if area is DamageEntityBase:
 		var damage_base : DamageEntityBase = area as DamageEntityBase
-		health -= damage_base.damage
-		if health <= 0:
+		PlayerUi.current_health -= damage_base.damage
+		if PlayerUi.current_health <= 0:
 			print("you died")
 			hide()
 			# TODO: death logic here
 			
-		print(health)
 		# TODO blink plane to show invunerability frames, add timer to set hit to active again
 		await damage_cooldown.timeout
 		can_take_damage = true
