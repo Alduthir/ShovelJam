@@ -1,29 +1,33 @@
 extends Area2D
 
 @export var damage := 10.0
-@export var speed := 800.0
+@export var speed := 700.0
 @export var color := Color.PURPLE
 
 @onready var sprite : Sprite2D = %Sprite2D
 @onready var explosions : GPUParticles2D = %Explosions
 @onready var smoke : GPUParticles2D = %Smoke
 @onready var bullet_sound : AudioStreamPlayer2D = %BulletSound
+@onready var shape : CollisionShape2D = %CollisionShape2D
 
-var direction : Vector2 = Vector2.LEFT
 var damaging : bool = false
+var aim_direction := Vector2.LEFT
 
 func _ready() -> void:
 	sprite.modulate = color
+	var player_nodes := get_tree().get_nodes_in_group("Player")
+	
+	if !player_nodes.is_empty():
+		var player : Node2D = get_tree().get_nodes_in_group("Player")[0]
+		aim_direction = global_position.direction_to(player.global_position)
 
 func _process(delta: float) -> void:
-	var rotated_direction := direction.rotated(rotation)
-	position += rotated_direction * speed * delta
+	position += aim_direction * speed * delta
 
 func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
 	queue_free()
 
 func _on_area_entered(area: Area2D) -> void:
-	#Workaround for bullets sometimes triggering area entered twice
 	if damaging:
 		return
 	

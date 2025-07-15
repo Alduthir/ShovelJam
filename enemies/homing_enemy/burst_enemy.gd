@@ -1,10 +1,11 @@
-class_name HomingEnemy extends Enemy
+class_name ForwardShootingEnemy extends Enemy
 ## This enemy will first move towards its target position. Upon arriving it will start shooting forward until it dies.
 
 @export var target_position := Vector2.ZERO
-@export var bullet_scene := preload("res://bullets/enemy_bullet.tscn")
-
-@onready var shot_timer : Timer = %ShotTimer
+@export var bullet_scene := preload("res://bullets/aimed_bullet.tscn")
+@export var shots_in_burst := 3
+@export var shot_cooldown := 0.05
+@onready var burst_timer : Timer = %BurstTimer
 @onready var shot_marker : Marker2D = %Shotmarker
 
 func _process(delta: float) -> void:
@@ -13,9 +14,15 @@ func _process(delta: float) -> void:
 	if distance > 3.0:
 		var direction := global_position.direction_to(target_position)
 		position += direction * speed * delta
-	elif shot_timer.is_stopped():
+	elif burst_timer.is_stopped():
+		shoot_burst()
+		burst_timer.start()
+
+func shoot_burst() -> void:
+	for i in shots_in_burst:
 		shoot()
-		shot_timer.start()
+		await get_tree().create_timer(shot_cooldown).timeout
+	
 
 func shoot() -> void:
 	var bullet : Node2D = bullet_scene.instantiate()
@@ -23,5 +30,5 @@ func shoot() -> void:
 	add_sibling(bullet)
 	
 func _on_shot_timer_timeout() -> void:
-	shoot()
+	shoot_burst()
 	

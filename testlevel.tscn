@@ -1,8 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://bms73m1kyij77"]
+[gd_scene load_steps=6 format=3 uid="uid://bms73m1kyij77"]
 
 [ext_resource type="PackedScene" uid="uid://dgsri73h5qq53" path="res://player/player.tscn" id="2_74kyy"]
 [ext_resource type="PackedScene" uid="uid://br05f64km1gja" path="res://engine/ship_reactor.tscn" id="3_74kyy"]
 [ext_resource type="PackedScene" uid="uid://bt02ogitxuame" path="res://enemies/forward_shooting/forward_shooting_enemy.tscn" id="3_kx2s4"]
+[ext_resource type="PackedScene" uid="uid://dntuqbn8l0r61" path="res://bullets/aimed_bullet.tscn" id="4_kx2s4"]
+[ext_resource type="PackedScene" uid="uid://cuqw47rul42ei" path="res://enemies/forward_shooting/triple_shot_enemy.tscn" id="5_b5yu0"]
 
 [node name="Testlevel" type="Node2D"]
 
@@ -17,7 +19,12 @@ ship_reactor = NodePath("../ShipReactor")
 [node name="ForwardShootingEnemy2" parent="." instance=ExtResource("3_kx2s4")]
 position = Vector2(1448, 56)
 target_position = Vector2(600, 480)
+bullet_scene = ExtResource("4_kx2s4")
 
 [node name="ForwardShootingEnemy" parent="." instance=ExtResource("3_kx2s4")]
 position = Vector2(1504, 568)
 target_position = Vector2(840, 460)
+
+[node name="TripleShotEnemy" parent="." instance=ExtResource("5_b5yu0")]
+position = Vector2(1517, 284)
+target_position = Vector2(1000, 280)
