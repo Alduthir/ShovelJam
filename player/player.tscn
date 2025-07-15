@@ -1,9 +1,16 @@
-[gd_scene load_steps=7 format=3 uid="uid://dgsri73h5qq53"]
+[gd_scene load_steps=14 format=3 uid="uid://dgsri73h5qq53"]
 
 [ext_resource type="Script" uid="uid://bs8xji23fhs6m" path="res://player/scripts/player.gd" id="1_g1dw6"]
 [ext_resource type="PackedScene" uid="uid://cy88by0rop55u" path="res://bullets/player_bullet.tscn" id="2_g1dw6"]
 [ext_resource type="Texture2D" uid="uid://oxx87x34q0rw" path="res://player/sprites/player.png" id="3_g1dw6"]
+[ext_resource type="Shader" uid="uid://ctwb3lbuw6h6m" path="res://player/is_hit.gdshader" id="3_g6k8r"]
 [ext_resource type="AudioStream" uid="uid://dywm04v350a4b" path="res://external_assets/sketcherskt/laserpew.ogg" id="4_yw30f"]
+[ext_resource type="PackedScene" uid="uid://bs48mw0qglkar" path="res://shared/death_explosion.tscn" id="5_qjkh3"]
+[ext_resource type="AudioStream" uid="uid://b0vwytqpyg6jg" path="res://external_assets/dklon/boom9.wav" id="7_boad6"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_boad6"]
+shader = ExtResource("3_g6k8r")
+shader_parameter/hit_opacity = 0.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rkbax"]
 size = Vector2(27.9999, 45)
@@ -11,6 +18,44 @@ size = Vector2(27.9999, 45)
 [sub_resource type="GDScript" id="GDScript_g1dw6"]
 script/source = "extends Node
 "
+
+[sub_resource type="Animation" id="Animation_g6k8r"]
+resource_name = "is_hit"
+length = 0.1
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:material:shader_parameter/hit_opacity")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [1.0, 0.0]
+}
+
+[sub_resource type="Animation" id="Animation_boad6"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:material:shader_parameter/hit_opacity")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_rgyib"]
+_data = {
+&"RESET": SubResource("Animation_boad6"),
+&"is_hit": SubResource("Animation_g6k8r")
+}
 
 [node name="Player" type="Area2D" groups=["Player"]]
 collision_mask = 24
@@ -20,6 +65,7 @@ metadata/_edit_group_ = true
 
 [node name="Sprite" type="Sprite2D" parent="."]
 unique_name_in_owner = true
+material = SubResource("ShaderMaterial_boad6")
 texture = ExtResource("3_g1dw6")
 
 [node name="CollisionShape" type="CollisionShape2D" parent="."]
@@ -33,9 +79,10 @@ wait_time = 0.14
 
 [node name="DamageCooldownTimer" type="Timer" parent="."]
 unique_name_in_owner = true
-wait_time = 3.0
+wait_time = 0.4
+one_shot = true
 
-[node name="BulletAudioStream" type="AudioStreamPlayer2D" parent="."]
+[node name="ShootingSound" type="AudioStreamPlayer2D" parent="."]
 unique_name_in_owner = true
 stream = ExtResource("4_yw30f")
 
@@ -53,5 +100,18 @@ position = Vector2(56, 8)
 [node name="DownBulletMarker" type="Marker2D" parent="."]
 unique_name_in_owner = true
 position = Vector2(56, 24)
+
+[node name="Explosions" parent="." instance=ExtResource("5_qjkh3")]
+unique_name_in_owner = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+unique_name_in_owner = true
+libraries = {
+&"": SubResource("AnimationLibrary_rgyib")
+}
+
+[node name="DeathSound" type="AudioStreamPlayer2D" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("7_boad6")
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]

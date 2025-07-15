@@ -9,7 +9,7 @@ extends Area2D
 @onready var smoke : GPUParticles2D = %Smoke
 
 var direction : Vector2 = Vector2.RIGHT
-
+var damaging : bool = false
 func _ready() -> void:
 	sprite.modulate = color
 
@@ -21,6 +21,9 @@ func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
 	queue_free()
 
 func _on_area_entered(area: Area2D) -> void:
+	if damaging:
+		return
+	damaging = true
 	if area is Enemy:
 		var enemy := area as Enemy
 		enemy.take_damage(damage)

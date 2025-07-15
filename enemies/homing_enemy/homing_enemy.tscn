@@ -1,0 +1,33 @@
+[gd_scene load_steps=3 format=3 uid="uid://dfmyuqycpb0oa"]
+
+[ext_resource type="Script" uid="uid://dr8ei6402xb3e" path="res://enemies/homing_enemy/homing_enemy.gd" id="1_gx1ii"]
+[ext_resource type="Texture2D" uid="uid://oxx87x34q0rw" path="res://player/sprites/player.png" id="2_h1tvg"]
+
+[node name="HomingEnemy" type="Area2D"]
+collision_layer = 4
+collision_mask = 2
+script = ExtResource("1_gx1ii")
+target_position = null
+bullet_scene = null
+speed = null
+health = null
+explosion_effect = null
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(0.396078, 0.352941, 1, 1)
+texture = ExtResource("2_h1tvg")
+flip_h = true
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+unique_name_in_owner = true
+polygon = PackedVector2Array(-51, 12, -51, -2, -28, -2, -8, -20, 30, -21, 39, -14, 52, -14, 52, 13, 28, 14)
+
+[node name="ShotTimer" type="Timer" parent="."]
+unique_name_in_owner = true
+wait_time = 0.8
+
+[node name="Shotmarker" type="Marker2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(-52, 18)
+
+[connection signal="timeout" from="ShotTimer" to="." method="_on_shot_timer_timeout"]

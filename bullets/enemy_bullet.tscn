@@ -1,9 +1,10 @@
-[gd_scene load_steps=16 format=3 uid="uid://c3qaut3rpoyrt"]
+[gd_scene load_steps=17 format=3 uid="uid://c3qaut3rpoyrt"]
 
 [ext_resource type="Script" uid="uid://3rrq2j8s5yar" path="res://bullets/enemy_bullet.gd" id="1_v5fu0"]
 [ext_resource type="Texture2D" uid="uid://bweg3w60dlxti" path="res://bullets/bullet.png" id="2_3il18"]
 [ext_resource type="Texture2D" uid="uid://cmlga3tk5784h" path="res://external_assets/kenney_particle_pack/PNG (Transparent)/scorch_03.png" id="3_c0w2n"]
 [ext_resource type="Texture2D" uid="uid://bfntnsvtm5be7" path="res://external_assets/kenney_particle_pack/PNG (Transparent)/smoke_01.png" id="4_uy0w8"]
+[ext_resource type="AudioStream" uid="uid://c0s7a26nuis8g" path="res://external_assets/dklon/boom2.wav" id="5_3il18"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_sjpon"]
 radius = 7.28011
@@ -65,9 +66,10 @@ scale_max = 0.2
 scale_over_velocity_curve = SubResource("CurveTexture_q8r3s")
 color_ramp = SubResource("GradientTexture1D_cws53")
 
-[node name="SimpleBullet" type="Area2D"]
+[node name="EnemyBullet" type="Area2D"]
 collision_layer = 8
 script = ExtResource("1_v5fu0")
+speed = 500.0
 color = Color(0.764706, 0.0470588, 0.843137, 1)
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -98,6 +100,10 @@ texture = ExtResource("4_uy0w8")
 lifetime = 0.2
 one_shot = true
 process_material = SubResource("ParticleProcessMaterial_4gl2m")
+
+[node name="BulletSound" type="AudioStreamPlayer2D" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("5_3il18")
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
