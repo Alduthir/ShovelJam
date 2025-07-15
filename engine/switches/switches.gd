@@ -21,6 +21,11 @@ func reset_puzzle() -> void:
 			random_switch.is_turned_on = false
 			switches_turned_off += 1
 
+func set_completed()->void:
+	is_completed = true
+	for switch : Switch in switches:
+		switch.is_turned_on = true
+
 func check_all_switches_on() -> void:
 	if is_completed:
 		return

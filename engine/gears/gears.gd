@@ -8,9 +8,7 @@ var is_completed := false
 
 signal puzzle_completed
 
-@onready var wheel := %Wheel
-func _ready() -> void:
-	rotation_degrees = required_rotation
+@onready var wheel := %Wheel	
 
 func _physics_process(_delta: float) -> void:
 	if is_completed: 
@@ -24,6 +22,10 @@ func _physics_process(_delta: float) -> void:
 	
 	if visible:
 		degrees_rotated = rotation_degrees
+
+func set_completed()->void:
+	is_completed = true
+	rotation_degrees = required_rotation
 
 func reset_puzzle()-> void:
 	is_completed = false

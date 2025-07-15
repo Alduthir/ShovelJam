@@ -11,10 +11,7 @@ var full_rotation_degrees := 125.0
 
 var tween : Tween  = null
 
-signal puzzle_completed()
-
-func _ready() -> void:
-	gauge.rotation_degrees = full_rotation_degrees
+signal puzzle_completed()	
 
 func _process(delta: float) -> void:
 	if gauge.rotation_degrees < full_rotation_degrees:
@@ -43,6 +40,10 @@ func _on_button_input_event(_viewport: Node, _event: InputEvent, _shape_idx: int
 	elif  Input.is_action_just_released("lmb"):
 		button_sprite.texture = button_released
 
+func set_completed()->void:
+	is_completed = true
+	gauge.rotation_degrees = full_rotation_degrees
+	
 func reset_puzzle()->void:
 	gauge.rotation_degrees = empty_rotation_degrees
 	is_completed = false

@@ -47,6 +47,18 @@ func _ready() -> void:
 		break_random_system()
 		)
 	
+	#Set puzzles to completed on startup depending on scene setup	
+	for puzzle : Node2D in completed_puzzles:
+		if puzzle is Wires:
+			wires.set_completed()
+		elif puzzle is Gears:
+			gears.set_completed()
+		elif puzzle is Pump:
+			pump.set_completed()
+		elif puzzle is Switches:
+			switches.set_completed()
+		
+
 func set_completed_puzzles(new_value: int)->void:
 	completed_puzzles = clamp(new_value, 0, 4)
 
