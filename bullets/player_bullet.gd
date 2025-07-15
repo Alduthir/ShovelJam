@@ -7,9 +7,11 @@ extends Area2D
 @onready var sprite : Sprite2D = %Sprite2D
 @onready var explosions : GPUParticles2D = %Explosions
 @onready var smoke : GPUParticles2D = %Smoke
+@onready var bullet_sound : AudioStreamPlayer2D = %BulletSound
 
 var direction : Vector2 = Vector2.RIGHT
 var damaging : bool = false
+
 func _ready() -> void:
 	sprite.modulate = color
 
@@ -28,6 +30,9 @@ func _on_area_entered(area: Area2D) -> void:
 		var enemy := area as Enemy
 		enemy.take_damage(damage)
 		set_process(false)
+	
+	bullet_sound.play()
+	bullet_sound.finished.connect(bullet_sound.stop)
 	sprite.visible = false
 	explosions.emitting = true
 	smoke.emitting = true

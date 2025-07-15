@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://bms73m1kyij77"]
+[gd_scene load_steps=8 format=3 uid="uid://bms73m1kyij77"]
 
 [ext_resource type="PackedScene" uid="uid://dgsri73h5qq53" path="res://player/player.tscn" id="2_74kyy"]
 [ext_resource type="PackedScene" uid="uid://br05f64km1gja" path="res://engine/ship_reactor.tscn" id="3_74kyy"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://cuqw47rul42ei" path="res://enemies/forward_shooting/triple_shot_enemy.tscn" id="5_b5yu0"]
 [ext_resource type="PackedScene" uid="uid://0gmqk6pvacyl" path="res://enemies/beam_enemy/beam_enemy.tscn" id="6_8ws1j"]
 [ext_resource type="PackedScene" uid="uid://dfmyuqycpb0oa" path="res://enemies/homing_enemy/homing_enemy.tscn" id="6_vfacy"]
+[ext_resource type="PackedScene" uid="uid://c2d31wvr1rba6" path="res://enemies/homing_enemy/burst_enemy.tscn" id="7_vfacy"]
 
 [node name="Testlevel" type="Node2D"]
 
@@ -33,3 +34,7 @@ direction = Vector2(-1, 0.2)
 [node name="HomingEnemy" parent="." instance=ExtResource("6_vfacy")]
 position = Vector2(1477, 107)
 target_position = Vector2(800, 200)
+
+[node name="BurstEnemy" parent="." instance=ExtResource("7_vfacy")]
+position = Vector2(1640, 394)
+target_position = Vector2(500, 200)

@@ -36,6 +36,7 @@ func set_completed() -> void:
 				wire_node.linked_node.is_line_connected = true
 
 func reset_puzzle() -> void:
+	is_completed = false
 	for wire_node in wire_nodes:
 		if wire_node.is_line_connected:
 			for child in wire_node.get_children():
