@@ -18,6 +18,7 @@ extends Area2D
 @onready var down_bullet_marker : Marker2D = %DownBulletMarker
 @onready var explosions : GPUParticles2D = %Explosions
 @onready var animation_player : AnimationPlayer = %AnimationPlayer
+@onready var collision_shape : CollisionShape2D = %CollisionShape
 
 var player_frame : int
 var player_animation_name : String
@@ -113,8 +114,6 @@ func take_damage(amount : float) -> void:
 func set_can_take_damage(new_value: bool) -> void:
 	can_take_damage = new_value
 	if can_take_damage:
-		monitorable = true
-		monitoring = true
+		collision_shape.disabled = false
 	else:
-		monitorable = false
-		monitoring = false
+		collision_shape.disabled = true

@@ -69,6 +69,7 @@ material = SubResource("ShaderMaterial_boad6")
 texture = ExtResource("3_g1dw6")
 
 [node name="CollisionShape" type="CollisionShape2D" parent="."]
+unique_name_in_owner = true
 position = Vector2(-9.50005, -1.99996)
 rotation = 1.5708
 shape = SubResource("RectangleShape2D_rkbax")

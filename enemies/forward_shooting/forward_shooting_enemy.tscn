@@ -3,11 +3,10 @@
 [ext_resource type="Script" uid="uid://dxiv2jephpjem" path="res://enemies/forward_shooting/forward_shooting_enemy.gd" id="1_gsby8"]
 [ext_resource type="Texture2D" uid="uid://oxx87x34q0rw" path="res://player/sprites/player.png" id="1_pkivl"]
 
-[node name="ForwardShootingEnemy" type="Area2D" node_paths=PackedStringArray("sprite_node")]
+[node name="ForwardShootingEnemy" type="Area2D"]
 collision_layer = 4
 collision_mask = 2
 script = ExtResource("1_gsby8")
-sprite_node = NodePath("Sprite2D")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 modulate = Color(0.396078, 0.352941, 1, 1)
