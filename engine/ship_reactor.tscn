@@ -61,3 +61,8 @@ scale = Vector2(0.9, 0.9)
 [node name="Switches" parent="." instance=ExtResource("4_rkv7k")]
 unique_name_in_owner = true
 position = Vector2(1000, 612)
+
+[node name="BreakSystemTimer" type="Timer" parent="."]
+unique_name_in_owner = true
+wait_time = 20.0
+autostart = true

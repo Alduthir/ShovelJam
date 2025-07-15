@@ -1,0 +1,58 @@
+[gd_scene load_steps=11 format=3 uid="uid://bs48mw0qglkar"]
+
+[ext_resource type="Texture2D" uid="uid://c2aokkyrqcrrg" path="res://external_assets/kenney_particle_pack/PNG (Transparent)/fire_02.png" id="1_yp7v1"]
+
+[sub_resource type="Curve" id="Curve_gsby8"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.561798), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_tbfed"]
+curve = SubResource("Curve_gsby8")
+
+[sub_resource type="Gradient" id="Gradient_1dmcy"]
+colors = PackedColorArray(0.442527, 0, 0, 1, 1, 0.419608, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_k3mph"]
+gradient = SubResource("Gradient_1dmcy")
+
+[sub_resource type="Curve" id="Curve_we720"]
+_data = [Vector2(0, 0.0674158), 0.0, 0.0, 0, 0, Vector2(0.62212, 0.651685), 0.0, 0.0, 0, 0, Vector2(0.995392, 1), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_a1r2j"]
+curve = SubResource("Curve_we720")
+
+[sub_resource type="Curve" id="Curve_m0cwb"]
+_data = [Vector2(0.0046083, 0.865169), 0.0, 0.0, 0, 0, Vector2(0.700461, 0.842697), 0.0, 0.0, 0, 0, Vector2(1, 0.325843), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_p6obt"]
+curve = SubResource("Curve_m0cwb")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_8ftsi"]
+lifetime_randomness = 0.46
+particle_flag_disable_z = true
+orbit_velocity_min = -0.267
+orbit_velocity_max = 0.22
+radial_velocity_min = -2.23517e-05
+radial_velocity_max = 258.82
+radial_velocity_curve = SubResource("CurveTexture_p6obt")
+gravity = Vector3(0, 0, 0)
+scale_min = 0.5
+color_initial_ramp = SubResource("GradientTexture1D_k3mph")
+alpha_curve = SubResource("CurveTexture_tbfed")
+emission_curve = SubResource("CurveTexture_a1r2j")
+hue_variation_min = -2.23517e-08
+hue_variation_max = 0.09
+turbulence_enabled = true
+turbulence_noise_strength = 1.35
+turbulence_noise_scale = 2.063
+turbulence_noise_speed_random = 0.0
+
+[node name="Explosions" type="GPUParticles2D"]
+emitting = false
+amount = 10
+texture = ExtResource("1_yp7v1")
+lifetime = 0.5
+one_shot = true
+process_material = SubResource("ParticleProcessMaterial_8ftsi")

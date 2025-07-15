@@ -1,21 +1,23 @@
 class_name Player
 extends Area2D
 
-@export var speed : int = 400
+@export var speed := 400.0
 @export var bullet_scene : PackedScene
 @export var special_scene : PackedScene
 @export var ship_reactor : ShipReactor
 
-@onready var player_animation : AnimatedSprite2D = %Sprite as AnimatedSprite2D
-@onready var player_collision : CollisionShape2D = %CollisionShape as CollisionShape2D
+@onready var sprite : Sprite2D = %Sprite as Sprite2D
 @onready var shoot_cooldown : Timer = %ShootCooldownTimer as Timer
 @onready var damage_cooldown : Timer = %DamageCooldownTimer as Timer
 @onready var bullet_sound : AudioStreamPlayer2D = %BulletAudioStream as AudioStreamPlayer2D
 @onready var screen_size : Vector2 = get_viewport_rect().size
 
+@onready var horizontal_bullet_marker : Marker2D = %HorizontalBulletMarker
+@onready var up_bullet_marker : Marker2D = %UpBulletMarker
+@onready var down_bullet_marker : Marker2D = %DownBulletMarker
+
 var player_frame : int
 var player_animation_name : String
-var player_texture_size : float
 var sprite_size : Vector2
 var screen_size_to_adjust : Vector2
 
@@ -24,39 +26,23 @@ var can_take_damage : bool = true
 
 func _ready() -> void:
 	screen_size.y -= 150 #account for the lower part of the screen being UI
-	
-# Called every frame. 'delta' is the elapsed time since the previous frame.
+	sprite_size = sprite.get_rect().size
+
 func _process(delta: float) -> void:
 	move(delta)
 	shoot()
-	
-
 
 func move(delta: float) -> void:
-	var velocity: Vector2 = Vector2.ZERO
-	if Input.is_action_pressed("move_right"):
-		velocity.x += 1
-	if Input.is_action_pressed("move_left"):
-		velocity.x -= 1
-	if Input.is_action_pressed("move_down"):
-		velocity.y += 1
-	if Input.is_action_pressed("move_up"):
-		velocity.y -= 1
+	var velocity := Input.get_vector("move_left","move_right","move_up","move_down")
 	
 	if velocity.length() > 0:
 		velocity = velocity.normalized() * speed
-		player_animation.play()
 	else:
-		player_animation.stop()
 		return
-
-	var multiplier := 0.25 * ship_reactor.completed_puzzles.size()
-	position += (velocity * delta) * multiplier
-	# TODO: make more efficient if we notice a big performance dip
-	if player_frame != player_animation.get_frame() or player_animation_name != player_animation.animation:
-		player_frame = player_animation.get_frame()
-		player_animation_name = player_animation.animation
-		sprite_size = player_animation.sprite_frames.get_frame_texture(player_animation_name, player_frame).get_size() * player_animation.get_scale()
+	
+	position += (velocity * delta)
+	#var multiplier := 0.25 * ship_reactor.completed_puzzles.size()
+	#position += (velocity * delta) * multiplier
 	
 	position.x = position.clamp(sprite_size / 2, screen_size - (sprite_size / 2)).x
 	position.y = position.clamp(sprite_size / 2 + Vector2(0,50), screen_size - (sprite_size / 2)).y
@@ -70,33 +56,39 @@ func shoot() -> void:
 		pass
 	elif Input.is_action_pressed("shoot") and can_shoot:
 		can_shoot = false
-		var bullet : PlayerBulletBase = bullet_scene.instantiate()
-		# TODO: if nose tipping is added, add that tipping rotation to the bullet's rotation
-		bullet.position = position + Vector2(100, 0)
+		bullet_sound.pitch_scale = randf_range(0.9,1.1)
+		bullet_sound.play()
 		
-		add_sibling(bullet)
+		spawn_bullets()
+
 		shoot_cooldown.start()
 		await shoot_cooldown.timeout
 		can_shoot = true
 
-func _on_area_entered(area: Area2D) -> void:
-	if !can_take_damage:
-		pass
+func spawn_bullets()-> void:
+	#horizontal bullet
+		var bullet : Node2D = bullet_scene.instantiate()
+		bullet.position = horizontal_bullet_marker.global_position
+		add_sibling(bullet)
+	#up bullet
+		bullet = bullet_scene.instantiate()
+		bullet.position = up_bullet_marker.global_position
+		bullet.rotation_degrees = -10
+		add_sibling(bullet)
+	#down bullet
+		bullet = bullet_scene.instantiate()
+		bullet.position = down_bullet_marker.global_position
+		bullet.rotation_degrees = 10
+		add_sibling(bullet)
+
+func take_damage(amount : float) -> void:
 	can_take_damage = false
 
-	if area is DamageEntityBase:
-		var damage_base : DamageEntityBase = area as DamageEntityBase
-		PlayerUi.current_health -= damage_base.damage
-		if PlayerUi.current_health <= 0:
-			print("you died")
-			hide()
-			# TODO: death logic here
+	PlayerUi.current_health = max(PlayerUi.current_health - amount, 0)
+	if PlayerUi.current_health <= 0:
+		print("you died")
+		# TODO: death logic here
 			
 		# TODO blink plane to show invunerability frames, add timer to set hit to active again
 		await damage_cooldown.timeout
 		can_take_damage = true
-	
-func start(pos: Vector2) -> void:
-	position = pos
-	show()
-	player_collision.disabled = false
