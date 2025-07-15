@@ -1,0 +1,29 @@
+[gd_scene load_steps=3 format=3 uid="uid://bt02ogitxuame"]
+
+[ext_resource type="Script" uid="uid://dxiv2jephpjem" path="res://enemies/forward_shooting/forward_shooting_enemy.gd" id="1_gsby8"]
+[ext_resource type="Texture2D" uid="uid://oxx87x34q0rw" path="res://player/sprites/player.png" id="1_pkivl"]
+
+[node name="ForwardShootingEnemy" type="Area2D" node_paths=PackedStringArray("sprite_node")]
+collision_layer = 4
+collision_mask = 2
+script = ExtResource("1_gsby8")
+sprite_node = NodePath("Sprite2D")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(0.396078, 0.352941, 1, 1)
+texture = ExtResource("1_pkivl")
+flip_h = true
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+unique_name_in_owner = true
+polygon = PackedVector2Array(-51, 12, -51, -2, -28, -2, -8, -20, 30, -21, 39, -14, 52, -14, 52, 13, 28, 14)
+
+[node name="ShotTimer" type="Timer" parent="."]
+unique_name_in_owner = true
+wait_time = 0.8
+
+[node name="Shotmarker" type="Marker2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(-52, 18)
+
+[connection signal="timeout" from="ShotTimer" to="." method="_on_shot_timer_timeout"]

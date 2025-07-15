@@ -1,47 +1,35 @@
 [gd_scene load_steps=7 format=3 uid="uid://dgsri73h5qq53"]
 
 [ext_resource type="Script" uid="uid://bs8xji23fhs6m" path="res://player/scripts/player.gd" id="1_g1dw6"]
-[ext_resource type="PackedScene" uid="uid://ja4082f8vsu4" path="res://bullets/default_bullet.tscn" id="2_yw30f"]
-[ext_resource type="Texture2D" uid="uid://b0kcao2di1jed" path="res://player/sprites/player-plane.jpg" id="3_qjkh3"]
+[ext_resource type="PackedScene" uid="uid://cy88by0rop55u" path="res://bullets/player_bullet.tscn" id="2_g1dw6"]
+[ext_resource type="Texture2D" uid="uid://oxx87x34q0rw" path="res://player/sprites/player.png" id="3_g1dw6"]
+[ext_resource type="AudioStream" uid="uid://dywm04v350a4b" path="res://external_assets/sketcherskt/laserpew.ogg" id="4_yw30f"]
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_83hs8"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("3_qjkh3")
-}],
-"loop": true,
-"name": &"Idle",
-"speed": 5.0
-}]
-
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_x8kxw"]
-height = 90.0
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rkbax"]
+size = Vector2(27.9999, 45)
 
 [sub_resource type="GDScript" id="GDScript_g1dw6"]
 script/source = "extends Node
 "
 
 [node name="Player" type="Area2D" groups=["Player"]]
-collision_mask = 0
+collision_mask = 24
 script = ExtResource("1_g1dw6")
-speed = null
-bullet_scene = ExtResource("2_yw30f")
+bullet_scene = ExtResource("2_g1dw6")
 metadata/_edit_group_ = true
 
-[node name="Sprite" type="AnimatedSprite2D" parent="."]
+[node name="Sprite" type="Sprite2D" parent="."]
 unique_name_in_owner = true
-scale = Vector2(0.25, 0.25)
-sprite_frames = SubResource("SpriteFrames_83hs8")
-animation = &"Idle"
+texture = ExtResource("3_g1dw6")
 
 [node name="CollisionShape" type="CollisionShape2D" parent="."]
-unique_name_in_owner = true
+position = Vector2(-9.50005, -1.99996)
 rotation = 1.5708
-shape = SubResource("CapsuleShape2D_x8kxw")
+shape = SubResource("RectangleShape2D_rkbax")
 
 [node name="ShootCooldownTimer" type="Timer" parent="."]
 unique_name_in_owner = true
+wait_time = 0.14
 
 [node name="DamageCooldownTimer" type="Timer" parent="."]
 unique_name_in_owner = true
@@ -49,8 +37,21 @@ wait_time = 3.0
 
 [node name="BulletAudioStream" type="AudioStreamPlayer2D" parent="."]
 unique_name_in_owner = true
+stream = ExtResource("4_yw30f")
 
 [node name="PlayerHealth" type="Node" parent="."]
 script = SubResource("GDScript_g1dw6")
+
+[node name="HorizontalBulletMarker" type="Marker2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(56, 16)
+
+[node name="UpBulletMarker" type="Marker2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(56, 8)
+
+[node name="DownBulletMarker" type="Marker2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(56, 24)
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
