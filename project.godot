@@ -13,7 +13,7 @@ Engineconfigurationfile.config_version=5
 [application]
 
 config/name="shoveljam"
-run/main_scene="uid://bms73m1kyij77"
+run/main_scene="uid://dxacd6m6wm7vj"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 config/icon="res://icon.svg"
 

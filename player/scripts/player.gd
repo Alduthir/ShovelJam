@@ -105,11 +105,12 @@ func take_damage(amount : float) -> void:
 
 		sprite.visible = false
 		explosions.emitting = true
-		explosions.finished.connect(queue_free)
-		print("you died")
-		return
-		# TODO blink plane to show invunerability frames, add timer to set hit to active again
-	damage_cooldown.start()
+		explosions.one_shot = true
+		explosions.finished.connect(func()->void:
+			get_tree().change_scene_to_file("res://ui/MainMenu.tscn")
+			)
+	else:
+		damage_cooldown.start()
 
 func set_can_take_damage(new_value: bool) -> void:
 	can_take_damage = new_value
