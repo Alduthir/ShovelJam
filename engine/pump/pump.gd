@@ -13,6 +13,8 @@ var tween : Tween  = null
 
 signal puzzle_completed()
 
+func _ready() -> void:
+	gauge.rotation_degrees = full_rotation_degrees
 
 func _process(delta: float) -> void:
 	if gauge.rotation_degrees < full_rotation_degrees:

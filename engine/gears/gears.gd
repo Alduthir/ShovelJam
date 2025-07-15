@@ -10,7 +10,7 @@ signal puzzle_completed
 
 @onready var wheel := %Wheel
 func _ready() -> void:
-	rotation_degrees = 0.0
+	rotation_degrees = required_rotation
 
 func _physics_process(_delta: float) -> void:
 	if is_completed: 
