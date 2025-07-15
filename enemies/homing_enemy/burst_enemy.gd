@@ -1,4 +1,4 @@
-class_name ForwardShootingEnemy extends Enemy
+class_name BurstEnemy extends Enemy
 ## This enemy will first move towards its target position. Upon arriving it will start shooting forward until it dies.
 
 @export var target_position := Vector2.ZERO

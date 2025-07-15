@@ -1,6 +1,7 @@
 class_name Wires extends Node2D
 
 var wire_nodes : Array[WireNode]
+var is_completed := false
 
 signal puzzle_completed
 func _ready() -> void:
@@ -9,7 +10,20 @@ func _ready() -> void:
 			var wire_node : WireNode = child as WireNode
 			wire_node.line_connected.connect(check_lines)
 			wire_nodes.append(wire_node)
+			
+func check_lines()->void:
+	if is_completed:
+		return
+	var all_lines_connected := true
+	for wire_node : WireNode in wire_nodes:
+		if wire_node.is_line_connected == false:
+			all_lines_connected = false
 	
+	if all_lines_connected:
+		puzzle_completed.emit()
+
+func set_completed() -> void:
+	is_completed = true
 	for wire_node in wire_nodes:
 		if wire_node.is_line_connected == false:
 			for child in get_children():
@@ -20,16 +34,6 @@ func _ready() -> void:
 				wire_node.add_child(line)
 				wire_node.is_line_connected = true
 				wire_node.linked_node.is_line_connected = true
-			
-func check_lines()->void:
-	var all_lines_connected := true
-	for wire_node : WireNode in wire_nodes:
-		if wire_node.is_line_connected == false:
-			all_lines_connected = false
-	
-	if all_lines_connected:
-		puzzle_completed.emit()
-		
 
 func reset_puzzle() -> void:
 	for wire_node in wire_nodes:
