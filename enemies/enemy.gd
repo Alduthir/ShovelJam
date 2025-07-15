@@ -12,8 +12,9 @@ func take_damage(amount: float)-> void:
 	health = max(health - amount, 0)
 	
 	if health <= 0:
-		var sprite : Sprite2D= find_child("Sprite2D")
-		sprite.visible = false
+		var sprites := find_children("Sprite2D")
+		for sprite : Sprite2D in sprites:
+			sprite.visible = false
 		dying = true
 		var explosion : GPUParticles2D = explosion_effect.instantiate()
 		add_child(explosion)

@@ -1,7 +1,10 @@
-[gd_scene load_steps=3 format=3 uid="uid://bt02ogitxuame"]
+[gd_scene load_steps=4 format=3 uid="uid://bt02ogitxuame"]
 
 [ext_resource type="Script" uid="uid://dxiv2jephpjem" path="res://enemies/forward_shooting/forward_shooting_enemy.gd" id="1_gsby8"]
-[ext_resource type="Texture2D" uid="uid://oxx87x34q0rw" path="res://player/sprites/player.png" id="1_pkivl"]
+[ext_resource type="Texture2D" uid="uid://cjjuqpdhuxcp0" path="res://enemies/forward_shooting/single_shot_enemy.png" id="2_cf0xn"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cf0xn"]
+size = Vector2(97, 41)
 
 [node name="ForwardShootingEnemy" type="Area2D"]
 collision_layer = 4
@@ -9,13 +12,7 @@ collision_mask = 2
 script = ExtResource("1_gsby8")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-modulate = Color(0.396078, 0.352941, 1, 1)
-texture = ExtResource("1_pkivl")
-flip_h = true
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
-unique_name_in_owner = true
-polygon = PackedVector2Array(-51, 12, -51, -2, -28, -2, -8, -20, 30, -21, 39, -14, 52, -14, 52, 13, 28, 14)
+texture = ExtResource("2_cf0xn")
 
 [node name="ShotTimer" type="Timer" parent="."]
 unique_name_in_owner = true
@@ -23,6 +20,10 @@ wait_time = 0.8
 
 [node name="Shotmarker" type="Marker2D" parent="."]
 unique_name_in_owner = true
-position = Vector2(-52, 18)
+position = Vector2(-45, 5)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-2.5, -0.5)
+shape = SubResource("RectangleShape2D_cf0xn")
 
 [connection signal="timeout" from="ShotTimer" to="." method="_on_shot_timer_timeout"]

@@ -1,0 +1,92 @@
+[gd_scene load_steps=13 format=3 uid="uid://dv620i700bxfe"]
+
+[ext_resource type="Texture2D" uid="uid://dg51c8u7fe36h" path="res://enemies/beam_enemy/beampod.png" id="1_ssfjt"]
+[ext_resource type="Texture2D" uid="uid://c5yu224ddrbsn" path="res://bullets/beam_horizontal.png" id="2_najc3"]
+[ext_resource type="Script" uid="uid://dxokj5goccowb" path="res://enemies/beam_enemy/beam_pod.gd" id="2_oo1v4"]
+[ext_resource type="AudioStream" uid="uid://btvyuohopb4oc" path="res://external_assets/dklon/boom5.wav" id="4_ssfjt"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oo1v4"]
+atlas = ExtResource("2_najc3")
+region = Rect2(0, 0, 1280, 13)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ssfjt"]
+atlas = ExtResource("2_najc3")
+region = Rect2(0, 13, 1280, 13)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nqaxy"]
+atlas = ExtResource("2_najc3")
+region = Rect2(0, 26, 1280, 13)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_eurml"]
+atlas = ExtResource("2_najc3")
+region = Rect2(0, 39, 1280, 13)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_og7lo"]
+atlas = ExtResource("2_najc3")
+region = Rect2(0, 52, 1280, 13)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_sepxq"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": null
+}, {
+"duration": 5.0,
+"texture": SubResource("AtlasTexture_oo1v4")
+}, {
+"duration": 5.0,
+"texture": SubResource("AtlasTexture_ssfjt")
+}, {
+"duration": 2.0,
+"texture": SubResource("AtlasTexture_nqaxy")
+}, {
+"duration": 2.0,
+"texture": SubResource("AtlasTexture_eurml")
+}, {
+"duration": 20.0,
+"texture": SubResource("AtlasTexture_og7lo")
+}],
+"loop": false,
+"name": &"shoot_beam",
+"speed": 12.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_najc3"]
+size = Vector2(1280, 7)
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_nqaxy"]
+random_pitch = 2.0
+streams_count = 1
+stream_0/stream = ExtResource("4_ssfjt")
+
+[node name="BeamPod" type="Sprite2D"]
+texture = ExtResource("1_ssfjt")
+flip_h = true
+script = ExtResource("2_oo1v4")
+
+[node name="Beam" type="AnimatedSprite2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(-970, -1)
+scale = Vector2(1.5, 1)
+sprite_frames = SubResource("SpriteFrames_sepxq")
+animation = &"shoot_beam"
+frame = 4
+frame_progress = 1.0
+
+[node name="Area2D" type="Area2D" parent="Beam"]
+unique_name_in_owner = true
+collision_layer = 8
+
+[node name="BeamCollider" type="CollisionShape2D" parent="Beam/Area2D"]
+unique_name_in_owner = true
+position = Vector2(0, 0.5)
+shape = SubResource("RectangleShape2D_najc3")
+disabled = true
+
+[node name="ShootTimer" type="Timer" parent="."]
+unique_name_in_owner = true
+wait_time = 2.0
+autostart = true
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = SubResource("AudioStreamRandomizer_nqaxy")
