@@ -50,9 +50,8 @@ func move(delta: float) -> void:
 	else:
 		return
 	
-	position += (velocity * delta)
-	#var multiplier := 0.25 * ship_reactor.completed_puzzles.size()
-	#position += (velocity * delta) * multiplier
+	var multiplier := 0.25 * ship_reactor.completed_puzzles.size()
+	position += (velocity * delta) * multiplier
 	
 	position.x = position.clamp(sprite_size / 2, screen_size - (sprite_size / 2)).x
 	position.y = position.clamp(sprite_size / 2 + Vector2(0,50), screen_size - (sprite_size / 2)).y

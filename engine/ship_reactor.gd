@@ -2,6 +2,7 @@ class_name ShipReactor extends Node2D
 
 @export var breaking_min_time := 10.0
 @export var breaking_max_time := 20.0
+@export var completed_puzzles : Array[Node2D]
 
 @onready var wires : Wires = %Wires
 @onready var pump : Pump = %Pump
@@ -12,8 +13,11 @@ class_name ShipReactor extends Node2D
 @onready var light_three : Sprite2D = %Light3
 @onready var light_four : Sprite2D = %Light4
 @onready var break_system_timer : Timer = %BreakSystemTimer
-
-var completed_puzzles : Array[Node2D]
+@onready var wire_explosions : GPUParticles2D = %WireExplosions
+@onready var gear_explosions : GPUParticles2D = %GearExplosions
+@onready var pump_explosions : GPUParticles2D = %PumpExplosions
+@onready var switch_explosions : GPUParticles2D = %SwitchExplosions
+@onready var explosion_audio : AudioStreamPlayer2D = %ExplosionAudio
 var light_error := preload("res://engine/light_red.png")
 var light_good := preload("res://engine/light_green.png")
 
@@ -54,13 +58,18 @@ func break_random_system()->void:
 	if puzzle_to_break is Wires: 
 		wires.reset_puzzle()
 		light_one.texture = light_error
+		wire_explosions.emitting = true
 	elif puzzle_to_break is Gears:
 		gears.reset_puzzle()
 		light_two.texture = light_error
+		gear_explosions.emitting = true
 	elif puzzle_to_break is Pump:
 		pump.reset_puzzle()
 		light_three.texture = light_error
+		pump_explosions.emitting = true
 	elif puzzle_to_break is Switches:
 		switches.reset_puzzle()
 		light_four.texture = light_error
+		switch_explosions.emitting = true
+	explosion_audio.play()
 	completed_puzzles.erase(puzzle_to_break)
