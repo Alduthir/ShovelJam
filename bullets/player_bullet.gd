@@ -27,8 +27,6 @@ func _on_area_entered(area: Area2D) -> void:
 	if area is Enemy:
 		var enemy := area as Enemy
 		enemy.take_damage(damage)
-		monitoring = false
-		monitorable = false
 		set_process(false)
 	sprite.visible = false
 	explosions.emitting = true
