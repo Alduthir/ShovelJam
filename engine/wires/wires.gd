@@ -20,6 +20,7 @@ func check_lines()->void:
 			all_lines_connected = false
 	
 	if all_lines_connected:
+		is_completed = true
 		puzzle_completed.emit()
 
 func set_completed() -> void:

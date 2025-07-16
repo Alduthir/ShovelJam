@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://dxacd6m6wm7vj"]
+[gd_scene load_steps=3 format=3 uid="uid://dxacd6m6wm7vj"]
 
 [ext_resource type="Script" uid="uid://cv2gjiim8k54w" path="res://ui/main_menu.gd" id="1_b00nv"]
+[ext_resource type="AudioStream" uid="uid://csws4fgomr8mo" path="res://external_assets/Juhani_Junkala_SubspaceAudio/Juhani Junkala [Retro Game Music Pack] Title Screen.wav" id="2_rn8js"]
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -37,7 +38,7 @@ grow_vertical = 2
 [node name="Label" type="Label" parent="VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 50
-text = "Untitled"
+text = "The ship that shouldn't"
 horizontal_alignment = 1
 
 [node name="Label2" type="Label" parent="VBoxContainer"]
@@ -62,6 +63,12 @@ text = "Play"
 layout_mode = 2
 text = "Quit
 "
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("2_rn8js")
+volume_db = -12.139
+autoplay = true
 
 [connection signal="pressed" from="VBoxContainer/PanelContainer/VBoxContainer/PlayButton" to="." method="_on_play_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/PanelContainer/VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]

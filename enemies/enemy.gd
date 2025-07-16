@@ -6,12 +6,21 @@ class_name Enemy extends Area2D
 
 var dying := false
 
+signal has_died(sender : Enemy)
+
 func take_damage(amount: float)-> void:
 	if dying:
 		return
 	health = max(health - amount, 0)
 	
 	if health <= 0:
+		var collider := find_child("CollisionShape2D")
+		if collider:
+			collider.set_deferred("disabled", true)
+		else:
+			var polygon := find_child("CollisionPolygon2D")
+			if polygon:
+				polygon.set_deferred("disabled", true)
 		var sprites := find_children("Sprite2D")
 		for sprite : Sprite2D in sprites:
 			sprite.visible = false
@@ -19,4 +28,7 @@ func take_damage(amount: float)-> void:
 		var explosion : GPUParticles2D = explosion_effect.instantiate()
 		add_child(explosion)
 		explosion.emitting = true
-		explosion.finished.connect(queue_free)
+		explosion.finished.connect(func()->void:
+			has_died.emit(self)
+			queue_free()
+			)

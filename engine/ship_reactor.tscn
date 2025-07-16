@@ -8,7 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://bwx5wif5fibmo" path="res://engine/hexagons.png" id="4_i0x48"]
 [ext_resource type="Texture2D" uid="uid://dqj8s1i0b4xa3" path="res://engine/light_container.png" id="4_n1y8t"]
 [ext_resource type="PackedScene" uid="uid://dcxgbpbmp8dbj" path="res://engine/switches/switches.tscn" id="4_rkv7k"]
-[ext_resource type="Texture2D" uid="uid://ba6m0io0kwe37" path="res://engine/light_green.png" id="5_41ejd"]
+[ext_resource type="Texture2D" uid="uid://c8s8gqdmj5hna" path="res://engine/light_red.png" id="5_px8ua"]
 [ext_resource type="PackedScene" uid="uid://bs48mw0qglkar" path="res://shared/death_explosion.tscn" id="10_41ejd"]
 [ext_resource type="AudioStream" uid="uid://c4uviyrskp0qq" path="res://external_assets/dklon/boom7.wav" id="11_px8ua"]
 [ext_resource type="AudioStream" uid="uid://eli37c4c1anp" path="res://external_assets/dklon/boom8.wav" id="12_8om3d"]
@@ -24,6 +24,7 @@ stream_2/stream = ExtResource("13_i0xvy")
 [node name="ShipReactor" type="Node2D" node_paths=PackedStringArray("completed_puzzles")]
 script = ExtResource("1_bq62t")
 completed_puzzles = [NodePath("Wires"), NodePath("Pump"), NodePath("Gears"), NodePath("Switches")]
+start_break_timer = true
 
 [node name="Dashboard" type="Sprite2D" parent="."]
 position = Vector2(638, 649)
@@ -40,22 +41,22 @@ texture = ExtResource("4_n1y8t")
 [node name="Light1" type="Sprite2D" parent="Dashboard/LightContainer"]
 unique_name_in_owner = true
 position = Vector2(-33, -2)
-texture = ExtResource("5_41ejd")
+texture = ExtResource("5_px8ua")
 
 [node name="Light2" type="Sprite2D" parent="Dashboard/LightContainer"]
 unique_name_in_owner = true
 position = Vector2(-12, -2)
-texture = ExtResource("5_41ejd")
+texture = ExtResource("5_px8ua")
 
 [node name="Light3" type="Sprite2D" parent="Dashboard/LightContainer"]
 unique_name_in_owner = true
 position = Vector2(10, -2)
-texture = ExtResource("5_41ejd")
+texture = ExtResource("5_px8ua")
 
 [node name="Light4" type="Sprite2D" parent="Dashboard/LightContainer"]
 unique_name_in_owner = true
 position = Vector2(31, -2)
-texture = ExtResource("5_41ejd")
+texture = ExtResource("5_px8ua")
 
 [node name="Wires" parent="." instance=ExtResource("1_l22x7")]
 unique_name_in_owner = true
@@ -77,7 +78,6 @@ position = Vector2(1000, 612)
 [node name="BreakSystemTimer" type="Timer" parent="."]
 unique_name_in_owner = true
 wait_time = 20.0
-autostart = true
 
 [node name="WireExplosions" parent="." instance=ExtResource("10_41ejd")]
 unique_name_in_owner = true
