@@ -1,70 +1,11 @@
-[gd_scene load_steps=17 format=3 uid="uid://c3qaut3rpoyrt"]
+[gd_scene load_steps=5 format=3 uid="uid://c3qaut3rpoyrt"]
 
 [ext_resource type="Script" uid="uid://3rrq2j8s5yar" path="res://bullets/enemy_bullet.gd" id="1_v5fu0"]
 [ext_resource type="Texture2D" uid="uid://bweg3w60dlxti" path="res://bullets/bullet.png" id="2_3il18"]
-[ext_resource type="Texture2D" uid="uid://cmlga3tk5784h" path="res://external_assets/kenney_particle_pack/PNG (Transparent)/scorch_03.png" id="3_c0w2n"]
-[ext_resource type="Texture2D" uid="uid://bfntnsvtm5be7" path="res://external_assets/kenney_particle_pack/PNG (Transparent)/smoke_01.png" id="4_uy0w8"]
 [ext_resource type="AudioStream" uid="uid://c0s7a26nuis8g" path="res://external_assets/dklon/boom2.wav" id="5_3il18"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_sjpon"]
 radius = 7.28011
-
-[sub_resource type="Gradient" id="Gradient_jglok"]
-colors = PackedColorArray(0.52549, 0, 0, 1, 1, 0.529412, 0.0941176, 1)
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_jwrwj"]
-gradient = SubResource("Gradient_jglok")
-
-[sub_resource type="Curve" id="Curve_otj6d"]
-_data = [Vector2(0.0184332, 0.764045), 0.0, 0.0, 0, 0, Vector2(0.239631, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.359551), 0.0, 0.0, 0, 0]
-point_count = 3
-
-[sub_resource type="CurveTexture" id="CurveTexture_7p8w4"]
-curve = SubResource("Curve_otj6d")
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_pb531"]
-lifetime_randomness = 0.12
-particle_flag_disable_z = true
-emission_shape = 1
-emission_sphere_radius = 20.0
-angle_min = -259.8
-angle_max = 276.7
-orbit_velocity_min = -0.0629999
-orbit_velocity_max = 0.0940001
-gravity = Vector3(0, 0, 0)
-radial_accel_min = -2.23517e-06
-radial_accel_max = 46.27
-scale_min = 0.05
-scale_max = 0.1
-scale_curve = SubResource("CurveTexture_7p8w4")
-color_ramp = SubResource("GradientTexture1D_jwrwj")
-
-[sub_resource type="Gradient" id="Gradient_0xk7x"]
-colors = PackedColorArray(0.266575, 0.266575, 0.266575, 1, 1, 1, 1, 1)
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_cws53"]
-gradient = SubResource("Gradient_0xk7x")
-
-[sub_resource type="Curve" id="Curve_mpsaq"]
-_limits = [0.0, 3.0, 0.0, 1.0]
-_data = [Vector2(0.0046083, 0.505618), 0.0, 0.0, 0, 0, Vector2(1, 1.07865), 0.0, 0.0, 0, 0]
-point_count = 2
-
-[sub_resource type="CurveTexture" id="CurveTexture_q8r3s"]
-curve = SubResource("Curve_mpsaq")
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_4gl2m"]
-lifetime_randomness = 0.43
-particle_flag_disable_z = true
-emission_shape = 1
-emission_sphere_radius = 50.0
-gravity = Vector3(0, -300, 0)
-linear_accel_min = -2.23517e-06
-linear_accel_max = -2.23517e-06
-scale_min = 0.05
-scale_max = 0.2
-scale_over_velocity_curve = SubResource("CurveTexture_q8r3s")
-color_ramp = SubResource("GradientTexture1D_cws53")
 
 [node name="EnemyBullet" type="Area2D"]
 collision_layer = 8
@@ -80,26 +21,6 @@ texture = ExtResource("2_3il18")
 shape = SubResource("CircleShape2D_sjpon")
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
-
-[node name="Explosions" type="GPUParticles2D" parent="."]
-unique_name_in_owner = true
-z_index = 1
-emitting = false
-amount = 5
-texture = ExtResource("3_c0w2n")
-lifetime = 0.2
-one_shot = true
-process_material = SubResource("ParticleProcessMaterial_pb531")
-
-[node name="Smoke" type="GPUParticles2D" parent="."]
-unique_name_in_owner = true
-z_index = 1
-emitting = false
-amount = 6
-texture = ExtResource("4_uy0w8")
-lifetime = 0.2
-one_shot = true
-process_material = SubResource("ParticleProcessMaterial_4gl2m")
 
 [node name="BulletSound" type="AudioStreamPlayer2D" parent="."]
 unique_name_in_owner = true

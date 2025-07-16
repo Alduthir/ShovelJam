@@ -1,0 +1,89 @@
+[gd_scene load_steps=16 format=3 uid="uid://dmawucxfbyrvp"]
+
+[ext_resource type="PackedScene" uid="uid://iw2wohbdu57" path="res://waves/MobSpawner.tscn" id="1_buypi"]
+[ext_resource type="Script" uid="uid://dplyqb1aufxkw" path="res://waves/wave.gd" id="2_njel3"]
+[ext_resource type="Resource" uid="uid://m7t2s6wcaqr5" path="res://waves/wave1.tres" id="3_vr1i5"]
+[ext_resource type="Script" uid="uid://cad3xfvlk8rmp" path="res://waves/mob.gd" id="4_rpuu0"]
+[ext_resource type="PackedScene" uid="uid://br05f64km1gja" path="res://engine/ship_reactor.tscn" id="5_oo8pe"]
+[ext_resource type="PackedScene" uid="uid://dgsri73h5qq53" path="res://player/player.tscn" id="6_4gito"]
+[ext_resource type="Texture2D" uid="uid://chuf8wjuqxnwn" path="res://external_assets/kenney_particle_pack/PNG (Transparent)/star_07.png" id="7_fbuy2"]
+[ext_resource type="AudioStream" uid="uid://bjp5pfk2gcdei" path="res://external_assets/Juhani_Junkala_SubspaceAudio/Juhani Junkala [Retro Game Music Pack] Level 1.wav" id="8_0k8yu"]
+
+[sub_resource type="Resource" id="Resource_miq82"]
+script = ExtResource("4_rpuu0")
+type = 4
+spawn_position = Vector2(1400, 300)
+target_position = Vector2(500, 400)
+rotation = 0.0
+metadata/_custom_type_script = "uid://cad3xfvlk8rmp"
+
+[sub_resource type="Resource" id="Resource_j5hk1"]
+script = ExtResource("4_rpuu0")
+type = 4
+spawn_position = Vector2(1400, 300)
+target_position = Vector2(500, 400)
+rotation = 0.0
+metadata/_custom_type_script = "uid://cad3xfvlk8rmp"
+
+[sub_resource type="Resource" id="Resource_ueiaa"]
+script = ExtResource("4_rpuu0")
+type = 4
+spawn_position = Vector2(1400, 300)
+target_position = Vector2(500, 400)
+rotation = 0.0
+metadata/_custom_type_script = "uid://cad3xfvlk8rmp"
+
+[sub_resource type="Resource" id="Resource_daj04"]
+script = ExtResource("2_njel3")
+mobs = Array[ExtResource("4_rpuu0")]([SubResource("Resource_miq82"), SubResource("Resource_j5hk1"), SubResource("Resource_ueiaa")])
+spawn_delay = 1.0
+next_wave_delay = 5.0
+metadata/_custom_type_script = "uid://dplyqb1aufxkw"
+
+[sub_resource type="Gradient" id="Gradient_e35lh"]
+colors = PackedColorArray(1, 1, 0.686275, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_udeyl"]
+gradient = SubResource("Gradient_e35lh")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_udeyl"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(1, 300, 1)
+angle_min = -11.3
+angle_max = 304.9
+angular_velocity_min = 451.76
+angular_velocity_max = 683.29
+gravity = Vector3(-1000, 0, 0)
+linear_accel_min = -2.23517e-06
+linear_accel_max = 31.37
+scale_min = 0.02
+scale_max = 0.04
+color_ramp = SubResource("GradientTexture1D_udeyl")
+turbulence_noise_speed_random = 0.0
+
+[node name="Testlevel" type="Node2D"]
+
+[node name="MobSpawner" parent="." instance=ExtResource("1_buypi")]
+waves = Array[ExtResource("2_njel3")]([ExtResource("3_vr1i5"), SubResource("Resource_daj04")])
+
+[node name="ShipReactor" parent="." instance=ExtResource("5_oo8pe")]
+z_index = 1
+
+[node name="Player" parent="." node_paths=PackedStringArray("ship_reactor") instance=ExtResource("6_4gito")]
+position = Vector2(96, 304)
+collision_mask = 65535
+ship_reactor = NodePath("../ShipReactor")
+
+[node name="Stars" type="GPUParticles2D" parent="."]
+position = Vector2(1289, 281)
+amount = 10
+texture = ExtResource("7_fbuy2")
+lifetime = 2.0
+randomness = 0.8
+process_material = SubResource("ParticleProcessMaterial_udeyl")
+
+[node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_0k8yu")
+volume_db = -20.0
+autoplay = true
