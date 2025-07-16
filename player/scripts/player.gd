@@ -29,7 +29,6 @@ var can_shoot : bool = true
 var can_take_damage : bool = true : set = set_can_take_damage
 
 func _ready() -> void:
-	screen_size.y -= 150 #account for the lower part of the screen being UI
 	sprite_size = sprite.get_rect().size
 	
 	damage_cooldown.timeout.connect(func()->void:
@@ -55,7 +54,7 @@ func move(delta: float) -> void:
 	position += (velocity * delta) * multiplier
 	
 	position.x = position.clamp(sprite_size / 2, screen_size - (sprite_size / 2)).x
-	position.y = position.clamp(sprite_size / 2 + Vector2(0,50), screen_size - (sprite_size / 2)).y
+	position.y = position.clamp(sprite_size / 2 + Vector2(0,50), Vector2(0,720) - Vector2(0,150) - (sprite_size / 2)).y
 
 	# TODO: if player goes up or down, rotate a slight bit to have nose of plane
 	# dip up or down, shooting and everything else may be changed in that direction too
@@ -115,6 +114,6 @@ func take_damage(amount : float) -> void:
 func set_can_take_damage(new_value: bool) -> void:
 	can_take_damage = new_value
 	if can_take_damage:
-		collision_shape.disabled = false
+		collision_shape.set_deferred("disabled", false)
 	else:
-		collision_shape.disabled = true
+		collision_shape.set_deferred("disabled", true)

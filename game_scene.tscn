@@ -1,0 +1,58 @@
+[gd_scene load_steps=12 format=3 uid="uid://bms73m1kyij77"]
+
+[ext_resource type="PackedScene" uid="uid://br05f64km1gja" path="res://engine/ship_reactor.tscn" id="1_6e45b"]
+[ext_resource type="PackedScene" uid="uid://iw2wohbdu57" path="res://waves/MobSpawner.tscn" id="1_mj2jn"]
+[ext_resource type="Script" uid="uid://dplyqb1aufxkw" path="res://waves/wave.gd" id="2_6e45b"]
+[ext_resource type="PackedScene" uid="uid://dgsri73h5qq53" path="res://player/player.tscn" id="2_e35lh"]
+[ext_resource type="Resource" uid="uid://m7t2s6wcaqr5" path="res://waves/wave1.tres" id="3_udeyl"]
+[ext_resource type="Resource" uid="uid://dsv4pug676asc" path="res://waves/wave2.tres" id="4_e35lh"]
+[ext_resource type="Texture2D" uid="uid://chuf8wjuqxnwn" path="res://external_assets/kenney_particle_pack/PNG (Transparent)/star_07.png" id="8_e35lh"]
+[ext_resource type="AudioStream" uid="uid://bjp5pfk2gcdei" path="res://external_assets/Juhani_Junkala_SubspaceAudio/Juhani Junkala [Retro Game Music Pack] Level 1.wav" id="9_udeyl"]
+
+[sub_resource type="Gradient" id="Gradient_e35lh"]
+colors = PackedColorArray(1, 1, 0.686275, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_udeyl"]
+gradient = SubResource("Gradient_e35lh")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_udeyl"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(1, 300, 1)
+angle_min = -11.3
+angle_max = 304.9
+angular_velocity_min = 451.76
+angular_velocity_max = 683.29
+gravity = Vector3(-1000, 0, 0)
+linear_accel_min = -2.23517e-06
+linear_accel_max = 31.37
+scale_min = 0.02
+scale_max = 0.04
+color_ramp = SubResource("GradientTexture1D_udeyl")
+turbulence_noise_speed_random = 0.0
+
+[node name="Testlevel" type="Node2D"]
+
+[node name="MobSpawner" parent="." instance=ExtResource("1_mj2jn")]
+waves = Array[ExtResource("2_6e45b")]([ExtResource("3_udeyl"), ExtResource("4_e35lh")])
+
+[node name="ShipReactor" parent="." instance=ExtResource("1_6e45b")]
+z_index = 1
+
+[node name="Player" parent="." node_paths=PackedStringArray("ship_reactor") instance=ExtResource("2_e35lh")]
+position = Vector2(96, 304)
+collision_mask = 65535
+ship_reactor = NodePath("../ShipReactor")
+
+[node name="Stars" type="GPUParticles2D" parent="."]
+position = Vector2(1289, 281)
+amount = 10
+texture = ExtResource("8_e35lh")
+lifetime = 2.0
+randomness = 0.8
+process_material = SubResource("ParticleProcessMaterial_udeyl")
+
+[node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("9_udeyl")
+volume_db = -20.0
+autoplay = true

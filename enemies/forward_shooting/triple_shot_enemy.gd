@@ -1,7 +1,6 @@
-class_name TripleShot extends Enemy
+class_name TripleShot extends MovingEnemy
 ## This enemy will first move towards its target position. Upon arriving it will start shooting forward until it dies.
 
-@export var target_position := Vector2.ZERO
 @export var bullet_scene := preload("res://bullets/enemy_bullet.tscn")
 
 @onready var shot_timer : Timer = %ShotTimer

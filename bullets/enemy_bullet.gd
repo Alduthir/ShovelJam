@@ -5,8 +5,8 @@ extends Area2D
 @export var color := Color.PURPLE
 
 @onready var sprite : Sprite2D = %Sprite2D
-@onready var explosions : GPUParticles2D = %Explosions
-@onready var smoke : GPUParticles2D = %Smoke
+@onready var explosion_scene := preload("res://shared/hit_explosions.tscn")
+@onready var smoke_scene := preload("res://shared/smoke.tscn")
 @onready var bullet_sound : AudioStreamPlayer2D = %BulletSound
 
 var direction : Vector2 = Vector2.LEFT
@@ -39,10 +39,20 @@ func _on_area_entered(area: Area2D) -> void:
 		bullet_sound.play()
 		bullet_sound.finished.connect(bullet_sound.stop)
 		player.take_damage(damage)
-		monitoring = false
-		monitorable = false
+		set_deferred("monitoring", false)
+		set_deferred("monitorable", false)
 		set_process(false)
 		sprite.visible = false
-		explosions.emitting = true
+		var explosion : GPUParticles2D = explosion_scene.instantiate()
+		explosion.position = global_position
+		explosion.emitting = true
+		var smoke : GPUParticles2D = smoke_scene.instantiate()
+		smoke.position = global_position
 		smoke.emitting = true
-		smoke.finished.connect(queue_free)
+		add_sibling(explosion)
+		add_sibling(smoke)
+		smoke.finished.connect(func()->void:
+			explosion.queue_free()
+			smoke.queue_free()
+			queue_free()
+			)

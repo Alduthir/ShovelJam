@@ -86,6 +86,7 @@ one_shot = true
 [node name="ShootingSound" type="AudioStreamPlayer2D" parent="."]
 unique_name_in_owner = true
 stream = ExtResource("4_yw30f")
+max_polyphony = 3
 
 [node name="PlayerHealth" type="Node" parent="."]
 script = SubResource("GDScript_g1dw6")
