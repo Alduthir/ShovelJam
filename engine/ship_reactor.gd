@@ -3,6 +3,7 @@ class_name ShipReactor extends Node2D
 @export var breaking_min_time := 10.0
 @export var breaking_max_time := 20.0
 @export var completed_puzzles : Array[Node2D]
+@export var start_break_timer : bool
 
 @onready var wires : Wires = %Wires
 @onready var pump : Pump = %Pump
@@ -18,9 +19,9 @@ class_name ShipReactor extends Node2D
 @onready var pump_explosions : GPUParticles2D = %PumpExplosions
 @onready var switch_explosions : GPUParticles2D = %SwitchExplosions
 @onready var explosion_audio : AudioStreamPlayer2D = %ExplosionAudio
+
 var light_error := preload("res://engine/light_red.png")
 var light_good := preload("res://engine/light_green.png")
-
 
 func _ready() -> void:
 	wires.puzzle_completed.connect(func()->void:
@@ -51,16 +52,19 @@ func _ready() -> void:
 	for puzzle : Node2D in completed_puzzles:
 		if puzzle is Wires:
 			wires.set_completed()
+			light_one.texture = light_good
 		elif puzzle is Gears:
 			gears.set_completed()
+			light_two.texture = light_good
 		elif puzzle is Pump:
 			pump.set_completed()
+			light_three.texture = light_good
 		elif puzzle is Switches:
 			switches.set_completed()
+			light_four.texture = light_good
 		
-
-func set_completed_puzzles(new_value: int)->void:
-	completed_puzzles = clamp(new_value, 0, 4)
+	if start_break_timer:
+		break_system_timer.start()
 
 func break_random_system()->void:	
 	if completed_puzzles.size() == 0:

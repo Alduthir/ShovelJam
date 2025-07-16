@@ -29,6 +29,7 @@ var can_shoot : bool = true
 var can_take_damage : bool = true : set = set_can_take_damage
 
 func _ready() -> void:
+	PlayerUi.current_health = PlayerUi.max_health
 	sprite_size = sprite.get_rect().size
 	
 	damage_cooldown.timeout.connect(func()->void:

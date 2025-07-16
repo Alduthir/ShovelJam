@@ -1,0 +1,127 @@
+[gd_scene load_steps=10 format=3 uid="uid://bcfanxdg8vjs0"]
+
+[ext_resource type="Script" uid="uid://cboe68co1fsau" path="res://hangar/hangar.gd" id="1_m3rri"]
+[ext_resource type="PackedScene" uid="uid://br05f64km1gja" path="res://engine/ship_reactor.tscn" id="1_mmcrf"]
+[ext_resource type="Texture2D" uid="uid://bq1bi2i7q8vro" path="res://hangar/hangar_background.png" id="2_y4nxw"]
+[ext_resource type="AudioStream" uid="uid://fjr3vwrckh3o" path="res://external_assets/Juhani_Junkala_SubspaceAudio/Juhani Junkala [Retro Game Music Pack] Ending.wav" id="4_dtjqe"]
+[ext_resource type="Texture2D" uid="uid://oxx87x34q0rw" path="res://player/sprites/player.png" id="5_ivf28"]
+
+[sub_resource type="Animation" id="Animation_ivf28"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Ship:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(684, 410)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Ship:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_nedbh"]
+resource_name = "fly"
+length = 1.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Ship:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.5, 0.7, 0.9, 1.3, 1.4, 1.5, 1.59857),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(684, 410), Vector2(695, 380), Vector2(740, 320), Vector2(780, 300), Vector2(780, 300), Vector2(850, 300), Vector2(1050, 300), Vector2(1270, 300), Vector2(1500, 300)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Ship:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.100523, 0.5, 0.7, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.0, -0.0872665, -0.20944, -0.10472, 0.0]
+}
+
+[sub_resource type="Animation" id="Animation_dtjqe"]
+resource_name = "hover"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Ship:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.201047, 0.4, 0.601915, 0.802961),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(684, 410), Vector2(684, 408), Vector2(684, 406), Vector2(684, 406), Vector2(684, 408)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Ship:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.400868, 0.601915, 0.802961),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 0.0174533, 0.0261799, 0.0, -0.0261799]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_nedbh"]
+_data = {
+&"RESET": SubResource("Animation_ivf28"),
+&"fly": SubResource("Animation_nedbh"),
+&"hover": SubResource("Animation_dtjqe")
+}
+
+[node name="Hangar" type="Node2D"]
+script = ExtResource("1_m3rri")
+
+[node name="Background" type="Sprite2D" parent="."]
+position = Vector2(641, 301)
+texture = ExtResource("2_y4nxw")
+
+[node name="ShipReactor" parent="." node_paths=PackedStringArray("completed_puzzles") instance=ExtResource("1_mmcrf")]
+unique_name_in_owner = true
+breaking_min_time = 9999.0
+breaking_max_time = 9999.0
+completed_puzzles = []
+start_break_timer = false
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("4_dtjqe")
+autoplay = true
+
+[node name="Ship" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(684, 410)
+texture = ExtResource("5_ivf28")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+unique_name_in_owner = true
+libraries = {
+&"": SubResource("AnimationLibrary_nedbh")
+}

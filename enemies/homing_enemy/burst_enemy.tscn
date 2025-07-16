@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://c2d31wvr1rba6"]
 
 [ext_resource type="Script" uid="uid://baftmdqg2c4ls" path="res://enemies/homing_enemy/burst_enemy.gd" id="1_rd2wf"]
-[ext_resource type="Texture2D" uid="uid://oxx87x34q0rw" path="res://player/sprites/player.png" id="2_jsmva"]
+[ext_resource type="Texture2D" uid="uid://cjjbulbhmf4rw" path="res://enemies/homing_enemy/burst_enemy.png" id="2_rd2wf"]
 
 [node name="BurstEnemy" type="Area2D"]
 collision_layer = 4
@@ -10,13 +10,7 @@ script = ExtResource("1_rd2wf")
 target_position = Vector2(200, 200)
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-modulate = Color(0.396078, 0.352941, 1, 1)
-texture = ExtResource("2_jsmva")
-flip_h = true
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
-unique_name_in_owner = true
-polygon = PackedVector2Array(-51, 12, -51, -2, -28, -2, -8, -20, 30, -21, 39, -14, 52, -14, 52, 13, 28, 14)
+texture = ExtResource("2_rd2wf")
 
 [node name="BurstTimer" type="Timer" parent="."]
 unique_name_in_owner = true
@@ -24,6 +18,9 @@ wait_time = 3.0
 
 [node name="Shotmarker" type="Marker2D" parent="."]
 unique_name_in_owner = true
-position = Vector2(-52, 18)
+position = Vector2(-1, 10)
+
+[node name="CollisionShape2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(-48, 24, 31, -24, 49, 24)
 
 [connection signal="timeout" from="BurstTimer" to="." method="_on_shot_timer_timeout"]

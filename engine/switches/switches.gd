@@ -11,7 +11,8 @@ func _ready() -> void:
 			var switch : Switch = child as Switch
 			switches.append(child)
 			switch.switch_flipped.connect(check_all_switches_on)
-
+	reset_puzzle()
+	
 func reset_puzzle() -> void:
 	is_completed = false
 	var switches_turned_off := 0
