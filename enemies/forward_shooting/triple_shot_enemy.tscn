@@ -1,15 +1,22 @@
-[gd_scene load_steps=4 format=3 uid="uid://cuqw47rul42ei"]
+[gd_scene load_steps=6 format=3 uid="uid://cuqw47rul42ei"]
 
 [ext_resource type="Script" uid="uid://bfk041ygm2jha" path="res://enemies/forward_shooting/triple_shot_enemy.gd" id="1_pobd8"]
 [ext_resource type="Texture2D" uid="uid://rum40p2sdy2e" path="res://enemies/forward_shooting/tri_shot_enemy.png" id="2_pobd8"]
+[ext_resource type="AudioStream" uid="uid://dywm04v350a4b" path="res://external_assets/sketcherskt/laserpew.ogg" id="3_yd1f8"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_yd1f8"]
 height = 64.0
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_qf60t"]
+random_pitch = 1.1
+streams_count = 1
+stream_0/stream = ExtResource("3_yd1f8")
 
 [node name="TripleShotEnemy" type="Area2D"]
 collision_layer = 4
 collision_mask = 2
 script = ExtResource("1_pobd8")
+health = 100.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_pobd8")
@@ -33,5 +40,10 @@ position = Vector2(-5, 12)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_yd1f8")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+unique_name_in_owner = true
+stream = SubResource("AudioStreamRandomizer_qf60t")
+pitch_scale = 2.0
 
 [connection signal="timeout" from="ShotTimer" to="." method="_on_shot_timer_timeout"]

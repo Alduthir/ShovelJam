@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://bnb86vmctt1wy"]
+[gd_scene load_steps=4 format=3 uid="uid://bnb86vmctt1wy"]
 
 [ext_resource type="Script" uid="uid://78fgkbosppfm" path="res://credits/credits.gd" id="1_o7wt1"]
 [ext_resource type="AudioStream" uid="uid://fjr3vwrckh3o" path="res://external_assets/Juhani_Junkala_SubspaceAudio/Juhani Junkala [Retro Game Music Pack] Ending.wav" id="2_s541x"]
+[ext_resource type="AudioStream" uid="uid://cwvdnhvw573gc" path="res://external_assets/circlerun/Warm Digital Accept Button HP.wav" id="3_s541x"]
 
 [node name="Credits" type="Control"]
 layout_mode = 3
@@ -41,7 +42,7 @@ text = "Art by Peter Askey
 
 With Special thanks for
 Particle Textures by Kenney
-Sound effects from Dklon and sketcherskt
+Sound effects from Dklon, Sketcherskt, CircleRun and Bart
 Music by Juhani Junkala (SubspaceAudio)"
 horizontal_alignment = 1
 
@@ -69,7 +70,13 @@ text = "Quit"
 [node name="Music" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true
 stream = ExtResource("2_s541x")
+volume_db = -15.0
 autoplay = true
+
+[node name="SFX" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("3_s541x")
+volume_db = 5.0
 
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/PlayAgainButton" to="." method="_on_play_again_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]

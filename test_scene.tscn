@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://iw2wohbdu57" path="res://waves/waveLogic/MobSpawner.tscn" id="1_buypi"]
 [ext_resource type="Script" uid="uid://dplyqb1aufxkw" path="res://waves/waveLogic/wave.gd" id="2_njel3"]
-[ext_resource type="Resource" uid="uid://dsv4pug676asc" path="res://waves/forward_with_tri_shot_wave.tres" id="3_8pr8v"]
+[ext_resource type="Resource" uid="uid://xvvk6geepkg2" path="res://waves/diagonal_beam_wave.tres" id="3_8pr8v"]
 [ext_resource type="PackedScene" uid="uid://br05f64km1gja" path="res://engine/ship_reactor.tscn" id="5_oo8pe"]
 [ext_resource type="PackedScene" uid="uid://dgsri73h5qq53" path="res://player/player.tscn" id="6_4gito"]
 [ext_resource type="Texture2D" uid="uid://chuf8wjuqxnwn" path="res://external_assets/kenney_particle_pack/PNG (Transparent)/star_07.png" id="7_fbuy2"]

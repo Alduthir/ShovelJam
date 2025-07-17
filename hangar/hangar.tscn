@@ -1,10 +1,11 @@
-[gd_scene load_steps=10 format=3 uid="uid://bcfanxdg8vjs0"]
+[gd_scene load_steps=11 format=3 uid="uid://bcfanxdg8vjs0"]
 
-[ext_resource type="Script" uid="uid://cboe68co1fsau" path="res://hangar/hangar.gd" id="1_m3rri"]
-[ext_resource type="PackedScene" uid="uid://br05f64km1gja" path="res://engine/ship_reactor.tscn" id="1_mmcrf"]
-[ext_resource type="Texture2D" uid="uid://bq1bi2i7q8vro" path="res://hangar/hangar_background.png" id="2_y4nxw"]
-[ext_resource type="AudioStream" uid="uid://fjr3vwrckh3o" path="res://external_assets/Juhani_Junkala_SubspaceAudio/Juhani Junkala [Retro Game Music Pack] Ending.wav" id="4_dtjqe"]
-[ext_resource type="Texture2D" uid="uid://oxx87x34q0rw" path="res://player/sprites/player.png" id="5_ivf28"]
+[ext_resource type="Script" uid="uid://cboe68co1fsau" path="res://hangar/hangar.gd" id="1_xyif4"]
+[ext_resource type="Texture2D" uid="uid://bq1bi2i7q8vro" path="res://hangar/hangar_background.png" id="2_qb21d"]
+[ext_resource type="PackedScene" uid="uid://br05f64km1gja" path="res://engine/ship_reactor.tscn" id="3_7fpvg"]
+[ext_resource type="AudioStream" uid="uid://fjr3vwrckh3o" path="res://external_assets/Juhani_Junkala_SubspaceAudio/Juhani Junkala [Retro Game Music Pack] Ending.wav" id="4_8n8ib"]
+[ext_resource type="Texture2D" uid="uid://oxx87x34q0rw" path="res://player/sprites/player.png" id="5_jx3ba"]
+[ext_resource type="AudioStream" uid="uid://fjfv1xyyph3o" path="res://external_assets/circlerun/Laser Sound 3 VOL Up.mp3" id="7_8n8ib"]
 
 [sub_resource type="Animation" id="Animation_ivf28"]
 length = 0.001
@@ -97,13 +98,13 @@ _data = {
 }
 
 [node name="Hangar" type="Node2D"]
-script = ExtResource("1_m3rri")
+script = ExtResource("1_xyif4")
 
 [node name="Background" type="Sprite2D" parent="."]
 position = Vector2(641, 301)
-texture = ExtResource("2_y4nxw")
+texture = ExtResource("2_qb21d")
 
-[node name="ShipReactor" parent="." node_paths=PackedStringArray("completed_puzzles") instance=ExtResource("1_mmcrf")]
+[node name="ShipReactor" parent="." node_paths=PackedStringArray("completed_puzzles") instance=ExtResource("3_7fpvg")]
 unique_name_in_owner = true
 breaking_min_time = 9999.0
 breaking_max_time = 9999.0
@@ -112,16 +113,21 @@ start_break_timer = false
 
 [node name="Music" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true
-stream = ExtResource("4_dtjqe")
+stream = ExtResource("4_8n8ib")
+volume_db = -15.0
 autoplay = true
 
 [node name="Ship" type="Sprite2D" parent="."]
 unique_name_in_owner = true
 position = Vector2(684, 410)
-texture = ExtResource("5_ivf28")
+texture = ExtResource("5_jx3ba")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 unique_name_in_owner = true
 libraries = {
 &"": SubResource("AnimationLibrary_nedbh")
 }
+
+[node name="SFX" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("7_8n8ib")

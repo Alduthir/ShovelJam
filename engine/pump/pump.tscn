@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://witytlvjln5p"]
+[gd_scene load_steps=7 format=3 uid="uid://witytlvjln5p"]
 
 [ext_resource type="Script" uid="uid://c3a2roh7mjmrg" path="res://engine/pump/pump.gd" id="1_1tavt"]
 [ext_resource type="Texture2D" uid="uid://ckvrmp0emaxpr" path="res://engine/pump/pump.png" id="2_bu2x2"]
 [ext_resource type="Texture2D" uid="uid://u7fkb4edcbn3" path="res://engine/gauge.png" id="3_hmo0t"]
 [ext_resource type="Texture2D" uid="uid://cm3sccsmo1epp" path="res://engine/pump/pump_button_up.png" id="3_kib3l"]
+[ext_resource type="AudioStream" uid="uid://5uo1s6qw18bt" path="res://external_assets/circlerun/Btn.wav" id="5_hmo0t"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hmo0t"]
 size = Vector2(79, 64)
@@ -31,5 +32,10 @@ texture = ExtResource("3_kib3l")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Button"]
 position = Vector2(-1.5, -3)
 shape = SubResource("RectangleShape2D_hmo0t")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("5_hmo0t")
+pitch_scale = 0.8
 
 [connection signal="input_event" from="Button" to="." method="_on_button_input_event"]

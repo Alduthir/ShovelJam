@@ -14,9 +14,10 @@ func take_damage(amount: float)-> void:
 	health = max(health - amount, 0)
 	
 	if health <= 0:
-		var collider := find_child("CollisionShape2D")
-		if collider:
-			collider.set_deferred("disabled", true)
+		var colliders := find_children("CollisionShape2D")
+		if colliders.size() > 0:
+			for collider : CollisionShape2D in colliders:
+				collider.set_deferred("disabled", true)
 		else:
 			var polygon := find_child("CollisionPolygon2D")
 			if polygon:
@@ -25,6 +26,7 @@ func take_damage(amount: float)-> void:
 		for sprite : Sprite2D in sprites:
 			sprite.visible = false
 		dying = true
+		call_deferred("set_process", false)
 		var explosion : GPUParticles2D = explosion_effect.instantiate()
 		add_child(explosion)
 		explosion.emitting = true

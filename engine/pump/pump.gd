@@ -2,6 +2,7 @@ class_name Pump extends Node2D
 
 @onready var gauge : Sprite2D = %Gauge as Sprite2D
 @onready var button_sprite : Sprite2D = %ButtonSprite
+@onready var audio : AudioStreamPlayer2D = %AudioStreamPlayer2D
 
 var button_pressed : Texture = preload("res://engine/pump/pump_button_down.png")
 var button_released : Texture = preload("res://engine/pump/pump_button_up.png")
@@ -37,6 +38,9 @@ func _on_button_input_event(_viewport: Node, _event: InputEvent, _shape_idx: int
 			puzzle_completed.emit()
 			is_completed = true
 		
+		var completion_percent := (gauge.rotation_degrees / full_rotation_degrees) * 100
+		audio.pitch_scale = 0.8 + (0.0004 * completion_percent)
+		audio.play()
 	elif  Input.is_action_just_released("lmb"):
 		button_sprite.texture = button_released
 

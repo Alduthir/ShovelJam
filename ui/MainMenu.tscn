@@ -1,7 +1,10 @@
-[gd_scene load_steps=3 format=3 uid="uid://dxacd6m6wm7vj"]
+[gd_scene load_steps=6 format=3 uid="uid://dxacd6m6wm7vj"]
 
 [ext_resource type="Script" uid="uid://cv2gjiim8k54w" path="res://ui/main_menu.gd" id="1_b00nv"]
 [ext_resource type="AudioStream" uid="uid://csws4fgomr8mo" path="res://external_assets/Juhani_Junkala_SubspaceAudio/Juhani Junkala [Retro Game Music Pack] Title Screen.wav" id="2_rn8js"]
+[ext_resource type="AudioStream" uid="uid://o7tr44xw4ji2" path="res://external_assets/circlerun/Warm Digital Accept Button.wav" id="2_x262b"]
+[ext_resource type="AudioStream" uid="uid://cwvdnhvw573gc" path="res://external_assets/circlerun/Warm Digital Accept Button HP.wav" id="3_nmrkx"]
+[ext_resource type="AudioStream" uid="uid://c4c6oyc7q3wwa" path="res://external_assets/circlerun/Button Sound 9.wav" id="3_x262b"]
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -11,6 +14,8 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_b00nv")
+click_sound = ExtResource("2_x262b")
+hover_sound = ExtResource("3_x262b")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 1
@@ -67,8 +72,16 @@ text = "Quit
 [node name="Music" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true
 stream = ExtResource("2_rn8js")
-volume_db = -12.139
+volume_db = -10.0
 autoplay = true
 
+[node name="SFX" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("3_nmrkx")
+volume_db = 5.0
+pitch_scale = 0.9
+
+[connection signal="mouse_entered" from="VBoxContainer/PanelContainer/VBoxContainer/PlayButton" to="." method="_on_play_button_mouse_entered"]
 [connection signal="pressed" from="VBoxContainer/PanelContainer/VBoxContainer/PlayButton" to="." method="_on_play_button_pressed"]
+[connection signal="mouse_entered" from="VBoxContainer/PanelContainer/VBoxContainer/QuitButton" to="." method="_on_quit_button_mouse_entered"]
 [connection signal="pressed" from="VBoxContainer/PanelContainer/VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]

@@ -11,20 +11,25 @@ collision_layer = 4
 collision_mask = 2
 script = ExtResource("1_bcwvd")
 speed = 150.0
+health = 40.0
 
 [node name="BeamPod2" parent="." instance=ExtResource("2_ulw1k")]
+unique_name_in_owner = true
 position = Vector2(0, -10)
 rotation = 1.5708
 
 [node name="BeamPod3" parent="." instance=ExtResource("2_ulw1k")]
+unique_name_in_owner = true
 position = Vector2(12, 0)
 rotation = 3.14159
 
 [node name="BeamPod4" parent="." instance=ExtResource("2_ulw1k")]
+unique_name_in_owner = true
 position = Vector2(0, 9)
 rotation = 4.71239
 
 [node name="BeamPod" parent="." instance=ExtResource("2_ulw1k")]
+unique_name_in_owner = true
 position = Vector2(-12, 0)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

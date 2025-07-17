@@ -3,10 +3,13 @@ class_name BeamPod extends Sprite2D
 @export var damage := 30.0
 @export var explosion := preload("res://shared/death_explosion.tscn")
 
-@onready var collider : CollisionShape2D = %BeamCollider
+@onready var collider : CollisionShape2D = %CollisionShape2D
 @onready var animator : AnimatedSprite2D = %Beam
 @onready var beam_area : Area2D = %Area2D
 @onready var shoot_timer : Timer = %ShootTimer
+@onready var sfx : AudioStreamPlayer2D = %AudioStreamPlayer2D
+
+signal firing
 
 func _ready() -> void:
 	collider.disabled = true
@@ -15,6 +18,7 @@ func _ready() -> void:
 	animator.animation_finished.connect(func()->void:
 		collider.disabled = true
 		animator.stop()
+		sfx.stop()
 		)
 	
 	beam_area.area_entered.connect(func(other : Area2D)->void:
@@ -46,6 +50,7 @@ func _ready() -> void:
 func _process(_delta: float) -> void:
 	if animator.is_playing() and animator.frame == 5 and collider.disabled:
 		collider.disabled = false
+		sfx.play()
 
 func fire_beam()->void:
 	animator.play("shoot_beam")

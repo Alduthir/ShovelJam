@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://b8ckivgeh8syg"
+path="res://.godot/imported/Button Sound 8.wav-499d8a172c1aac669fee7a97db84d14f.sample"
+
+[deps]
+
+source_file="res://external_assets/circlerun/Button Sound 8.wav"
+dest_files=["res://.godot/imported/Button Sound 8.wav-499d8a172c1aac669fee7a97db84d14f.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2
