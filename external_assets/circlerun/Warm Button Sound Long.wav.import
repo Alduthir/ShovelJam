@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://bgitw6r2d1kpm"
+path="res://.godot/imported/Warm Button Sound Long.wav-f5e2dacd42582ccc7647c87fce74a47d.sample"
+
+[deps]
+
+source_file="res://external_assets/circlerun/Warm Button Sound Long.wav"
+dest_files=["res://.godot/imported/Warm Button Sound Long.wav-f5e2dacd42582ccc7647c87fce74a47d.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

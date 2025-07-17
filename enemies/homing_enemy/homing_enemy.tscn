@@ -1,12 +1,19 @@
-[gd_scene load_steps=3 format=3 uid="uid://dfmyuqycpb0oa"]
+[gd_scene load_steps=5 format=3 uid="uid://dfmyuqycpb0oa"]
 
 [ext_resource type="Script" uid="uid://dr8ei6402xb3e" path="res://enemies/homing_enemy/homing_enemy.gd" id="1_gx1ii"]
 [ext_resource type="Texture2D" uid="uid://csyny0w44f6uc" path="res://enemies/homing_enemy/homing_enemy.png" id="2_gx1ii"]
+[ext_resource type="AudioStream" uid="uid://dywm04v350a4b" path="res://external_assets/sketcherskt/laserpew.ogg" id="3_3os5y"]
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_f1qdr"]
+random_pitch = 1.1
+streams_count = 1
+stream_0/stream = ExtResource("3_3os5y")
 
 [node name="HomingEnemy" type="Area2D"]
 collision_layer = 4
 collision_mask = 2
 script = ExtResource("1_gx1ii")
+speed = 500.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_gx1ii")
@@ -17,9 +24,14 @@ wait_time = 0.8
 
 [node name="Shotmarker" type="Marker2D" parent="."]
 unique_name_in_owner = true
-position = Vector2(-52, 18)
+position = Vector2(-27, 15)
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 polygon = PackedVector2Array(-20, -7, -12, -21, 19, -21, 20, 5, 12, 21, -13, 21, -18, 15, 6, 15, 6, -7)
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+unique_name_in_owner = true
+stream = SubResource("AudioStreamRandomizer_f1qdr")
+pitch_scale = 2.0
 
 [connection signal="timeout" from="ShotTimer" to="." method="_on_shot_timer_timeout"]

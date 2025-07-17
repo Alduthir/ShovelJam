@@ -19,6 +19,7 @@ class_name ShipReactor extends Node2D
 @onready var pump_explosions : GPUParticles2D = %PumpExplosions
 @onready var switch_explosions : GPUParticles2D = %SwitchExplosions
 @onready var explosion_audio : AudioStreamPlayer2D = %ExplosionAudio
+@onready var fix_audio : AudioStreamPlayer2D = %FixAudio
 
 var light_error := preload("res://engine/light_red.png")
 var light_good := preload("res://engine/light_green.png")
@@ -27,20 +28,24 @@ func _ready() -> void:
 	wires.puzzle_completed.connect(func()->void:
 		completed_puzzles.append(wires)
 		light_one.texture = light_good
+		fix_audio.play()
 	)	
 	gears.puzzle_completed.connect(func()->void:
 		completed_puzzles.append(gears)
 		light_two.texture = light_good
+		fix_audio.play()
 	)	
 	
 	pump.puzzle_completed.connect(func()->void:
 		completed_puzzles.append(pump)
 		light_three.texture = light_good
+		fix_audio.play()
 	)	
 
 	switches.puzzle_completed.connect(func()->void:
 		completed_puzzles.append(switches)
 		light_four.texture = light_good
+		fix_audio.play()
 	)	
 	
 	break_system_timer.timeout.connect(func () -> void: 

@@ -104,6 +104,11 @@ special={
 2d_physics/layer_4="EnemyProjectile"
 2d_physics/layer_5="Environment"
 
+[physics]
+
+common/physics_ticks_per_second=40
+2d/solver/solver_iterations=12
+
 [rendering]
 
 renderer/rendering_method="gl_compatibility"

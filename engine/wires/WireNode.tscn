@@ -1,13 +1,17 @@
-[gd_scene load_steps=4 format=3 uid="uid://j0lo8jsdj0nf"]
+[gd_scene load_steps=6 format=3 uid="uid://j0lo8jsdj0nf"]
 
 [ext_resource type="Script" uid="uid://cavi5axvh4uj4" path="res://engine/wires/wire_node.gd" id="1_pgr4y"]
+[ext_resource type="AudioStream" uid="uid://c4c6oyc7q3wwa" path="res://external_assets/circlerun/Button Sound 9.wav" id="2_cld5h"]
 [ext_resource type="Texture2D" uid="uid://ocllfd5d3mfs" path="res://engine/wires/wire_blue.png" id="2_pgr4y"]
+[ext_resource type="AudioStream" uid="uid://b8ckivgeh8syg" path="res://external_assets/circlerun/Button Sound 8.wav" id="3_hinbu"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pgr4y"]
-size = Vector2(29, 15)
+size = Vector2(36, 20)
 
 [node name="WireNode" type="Area2D"]
 script = ExtResource("1_pgr4y")
+connected_sound = ExtResource("2_cld5h")
+wrong_sound = ExtResource("3_hinbu")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 unique_name_in_owner = true
@@ -15,8 +19,11 @@ scale = Vector2(2, 2)
 texture = ExtResource("2_pgr4y")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-1.5, 0.5)
+position = Vector2(-1, 0)
 shape = SubResource("RectangleShape2D_pgr4y")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+unique_name_in_owner = true
 
 [connection signal="input_event" from="." to="." method="_on_input_event"]
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]

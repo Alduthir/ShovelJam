@@ -55,5 +55,5 @@ metadata/_custom_type_script = "uid://cad3xfvlk8rmp"
 script = ExtResource("2_il8rm")
 mobs = Array[ExtResource("1_hp6hv")]([SubResource("Resource_hp6hv"), SubResource("Resource_il8rm"), SubResource("Resource_trmwi"), SubResource("Resource_4ujvf"), SubResource("Resource_o1fwf"), SubResource("Resource_qbmug")])
 spawn_delay = 2.0
-next_wave_delay = 5.0
+next_wave_delay = 2.0
 metadata/_custom_type_script = "uid://dplyqb1aufxkw"

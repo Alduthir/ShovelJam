@@ -42,6 +42,8 @@ waves = Array[ExtResource("2_6e45b")]([ExtResource("3_udeyl"), ExtResource("4_e3
 
 [node name="ShipReactor" parent="." instance=ExtResource("1_6e45b")]
 z_index = 1
+breaking_min_time = 5.0
+breaking_max_time = 15.0
 
 [node name="Player" parent="." node_paths=PackedStringArray("ship_reactor") instance=ExtResource("2_e35lh")]
 position = Vector2(96, 304)
@@ -59,5 +61,5 @@ process_material = SubResource("ParticleProcessMaterial_udeyl")
 [node name="Music" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true
 stream = ExtResource("9_udeyl")
-volume_db = -20.0
+volume_db = -15.0
 autoplay = true

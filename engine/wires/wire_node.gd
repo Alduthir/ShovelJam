@@ -4,7 +4,8 @@ class_name WireNode extends Area2D
 @export_color_no_alpha var color : Color
 @export var texture : Texture2D = preload("res://engine/wires/wire_blue.png")
 @export var is_flipped := false
-
+@export var connected_sound : AudioStream
+@export var wrong_sound : AudioStream
 @export var linked_node : WireNode
 
 var line : Line2D = null
@@ -16,6 +17,7 @@ var previous_mouse_position := Vector2.ZERO
 var draw_length := 0.0
 
 @onready var sprite : Sprite2D = %Sprite2D
+@onready var audio : AudioStreamPlayer2D = %AudioStreamPlayer2D
 
 signal line_connected
 
@@ -34,7 +36,11 @@ func _process(_delta: float) -> void:
 				if linked_node.has_mouse:
 					is_line_connected = true
 					linked_node.is_line_connected = true
+					audio.stream = connected_sound
+					audio.play()
 				elif is_line_connected == false: 
+					audio.stream = wrong_sound
+					audio.play()
 					child.queue_free()
 					
 	if line != null and dragging:
@@ -45,7 +51,10 @@ func _process(_delta: float) -> void:
 		else : 
 			for child in get_children():
 				if child is Line2D:
+					audio.stream = wrong_sound
+					audio.play()
 					child.queue_free()
+					
 
 
 func _on_input_event(_viewport: Node, _event: InputEvent, _shape_idx: int) -> void:

@@ -37,10 +37,10 @@ metadata/_custom_type_script = "uid://cad3xfvlk8rmp"
 
 [sub_resource type="Resource" id="Resource_o1fwf"]
 script = ExtResource("1_kwv3x")
-type = 0
+type = 3
 spawn_position = Vector2(1400, 200)
 target_position = Vector2(500, 400)
-rotation = 45.0
+rotation = 0.0
 metadata/_custom_type_script = "uid://cad3xfvlk8rmp"
 
 [sub_resource type="Resource" id="Resource_qbmug"]

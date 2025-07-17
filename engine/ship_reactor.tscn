@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://br05f64km1gja"]
+[gd_scene load_steps=17 format=3 uid="uid://br05f64km1gja"]
 
 [ext_resource type="Script" uid="uid://cfhd032g6w06r" path="res://engine/ship_reactor.gd" id="1_bq62t"]
 [ext_resource type="PackedScene" uid="uid://qkrhe31vbry5" path="res://engine/wires/wires.tscn" id="1_l22x7"]
@@ -13,6 +13,7 @@
 [ext_resource type="AudioStream" uid="uid://c4uviyrskp0qq" path="res://external_assets/dklon/boom7.wav" id="11_px8ua"]
 [ext_resource type="AudioStream" uid="uid://eli37c4c1anp" path="res://external_assets/dklon/boom8.wav" id="12_8om3d"]
 [ext_resource type="AudioStream" uid="uid://d3uyc8rjladka" path="res://external_assets/dklon/boom6.wav" id="13_i0xvy"]
+[ext_resource type="AudioStream" uid="uid://bmak4pdopaons" path="res://external_assets/circlerun/Triplet Accept Button.wav" id="14_8om3d"]
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_6iu28"]
 random_pitch = 2.0
@@ -20,6 +21,11 @@ streams_count = 3
 stream_0/stream = ExtResource("11_px8ua")
 stream_1/stream = ExtResource("12_8om3d")
 stream_2/stream = ExtResource("13_i0xvy")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_i0xvy"]
+random_pitch = 1.1
+streams_count = 1
+stream_0/stream = ExtResource("14_8om3d")
 
 [node name="ShipReactor" type="Node2D" node_paths=PackedStringArray("completed_puzzles")]
 script = ExtResource("1_bq62t")
@@ -102,3 +108,7 @@ amount = 7
 [node name="ExplosionAudio" type="AudioStreamPlayer2D" parent="."]
 unique_name_in_owner = true
 stream = SubResource("AudioStreamRandomizer_6iu28")
+
+[node name="FixAudio" type="AudioStreamPlayer2D" parent="."]
+unique_name_in_owner = true
+stream = SubResource("AudioStreamRandomizer_i0xvy")

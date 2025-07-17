@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://decosl0av6bh7"
+path="res://.godot/imported/Main Window Open.mp3-ec3493aa9d791848e8299fe0f0b59e29.mp3str"
+
+[deps]
+
+source_file="res://external_assets/circlerun/Main Window Open.mp3"
+dest_files=["res://.godot/imported/Main Window Open.mp3-ec3493aa9d791848e8299fe0f0b59e29.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
