@@ -2,6 +2,7 @@ extends Node2D
 
 const HOVER = "hover"
 const FLY = "fly"
+const GAME_SCENE := "res://game_scene.tscn"
 
 @export var liftoff_sound : AudioStream = preload("res://external_assets/bart/warp engine engage_0-16bit.wav")
 @export var fly_sound : AudioStream = preload("res://external_assets/circlerun/Laser Sound 3 VOL Up.mp3")
@@ -13,6 +14,8 @@ const FLY = "fly"
 @onready var sfx : AudioStreamPlayer = %SFX
 
 func _ready() -> void:
+	PlayerUi.visible = true
+	ship_reactor.completed_puzzles.clear()
 	music.finished.connect(music.play)
 	animator.play(HOVER)
 
@@ -29,4 +32,4 @@ func _process(_delta: float) -> void:
 	
 
 func fly_animation_finished(_animation_name : String)->void:
-	get_tree().change_scene_to_file("res://game_scene.tscn")
+	get_tree().change_scene_to_file(GAME_SCENE)

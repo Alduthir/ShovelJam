@@ -12,6 +12,8 @@ const AIMING := preload("res://enemies/homing_enemy/homing_enemy.tscn")
 const BURST := preload("res://enemies/homing_enemy/burst_enemy.tscn")
 const BEAM := preload("res://enemies/beam_enemy/beam_enemy.tscn")
 
+const CREDITS_SCENE : String = "res://credits/credits.tscn"
+
 var current_wave : Wave = null
 var wave_index := 0
 var mob_index := 0 : set = set_mob_index
@@ -71,7 +73,7 @@ func set_mob_index(new_value : int)->void:
 func on_enemy_died(sender : Enemy)->void:
 	enemies.erase(sender)
 	if wave_index == waves.size() and enemies.size() == 0:
-		get_tree().change_scene_to_file("res://credits/credits.tscn")
+		get_tree().change_scene_to_file(CREDITS_SCENE)
 	
 func _on_next_wave_timer_timeout() -> void:
 	spawn_wave()
