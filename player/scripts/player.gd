@@ -28,6 +28,9 @@ var screen_size_to_adjust : Vector2
 var can_shoot : bool = true
 var can_take_damage : bool = true : set = set_can_take_damage
 
+var is_knocked_back := false
+var knockback_velocity := Vector2.ZERO
+
 func _ready() -> void:
 	PlayerUi.current_health = PlayerUi.max_health
 	sprite_size = sprite.get_rect().size
@@ -40,9 +43,17 @@ func _ready() -> void:
 		)
 
 func _process(delta: float) -> void:
-	move(delta)
-	shoot()
-
+	if is_knocked_back:
+		position += knockback_velocity
+		knockback_velocity = knockback_velocity.lerp(Vector2.ZERO, 5* delta)
+		if knockback_velocity.length() < 10:
+			is_knocked_back = false
+	else:
+		move(delta)
+		shoot()
+	
+	clamp_position()
+	
 func move(delta: float) -> void:
 	var velocity := Input.get_vector("move_left","move_right","move_up","move_down")
 	
@@ -53,13 +64,13 @@ func move(delta: float) -> void:
 	
 	var multiplier := 0.25 * ship_reactor.completed_puzzles.size()
 	position += (velocity * delta) * multiplier
-	
-	position.x = position.clamp(sprite_size / 2, screen_size - (sprite_size / 2)).x
-	position.y = position.clamp(sprite_size / 2 + Vector2(0,50), Vector2(0,720) - Vector2(0,150) - (sprite_size / 2)).y
-
 	# TODO: if player goes up or down, rotate a slight bit to have nose of plane
 	# dip up or down, shooting and everything else may be changed in that direction too
 
+func clamp_position()->void:
+	position.x = position.clamp(sprite_size / 2, screen_size - (sprite_size / 2)).x
+	position.y = position.clamp(sprite_size / 2 + Vector2(0,50), Vector2(0,720) - Vector2(0,150) - (sprite_size / 2)).y
+	
 func shoot() -> void:
 	if Input.is_action_just_pressed("special"):
 		# TODO: shoot special bullet/lazer/etc..
@@ -118,3 +129,14 @@ func set_can_take_damage(new_value: bool) -> void:
 		collision_shape.set_deferred("disabled", false)
 	else:
 		collision_shape.set_deferred("disabled", true)
+
+
+func _on_area_entered(area: Area2D) -> void:
+	if area is Enemy:
+		var enemy : Enemy = area as Enemy
+		enemy.take_damage(30)
+		take_damage(30)
+		
+		is_knocked_back = true
+		var direction := (global_position - enemy.global_position).normalized()
+		knockback_velocity = Vector2(direction.x,0.0) * 30.0

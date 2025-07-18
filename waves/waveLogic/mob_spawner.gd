@@ -11,6 +11,7 @@ const TRIPLE := preload("res://enemies/forward_shooting/triple_shot_enemy.tscn")
 const AIMING := preload("res://enemies/homing_enemy/homing_enemy.tscn")
 const BURST := preload("res://enemies/homing_enemy/burst_enemy.tscn")
 const BEAM := preload("res://enemies/beam_enemy/beam_enemy.tscn")
+const BOSS := preload("res://enemies/boss/boss.tscn")
 
 const CREDITS_SCENE : String = "res://credits/credits.tscn"
 
@@ -45,7 +46,7 @@ func spawn_mob()->void:
 		EnemyType.Type.BEAM:
 			mob = BEAM.instantiate()
 		EnemyType.Type.BOSS:
-			pass
+			mob = BOSS.instantiate()
 	
 	mob.rotation_degrees = current_wave.mobs[mob_index].rotation
 	mob.global_position = current_wave.mobs[mob_index].spawn_position
