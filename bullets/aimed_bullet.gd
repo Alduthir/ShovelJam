@@ -17,15 +17,17 @@ func _ready() -> void:
 	sprite.modulate = color
 	
 
+func initialize(start_pos: Vector2) -> void:
+	global_position = start_pos
+	var player_nodes := get_tree().get_nodes_in_group("Player")
+	if !player_nodes.is_empty():
+		var player : Node2D = get_tree().get_nodes_in_group("Player")[0]
+		aim_direction = start_pos.direction_to(player.global_position)
+	rotation = aim_direction.angle()
+	visible = true
+
+
 func _process(delta: float) -> void:
-	if aim_direction == Vector2.ZERO:
-		var player_nodes := get_tree().get_nodes_in_group("Player")
-		if !player_nodes.is_empty():
-			var player : Node2D = get_tree().get_nodes_in_group("Player")[0]
-			print(player.global_position)
-			print(player.position)
-			aim_direction = global_position.direction_to(player.global_position)
-			
 	global_position += aim_direction * speed * delta
 
 func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
