@@ -38,7 +38,6 @@ func get_instance(key: PackedScene) -> Node2D:
 			return obj
 
 	var instance: Node2D= scenes[key_name].instantiate()
-	instance.visible = true
 	add_child(instance)
 	pools[key_name].append(instance)
 	return instance
@@ -47,12 +46,17 @@ func return_instance(node: Node2D) -> void:
 	disable_instance(node)
 	
 func disable_instance(instance: Node2D) -> void:
-	instance.visible = false
+	instance.set_deferred("visible", false)
 	instance.set_process(false)
 	instance.set_physics_process(false)
 	instance.set_process_input(false)
 	instance.set_process_unhandled_input(false)
 	instance.set_process_unhandled_key_input(false)
+	for child in instance.get_children():
+		if child is CanvasItem:
+			(child as CanvasItem).visible = false
+		if child is CollisionShape2D:
+			child.set_deferred("disabled", true)
 
 func enable_instance(instance: Node2D) -> void:
 	instance.visible = true
@@ -61,4 +65,10 @@ func enable_instance(instance: Node2D) -> void:
 	instance.set_process_input(true)
 	instance.set_process_unhandled_input(true)
 	instance.set_process_unhandled_key_input(true)
-	
+	for child in instance.get_children():
+		child.set_process(true)
+		child.set_physics_process(true)
+		if child is CanvasItem:
+			(child as CanvasItem).visible = true
+		if child is CollisionShape2D:
+			child.set_deferred("disabled", false)

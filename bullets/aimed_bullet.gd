@@ -11,21 +11,26 @@ extends Area2D
 @onready var shape : CollisionShape2D = %CollisionShape2D
 
 var damaging : bool = false
-var aim_direction := Vector2.LEFT
+var aim_direction := Vector2.ZERO
 
 func _ready() -> void:
 	sprite.modulate = color
-	var player_nodes := get_tree().get_nodes_in_group("Player")
 	
-	if !player_nodes.is_empty():
-		var player : Node2D = get_tree().get_nodes_in_group("Player")[0]
-		aim_direction = global_position.direction_to(player.global_position)
 
 func _process(delta: float) -> void:
-	position += aim_direction * speed * delta
+	if aim_direction == Vector2.ZERO:
+		var player_nodes := get_tree().get_nodes_in_group("Player")
+		if !player_nodes.is_empty():
+			var player : Node2D = get_tree().get_nodes_in_group("Player")[0]
+			print(player.global_position)
+			print(player.position)
+			aim_direction = global_position.direction_to(player.global_position)
+			
+	global_position += aim_direction * speed * delta
 
 func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
-	queue_free()
+	Poolmanager.return_instance(self)
+	aim_direction = Vector2.ZERO
 
 func _on_area_entered(area: Area2D) -> void:
 	if damaging:
@@ -38,7 +43,9 @@ func _on_area_entered(area: Area2D) -> void:
 		var player := area as Player
 		
 		if player.can_take_damage == false:
-			queue_free()
+			Poolmanager.return_instance(self)
+			aim_direction = Vector2.ZERO
+			return
 		bullet_sound.pitch_scale = randf_range(0.8,1.2)
 		bullet_sound.play()
 		bullet_sound.finished.connect(bullet_sound.stop)
@@ -48,6 +55,8 @@ func _on_area_entered(area: Area2D) -> void:
 		set_deferred("monitorable",  false)
 		set_process(false)
 		sprite.visible = false
+		Poolmanager.return_instance(self)
+		aim_direction = Vector2.ZERO
 		
 		
 func enable_particle_effects() -> void:
@@ -58,7 +67,7 @@ func enable_particle_effects() -> void:
 	explosion.reparent(get_tree().root)
 	smoke.reparent(get_tree().root)
 	smoke.finished.connect(func()->void:
-		explosion.queue_free()
-		smoke.queue_free()
-		queue_free()
+		explosion.emitting = false
+		smoke.emitting = false
+		Poolmanager.return_instance(self)
 	)

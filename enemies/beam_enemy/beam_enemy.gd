@@ -21,4 +21,4 @@ func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
 	if animator.is_playing():
 		await animator.animation_finished
 	
-	queue_free()
+	Poolmanager.return_instance(self)

@@ -20,8 +20,7 @@ func _process(delta: float) -> void:
 	position += rotated_direction * speed * delta
 
 func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
-	if visible:
-		Poolmanager.return_instance(self)
+	Poolmanager.return_instance(self)
 
 func _on_area_entered(area: Area2D) -> void:
 	if damaging:
@@ -45,7 +44,7 @@ func enable_particle_effects() -> void:
 	explosion.reparent(get_tree().root)
 	smoke.reparent(get_tree().root)
 	smoke.finished.connect(func()->void:
-		explosion.queue_free()
-		smoke.queue_free()
-		queue_free()
+		explosion.emitting = false
+		smoke.emitting = false
+		Poolmanager.return_instance(self)
 	)

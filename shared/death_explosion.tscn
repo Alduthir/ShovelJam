@@ -1,7 +1,6 @@
-[gd_scene load_steps=12 format=3 uid="uid://bs48mw0qglkar"]
+[gd_scene load_steps=11 format=3 uid="uid://bs48mw0qglkar"]
 
 [ext_resource type="Texture2D" uid="uid://c2aokkyrqcrrg" path="res://external_assets/kenney_particle_pack/PNG (Transparent)/fire_02.png" id="1_yp7v1"]
-[ext_resource type="Script" uid="uid://bitrmmm6gr2ad" path="res://shared/death_explosion.gd" id="2_vtxt0"]
 
 [sub_resource type="Curve" id="Curve_gsby8"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.561798), 0.0, 0.0, 0, 0]
@@ -57,6 +56,3 @@ texture = ExtResource("1_yp7v1")
 lifetime = 0.5
 one_shot = true
 process_material = SubResource("ParticleProcessMaterial_8ftsi")
-script = ExtResource("2_vtxt0")
-
-[connection signal="finished" from="." to="." method="_on_finished"]

@@ -20,7 +20,7 @@ func _process(delta: float) -> void:
 	position += rotated_direction * speed * delta
 
 func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
-	queue_free()
+	Poolmanager.return_instance(self)
 
 func _on_area_entered(area: Area2D) -> void:
 	#Workaround for bullets sometimes triggering area entered twice
@@ -34,7 +34,7 @@ func _on_area_entered(area: Area2D) -> void:
 		var player := area as Player		
 		
 		if player.can_take_damage == false:
-			queue_free()
+			Poolmanager.return_instance(self)
 		bullet_sound.pitch_scale = randf_range(0.8,1.2)
 		bullet_sound.play()
 		bullet_sound.finished.connect(bullet_sound.stop)
@@ -54,7 +54,7 @@ func enable_particle_effects() -> void:
 	explosion.reparent(get_tree().root)
 	smoke.reparent(get_tree().root)
 	smoke.finished.connect(func()->void:
-		explosion.queue_free()
-		smoke.queue_free()
-		queue_free()
+		explosion.emitting = false
+		smoke.emitting = false
+		Poolmanager.return_instance(self)
 	)

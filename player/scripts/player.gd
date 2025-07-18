@@ -77,14 +77,15 @@ func shoot() -> void:
 
 func spawn_bullets()-> void:
 	var horizontal_bullet : Node2D = Poolmanager.get_instance(bullet_scene)
-	horizontal_bullet.position = horizontal_bullet_marker.global_position
+	horizontal_bullet.global_position = horizontal_bullet_marker.global_position
+	horizontal_bullet.rotation_degrees = 0
 	
 	var up_bullet : Node2D = Poolmanager.get_instance(bullet_scene)
-	up_bullet.position = up_bullet_marker.global_position
+	up_bullet.global_position = up_bullet_marker.global_position
 	up_bullet.rotation_degrees = -10
 	
 	var down_bullet :Node2D = Poolmanager.get_instance(bullet_scene)
-	down_bullet.position = down_bullet_marker.global_position
+	down_bullet.global_position = down_bullet_marker.global_position
 	down_bullet.rotation_degrees = 10
 
 func take_damage(amount : float) -> void:
