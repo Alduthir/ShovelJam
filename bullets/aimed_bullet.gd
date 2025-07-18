@@ -43,16 +43,16 @@ func _on_area_entered(area: Area2D) -> void:
 		bullet_sound.play()
 		bullet_sound.finished.connect(bullet_sound.stop)
 		player.take_damage(damage)
-		monitoring = false
-		monitorable = false
+		set_deferred("monitoring", false)
+		set_deferred("monitorable",  false)
 		set_process(false)
 		sprite.visible = false
 		explosion.position = global_position
 		explosion.emitting = true
 		smoke.position = global_position
 		smoke.emitting = true
-		add_sibling(explosion)
-		add_sibling(smoke)
+		explosion.reparent(get_tree().root)
+		smoke.reparent(get_tree().root)
 		smoke.finished.connect(func()->void:
 			explosion.queue_free()
 			smoke.queue_free()
