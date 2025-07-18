@@ -27,6 +27,7 @@ shape = SubResource("CircleShape2D_sjpon")
 [node name="BulletSound" type="AudioStreamPlayer2D" parent="."]
 unique_name_in_owner = true
 stream = ExtResource("5_ybpj4")
+volume_db = 5.0
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
