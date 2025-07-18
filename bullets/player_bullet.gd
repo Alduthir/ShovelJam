@@ -46,4 +46,4 @@ func _on_area_entered(area: Area2D) -> void:
 		explosion.queue_free()
 		smoke.queue_free()
 		queue_free()
-		)
+	)
