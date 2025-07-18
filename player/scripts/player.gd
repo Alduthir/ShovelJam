@@ -54,7 +54,8 @@ func move(delta: float) -> void:
 	var multiplier := 0.25 * ship_reactor.completed_puzzles.size()
 	position += (velocity * delta) * multiplier
 	
-	position = position.clamp(sprite_size / 2 + Vector2(0,50), Vector2(0,720) - Vector2(0,150) - (sprite_size / 2))
+	position.x = position.clamp(sprite_size / 2, screen_size - (sprite_size / 2)).x
+	position.y = position.clamp(sprite_size / 2 + Vector2(0,50), Vector2(0,720) - Vector2(0,150) - (sprite_size / 2)).y
 
 	# TODO: if player goes up or down, rotate a slight bit to have nose of plane
 	# dip up or down, shooting and everything else may be changed in that direction too

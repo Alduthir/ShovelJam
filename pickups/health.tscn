@@ -6,7 +6,8 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dutu3"]
 size = Vector2(32, 32)
 
-[node name="Area2D" type="Area2D"]
+[node name="HealthPickup" type="Area2D"]
+collision_layer = 8
 script = ExtResource("1_8nj3e")
 
 [node name="Sprite" type="Sprite2D" parent="."]
