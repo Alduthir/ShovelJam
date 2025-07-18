@@ -58,7 +58,7 @@ _data = {
 }
 
 [node name="Player" type="Area2D" groups=["Player"]]
-collision_mask = 24
+collision_mask = 12
 script = ExtResource("1_g1dw6")
 bullet_scene = ExtResource("2_g1dw6")
 metadata/_edit_group_ = true
