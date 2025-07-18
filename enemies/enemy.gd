@@ -2,8 +2,10 @@ class_name Enemy extends Area2D
 
 @export var speed := 300.0
 @export var health := 50.0
-@export var explosion_effect := preload("res://shared/death_explosion.tscn")
+#TODO: make use of a pool
 @export var health_pickup : PackedScene = preload("res://pickups/health.tscn")
+
+@onready var explosion_effect : GPUParticles2D = %Explosions as GPUParticles2D
 
 var dying := false
 var spawn_health_pickup : bool = false
@@ -36,10 +38,8 @@ func take_damage(amount: float)-> void:
 			add_sibling(pickup)
 			
 		call_deferred("set_process", false)
-		var explosion : GPUParticles2D = explosion_effect.instantiate()
-		add_child(explosion)
-		explosion.emitting = true
-		explosion.finished.connect(func()->void:
+		explosion_effect.emitting = true
+		explosion_effect.finished.connect(func()->void:
 			has_died.emit(self)
 			queue_free()
 		)

@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://dfmyuqycpb0oa"]
+[gd_scene load_steps=6 format=3 uid="uid://dfmyuqycpb0oa"]
 
 [ext_resource type="Script" uid="uid://dr8ei6402xb3e" path="res://enemies/homing_enemy/homing_enemy.gd" id="1_gx1ii"]
 [ext_resource type="Texture2D" uid="uid://csyny0w44f6uc" path="res://enemies/homing_enemy/homing_enemy.png" id="2_gx1ii"]
 [ext_resource type="AudioStream" uid="uid://dywm04v350a4b" path="res://external_assets/sketcherskt/laserpew.ogg" id="3_3os5y"]
+[ext_resource type="PackedScene" uid="uid://bs48mw0qglkar" path="res://shared/death_explosion.tscn" id="4_f1qdr"]
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_f1qdr"]
 random_pitch = 1.1
@@ -33,5 +34,8 @@ polygon = PackedVector2Array(-20, -7, -12, -21, 19, -21, 20, 5, 12, 21, -13, 21,
 unique_name_in_owner = true
 stream = SubResource("AudioStreamRandomizer_f1qdr")
 pitch_scale = 2.0
+
+[node name="Explosions" parent="." instance=ExtResource("4_f1qdr")]
+unique_name_in_owner = true
 
 [connection signal="timeout" from="ShotTimer" to="." method="_on_shot_timer_timeout"]

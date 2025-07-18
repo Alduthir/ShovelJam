@@ -1,8 +1,8 @@
 class_name BeamPod extends Sprite2D
 
 @export var damage := 30.0
-@export var explosion := preload("res://shared/death_explosion.tscn")
 
+@onready var explosion : GPUParticles2D = %Explosions
 @onready var collider : CollisionShape2D = %CollisionShape2D
 @onready var animator : AnimatedSprite2D = %Beam
 @onready var beam_area : Area2D = %Area2D
@@ -30,18 +30,16 @@ func _ready() -> void:
 			var area_shape_2d : Shape2D = player.collision_shape.shape
 			var area_global_transform := other.global_transform
 	
-			var collision_points := area_shape_2d.collide_and_get_contacts(area_global_transform,
-									body_shape_2d,
-									body_global_transform)
-			
+			var collision_points := area_shape_2d.collide_and_get_contacts(
+				area_global_transform,
+				body_shape_2d,
+				body_global_transform
+			)
 			
 			if collision_points.is_empty() == false:
-				var particles : GPUParticles2D = explosion.instantiate()
-				particles.global_position = collision_points[0]
-				particles.finished.connect(particles.queue_free)
-				get_tree().root.add_child(particles)
-				particles.emitting = true
-		)	
+				explosion.global_position = collision_points[0]
+				explosion.emitting = true
+		)
 	
 	shoot_timer.timeout.connect(fire_beam)
 

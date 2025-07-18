@@ -1,6 +1,7 @@
 class_name BurstEnemy extends MovingEnemy
 ## This enemy will first move towards its target position. Upon arriving it will start shooting forward until it dies.
 
+#TODO: start making use of a pool
 @export var bullet_scene := preload("res://bullets/aimed_bullet.tscn")
 @export var shots_in_burst := 3
 @export var shot_cooldown := 0.05
