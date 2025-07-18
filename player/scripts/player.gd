@@ -1,6 +1,8 @@
 class_name Player
 extends Area2D
 
+signal finished
+
 @export var speed := 400.0
 @export var bullet_scene : PackedScene
 @export var special_scene : PackedScene
@@ -32,6 +34,7 @@ var is_knocked_back := false
 var knockback_velocity := Vector2.ZERO
 
 func _ready() -> void:
+	PlayerUi.visible = true
 	PlayerUi.current_health = PlayerUi.max_health
 	sprite_size = sprite.get_rect().size
 	
@@ -115,6 +118,7 @@ func take_damage(amount : float) -> void:
 		explosions.emitting = true
 		explosions.one_shot = true
 		explosions.finished.connect(func()->void:
+			finished.emit()
 			get_tree().change_scene_to_file("res://ui/MainMenu.tscn")
 		)
 	else:

@@ -8,7 +8,6 @@ const HANGAR_SCENE : String = "res://hangar/hangar.tscn"
 func _ready() -> void:
 	music.finished.connect(music.play)
 	PlayerUi.visible = false
-	Poolmanager.disable_all()
 	play_again_button.disabled = false
 
 func _on_play_again_button_pressed() -> void:

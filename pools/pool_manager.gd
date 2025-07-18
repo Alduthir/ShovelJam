@@ -85,7 +85,5 @@ func enable_instance(instance: Node2D) -> void:
 
 func disable_all() -> void:
 	for pool: Array in pools.values():
-		print(pool)
 		for instance: Node2D in pool:
-			print(instance)
 			disable_instance(instance)

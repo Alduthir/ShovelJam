@@ -7,7 +7,7 @@ extends Area2D
 @onready var sprite : Sprite2D = %Sprite2D
 @onready var explosion := %Explosions as GPUParticles2D
 @onready var smoke := %Smoke as GPUParticles2D
-@onready var bullet_sound : AudioStreamPlayer2D = %BulletSound
+@onready var bullet_sound : AudioStreamPlayer = %BulletSound
 
 var direction : Vector2 = Vector2.RIGHT
 var damaging : bool = false
@@ -37,7 +37,6 @@ func _on_area_entered(area: Area2D) -> void:
 func enable_particle_effects() -> void:
 	explosion.emitting = true
 	smoke.emitting = true
-	visible = false
 	smoke.finished.connect(func()->void:
 		explosion.emitting = false
 		smoke.emitting = false

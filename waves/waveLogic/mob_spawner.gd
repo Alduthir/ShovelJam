@@ -1,5 +1,7 @@
 class_name MobSpawner extends Node2D
 
+signal finished
+
 @export var waves : Array[Wave]
 
 @export var single : PackedScene
@@ -78,6 +80,7 @@ func set_mob_index(new_value : int)->void:
 func on_enemy_died(sender : Enemy)->void:
 	enemies.erase(sender)
 	if wave_index == waves.size() and enemies.size() == 0:
+		finished.emit()
 		get_tree().change_scene_to_file(CREDITS_SCENE)
 	
 func _on_next_wave_timer_timeout() -> void:

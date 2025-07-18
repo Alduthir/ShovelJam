@@ -7,7 +7,7 @@ class_name BeamPod extends Sprite2D
 @onready var animator : AnimatedSprite2D = %Beam
 @onready var beam_area : Area2D = %Area2D
 @onready var shoot_timer : Timer = %ShootTimer
-@onready var sfx : AudioStreamPlayer2D = %AudioStreamPlayer2D
+@onready var sfx : AudioStreamPlayer = %AudioStreamPlayer
 
 func _ready() -> void:
 	collider.disabled = true
