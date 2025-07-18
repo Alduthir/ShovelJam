@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://c2d31wvr1rba6"]
+[gd_scene load_steps=6 format=3 uid="uid://c2d31wvr1rba6"]
 
 [ext_resource type="Script" uid="uid://baftmdqg2c4ls" path="res://enemies/homing_enemy/burst_enemy.gd" id="1_rd2wf"]
 [ext_resource type="Texture2D" uid="uid://cjjbulbhmf4rw" path="res://enemies/homing_enemy/burst_enemy.png" id="2_rd2wf"]
 [ext_resource type="AudioStream" uid="uid://dywm04v350a4b" path="res://external_assets/sketcherskt/laserpew.ogg" id="3_jsmva"]
+[ext_resource type="PackedScene" uid="uid://bs48mw0qglkar" path="res://shared/death_explosion.tscn" id="4_yv6rj"]
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_yv6rj"]
 random_pitch = 1.1
@@ -13,7 +14,6 @@ stream_0/stream = ExtResource("3_jsmva")
 collision_layer = 4
 collision_mask = 3
 script = ExtResource("1_rd2wf")
-target_position = Vector2(200, 200)
 speed = 400.0
 health = 100.0
 
@@ -36,5 +36,8 @@ unique_name_in_owner = true
 stream = SubResource("AudioStreamRandomizer_yv6rj")
 pitch_scale = 2.0
 max_polyphony = 3
+
+[node name="Explosions" parent="." instance=ExtResource("4_yv6rj")]
+unique_name_in_owner = true
 
 [connection signal="timeout" from="BurstTimer" to="." method="_on_shot_timer_timeout"]

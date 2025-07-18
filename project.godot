@@ -22,6 +22,7 @@ config/icon="res://icon.svg"
 PlayerUi="*res://ui/PlayerUi.tscn"
 CollisionLayers="*res://shared/CollisionLayers.gd"
 EnemyType="*res://shared/enemy_type.gd"
+Poolmanager="*res://pools/PoolManager.tscn"
 
 [debug]
 
@@ -33,7 +34,6 @@ gdscript/warnings/unreachable_code=2
 gdscript/warnings/unreachable_pattern=2
 gdscript/warnings/untyped_declaration=2
 gdscript/warnings/unsafe_property_access=2
-gdscript/warnings/unsafe_method_access=2
 gdscript/warnings/unsafe_cast=2
 gdscript/warnings/unsafe_call_argument=2
 
@@ -41,7 +41,6 @@ gdscript/warnings/unsafe_call_argument=2
 
 window/size/viewport_width=1280
 window/size/viewport_height=720
-window/size/mode=2
 window/size/resizable=false
 
 [input]

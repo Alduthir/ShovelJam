@@ -2,16 +2,16 @@ class_name MobSpawner extends Node2D
 
 @export var waves : Array[Wave]
 
+@export var single : PackedScene
+@export var triple : PackedScene
+@export var aiming : PackedScene
+@export var burst : PackedScene
+@export var beam : PackedScene
+@export var boss : PackedScene
+
+
 @onready var next_wave_timer : Timer = %NextWaveTimer
 @onready var next_mob_timer : Timer = %NextMobTimer
-
-
-const SINGLE := preload("res://enemies/forward_shooting/forward_shooting_enemy.tscn")
-const TRIPLE := preload("res://enemies/forward_shooting/triple_shot_enemy.tscn")
-const AIMING := preload("res://enemies/homing_enemy/homing_enemy.tscn")
-const BURST := preload("res://enemies/homing_enemy/burst_enemy.tscn")
-const BEAM := preload("res://enemies/beam_enemy/beam_enemy.tscn")
-const BOSS := preload("res://enemies/boss/boss.tscn")
 
 const CREDITS_SCENE : String = "res://credits/credits.tscn"
 
@@ -36,17 +36,18 @@ func spawn_mob()->void:
 	var mob : Enemy
 	match current_wave.mobs[mob_index].type:
 		EnemyType.Type.SINGLE:
-			mob = SINGLE.instantiate()
+			mob = Poolmanager.get_instance(single)
 		EnemyType.Type.TRIPLE:
-			mob = TRIPLE.instantiate()
+			mob = Poolmanager.get_instance(triple)
 		EnemyType.Type.AIMED:
-			mob = AIMING.instantiate()
+			mob = Poolmanager.get_instance(aiming)
 		EnemyType.Type.BURST:
-			mob = BURST.instantiate()
+			mob = Poolmanager.get_instance(burst)
 		EnemyType.Type.BEAM:
-			mob = BEAM.instantiate()
+			mob = Poolmanager.get_instance(beam)
+			(mob as BeamEnemy).enable_timer()
 		EnemyType.Type.BOSS:
-			mob = BOSS.instantiate()
+			mob = Poolmanager.get_instance(boss)
 	
 	mob.spawn_health_pickup = current_wave.mobs[mob_index].spawn_health_pickup
 	mob.rotation_degrees = current_wave.mobs[mob_index].rotation
@@ -54,11 +55,13 @@ func spawn_mob()->void:
 	mob.has_died.connect(on_enemy_died)
 	if mob is MovingEnemy:
 		var moving_mob := mob as MovingEnemy
+		moving_mob.has_arrived = false
 		moving_mob.target_position = current_wave.mobs[mob_index].target_position
-		get_tree().root.add_child(moving_mob)
 		enemies.append(moving_mob)
+		if moving_mob is Boss:
+			var boss := moving_mob as Boss
+			boss.initialize()
 	else:
-		get_tree().root.add_child(mob)
 		enemies.append(mob)
 	mob_index += 1
 

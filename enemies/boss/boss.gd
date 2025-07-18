@@ -8,13 +8,12 @@ class_name Boss extends MovingEnemy
 @onready var bottom_shot_marker : Marker2D = %BottomShotMarker
 @onready var shot_audio : AudioStreamPlayer2D = %AudioStreamPlayer2D
 
-var has_arrived := false
 var can_rotate_pods := false : set = set_can_rotate_pods
 var aim_pods_at : Vector2 = Vector2.ZERO
 
 @export var beam_pods : Array[BeamPod]
 
-func _ready()->void:
+func initialize()->void:
 	for child : BeamPod in beam_pods:
 		var animatedSprite : AnimatedSprite2D = child.find_child("Beam")
 		animatedSprite.animation_finished.connect(func()->void:
@@ -23,7 +22,7 @@ func _ready()->void:
 	for child : Timer in find_children("ShootTimer"):
 		child.timeout.connect(func()->void:
 			can_rotate_pods = false
-			)
+		)
 
 func _process(delta: float) -> void:
 	if has_arrived == false:
@@ -55,15 +54,13 @@ func shoot_burst() -> void:
 
 func shoot() -> void:
 	#Top Shot
-	var bullet : Node2D = bullet_scene.instantiate()
-	bullet.position = top_shot_marker.global_position
-	add_sibling(bullet)
+	var top_bullet : Node2D = Poolmanager.get_instance(bullet_scene)
+	top_bullet.position = top_shot_marker.global_position
 	shot_audio.play()
 	
 	#Bottom Shot
-	bullet = bullet_scene.instantiate()
-	bullet.position = bottom_shot_marker.global_position
-	add_sibling(bullet)
+	var bottom_bullet: Node2D = Poolmanager.get_instance(bullet_scene)
+	bottom_bullet.position = bottom_shot_marker.global_position
 	shot_audio.play()
 
 func set_can_rotate_pods(new_value : bool)->void:
