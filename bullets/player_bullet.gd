@@ -7,19 +7,17 @@ extends Area2D
 @onready var sprite : Sprite2D = %Sprite2D
 @onready var explosion := %Explosions as GPUParticles2D
 @onready var smoke := %Smoke as GPUParticles2D
-@onready var bullet_sound : AudioStreamPlayer2D = %BulletSound
+@onready var bullet_sound : AudioStreamPlayer = %BulletSound
 
 var direction : Vector2 = Vector2.RIGHT
 var damaging : bool = false
-var can_move : bool = true
 
 func _ready() -> void:
 	sprite.modulate = color
 
 func _process(delta: float) -> void:
-	if can_move:
-		var rotated_direction := direction.rotated(rotation)
-		position += rotated_direction * speed * delta
+	var rotated_direction := direction.rotated(rotation)
+	position += rotated_direction * speed * delta
 
 func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
 	Poolmanager.return_instance(self)
@@ -39,11 +37,8 @@ func _on_area_entered(area: Area2D) -> void:
 func enable_particle_effects() -> void:
 	explosion.emitting = true
 	smoke.emitting = true
-	visible = false
-	can_move = false
 	smoke.finished.connect(func()->void:
 		explosion.emitting = false
 		smoke.emitting = false
 		Poolmanager.return_instance(self)
-		can_move = true
 	)

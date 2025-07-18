@@ -12,6 +12,7 @@ const HANGAR_SCENE : String = "res://hangar/hangar.tscn"
 func _ready() -> void:
 	music.finished.connect(music.play)
 	PlayerUi.visible = false
+	Poolmanager.disable_all()
 
 
 func _on_play_button_pressed() -> void:
@@ -19,8 +20,9 @@ func _on_play_button_pressed() -> void:
 	sfx.play()
 	sfx.finished.connect(func()->void:
 		get_tree().change_scene_to_file(HANGAR_SCENE)
-		)
+	)
 	play_button.disabled = true
+	music.stop()
 	
 
 func _on_quit_button_pressed() -> void:

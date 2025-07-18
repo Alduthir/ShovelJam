@@ -24,6 +24,7 @@ func _process(delta: float) -> void:
 func shoot() -> void:
 	var bullet : Node2D = Poolmanager.get_instance(bullet_scene)
 	bullet.global_position = shot_marker.global_position
+	Poolmanager.enable_instance(bullet)
 	shot_audio.play()
 	
 func _on_shot_timer_timeout() -> void:

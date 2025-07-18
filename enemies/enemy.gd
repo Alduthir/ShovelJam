@@ -37,6 +37,7 @@ func take_damage(amount: float)-> void:
 		if spawn_health_pickup:
 			var pickup : HealthPickup = Poolmanager.get_instance(health_pickup)
 			pickup.global_position = global_position
+			Poolmanager.enable_instance(pickup)
 			
 		explosion_effect.emitting = true
 		explosion_effect.finished.connect(func()->void:

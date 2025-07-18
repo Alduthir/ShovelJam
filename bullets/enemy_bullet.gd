@@ -7,7 +7,7 @@ extends Area2D
 @onready var sprite : Sprite2D = %Sprite2D
 @onready var explosion := %Explosions as GPUParticles2D
 @onready var smoke := %Smoke as GPUParticles2D
-@onready var bullet_sound : AudioStreamPlayer2D = %BulletSound
+@onready var bullet_sound : AudioStreamPlayer = %BulletSound
 
 var direction : Vector2 = Vector2.LEFT
 var damaging : bool = false
@@ -35,9 +35,14 @@ func _on_area_entered(area: Area2D) -> void:
 		
 		if player.can_take_damage == false:
 			Poolmanager.return_instance(self)
+			return
 		bullet_sound.pitch_scale = randf_range(0.8,1.2)
 		bullet_sound.play()
-		bullet_sound.finished.connect(bullet_sound.stop)
+		bullet_sound.finished.connect(
+			func() -> void:
+				bullet_sound.stop()
+				Poolmanager.return_instance(self)
+		)
 		player.take_damage(damage)
 		set_deferred("monitoring", false)
 		set_deferred("monitorable", false)
@@ -51,8 +56,6 @@ func enable_particle_effects() -> void:
 	explosion.emitting = true
 	smoke.global_position = global_position
 	smoke.emitting = true
-	explosion.reparent(get_tree().root)
-	smoke.reparent(get_tree().root)
 	smoke.finished.connect(func()->void:
 		explosion.emitting = false
 		smoke.emitting = false

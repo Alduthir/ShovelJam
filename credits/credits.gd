@@ -14,7 +14,7 @@ func _on_play_again_button_pressed() -> void:
 	sfx.play()
 	sfx.finished.connect(func()->void:
 		get_tree().change_scene_to_file(HANGAR_SCENE)
-		)
+	)
 	play_again_button.disabled = true
 
 func _on_quit_button_pressed() -> void:

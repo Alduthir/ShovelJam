@@ -1,5 +1,7 @@
 class_name MobSpawner extends Node2D
 
+signal finished
+
 @export var waves : Array[Wave]
 
 @export var single : PackedScene
@@ -59,10 +61,10 @@ func spawn_mob()->void:
 		moving_mob.target_position = current_wave.mobs[mob_index].target_position
 		enemies.append(moving_mob)
 		if moving_mob is Boss:
-			var boss := moving_mob as Boss
-			boss.initialize()
+			(moving_mob as Boss).initialize()
 	else:
 		enemies.append(mob)
+	Poolmanager.enable_instance(mob)
 	mob_index += 1
 
 func set_mob_index(new_value : int)->void:
@@ -78,6 +80,7 @@ func set_mob_index(new_value : int)->void:
 func on_enemy_died(sender : Enemy)->void:
 	enemies.erase(sender)
 	if wave_index == waves.size() and enemies.size() == 0:
+		finished.emit()
 		get_tree().change_scene_to_file(CREDITS_SCENE)
 	
 func _on_next_wave_timer_timeout() -> void:
