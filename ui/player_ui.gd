@@ -19,3 +19,6 @@ func set_health(new_value: float) -> void:
 		tween.stop()
 	tween = create_tween()
 	tween.tween_property(health_bar, "value", current_health, 1.0).set_ease(Tween.EASE_OUT)
+
+func heal(amount: float) -> void:
+	set_health(current_health + amount)

@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://cj1w3ruq6a714"]
+
+[ext_resource type="Script" uid="uid://cmjmlcdlhvqng" path="res://pickups/health.gd" id="1_8nj3e"]
+[ext_resource type="Texture2D" uid="uid://boyu7ajp7g6sp" path="res://pickups/health_pickup.png" id="1_dutu3"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dutu3"]
+size = Vector2(32, 32)
+
+[node name="Area2D" type="Area2D"]
+script = ExtResource("1_8nj3e")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+texture = ExtResource("1_dutu3")
+
+[node name="CollisionShape" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_dutu3")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]

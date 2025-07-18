@@ -106,7 +106,7 @@ func take_damage(amount : float) -> void:
 		explosions.one_shot = true
 		explosions.finished.connect(func()->void:
 			get_tree().change_scene_to_file("res://ui/MainMenu.tscn")
-			)
+		)
 	else:
 		damage_cooldown.start()
 
