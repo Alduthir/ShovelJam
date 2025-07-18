@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://iw2wohbdu57"]
+[gd_scene load_steps=8 format=3 uid="uid://iw2wohbdu57"]
 
 [ext_resource type="Script" uid="uid://ka2kwnckn1ny" path="res://waves/waveLogic/mob_spawner.gd" id="1_mqkga"]
 [ext_resource type="PackedScene" uid="uid://bt02ogitxuame" path="res://enemies/forward_shooting/forward_shooting_enemy.tscn" id="2_7lmed"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://dfmyuqycpb0oa" path="res://enemies/homing_enemy/homing_enemy.tscn" id="4_jsdj3"]
 [ext_resource type="PackedScene" uid="uid://c2d31wvr1rba6" path="res://enemies/homing_enemy/burst_enemy.tscn" id="5_bt278"]
 [ext_resource type="PackedScene" uid="uid://0gmqk6pvacyl" path="res://enemies/beam_enemy/beam_enemy.tscn" id="6_gbpjv"]
+[ext_resource type="PackedScene" uid="uid://chgfjwnrr5lj4" path="res://enemies/boss/boss.tscn" id="7_f5imx"]
 
 [node name="MobSpawner" type="Node2D"]
 script = ExtResource("1_mqkga")
@@ -14,6 +15,7 @@ triple = ExtResource("3_f5imx")
 aiming = ExtResource("4_jsdj3")
 burst = ExtResource("5_bt278")
 beam = ExtResource("6_gbpjv")
+boss = ExtResource("7_f5imx")
 
 [node name="NextWaveTimer" type="Timer" parent="."]
 unique_name_in_owner = true

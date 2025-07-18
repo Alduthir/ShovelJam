@@ -7,6 +7,7 @@ class_name MobSpawner extends Node2D
 @export var aiming : PackedScene
 @export var burst : PackedScene
 @export var beam : PackedScene
+@export var boss : PackedScene
 
 
 @onready var next_wave_timer : Timer = %NextWaveTimer
@@ -44,8 +45,9 @@ func spawn_mob()->void:
 			mob = Poolmanager.get_instance(burst)
 		EnemyType.Type.BEAM:
 			mob = Poolmanager.get_instance(beam)
+			(mob as BeamEnemy).enable_timer()
 		EnemyType.Type.BOSS:
-			pass
+			mob = Poolmanager.get_instance(boss)
 	
 	mob.spawn_health_pickup = current_wave.mobs[mob_index].spawn_health_pickup
 	mob.rotation_degrees = current_wave.mobs[mob_index].rotation
@@ -56,6 +58,9 @@ func spawn_mob()->void:
 		moving_mob.has_arrived = false
 		moving_mob.target_position = current_wave.mobs[mob_index].target_position
 		enemies.append(moving_mob)
+		if moving_mob is Boss:
+			var boss := moving_mob as Boss
+			boss.initialize()
 	else:
 		enemies.append(mob)
 	mob_index += 1

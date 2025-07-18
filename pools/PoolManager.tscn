@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://ln8bkksiue3d"]
+[gd_scene load_steps=12 format=3 uid="uid://ln8bkksiue3d"]
 
 [ext_resource type="Script" uid="uid://ihc5ub3ta7pv" path="res://pools/pool_manager.gd" id="1_x8vg3"]
 [ext_resource type="PackedScene" uid="uid://cy88by0rop55u" path="res://bullets/player_bullet.tscn" id="2_nvlta"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://cuqw47rul42ei" path="res://enemies/forward_shooting/triple_shot_enemy.tscn" id="8_rt3lb"]
 [ext_resource type="PackedScene" uid="uid://c2d31wvr1rba6" path="res://enemies/homing_enemy/burst_enemy.tscn" id="9_10dio"]
 [ext_resource type="PackedScene" uid="uid://dfmyuqycpb0oa" path="res://enemies/homing_enemy/homing_enemy.tscn" id="10_ysggb"]
+[ext_resource type="PackedScene" uid="uid://chgfjwnrr5lj4" path="res://enemies/boss/boss.tscn" id="11_8qx3e"]
 [ext_resource type="PackedScene" uid="uid://cj1w3ruq6a714" path="res://pickups/health.tscn" id="11_lhti4"]
 
 [node name="PoolManager" type="Node"]
@@ -22,5 +23,6 @@ ExtResource("7_08icl"): 10,
 ExtResource("8_rt3lb"): 10,
 ExtResource("9_10dio"): 10,
 ExtResource("10_ysggb"): 10,
-ExtResource("11_lhti4"): 10
+ExtResource("11_lhti4"): 10,
+ExtResource("11_8qx3e"): 1
 })

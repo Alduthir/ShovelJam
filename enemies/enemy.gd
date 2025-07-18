@@ -38,10 +38,10 @@ func take_damage(amount: float)-> void:
 			var pickup : HealthPickup = Poolmanager.get_instance(health_pickup)
 			pickup.global_position = global_position
 			
-		call_deferred("set_process", false)
 		explosion_effect.emitting = true
 		explosion_effect.finished.connect(func()->void:
 			has_died.emit(self)
 			explosion_effect.emitting = false
 			Poolmanager.return_instance(self)
 		)
+		call_deferred("set_process", false)

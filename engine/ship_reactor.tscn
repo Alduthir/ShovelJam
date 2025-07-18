@@ -108,7 +108,9 @@ amount = 7
 [node name="ExplosionAudio" type="AudioStreamPlayer2D" parent="."]
 unique_name_in_owner = true
 stream = SubResource("AudioStreamRandomizer_6iu28")
+volume_db = 5.0
 
 [node name="FixAudio" type="AudioStreamPlayer2D" parent="."]
 unique_name_in_owner = true
 stream = SubResource("AudioStreamRandomizer_i0xvy")
+volume_db = 5.0

@@ -31,7 +31,7 @@ shape = SubResource("CircleShape2D_sjpon")
 [node name="BulletSound" type="AudioStreamPlayer2D" parent="."]
 unique_name_in_owner = true
 stream = SubResource("AudioStreamRandomizer_jglok")
-volume_db = -9.0
+volume_db = -3.0
 
 [node name="Smoke" parent="." instance=ExtResource("5_7il4k")]
 unique_name_in_owner = true

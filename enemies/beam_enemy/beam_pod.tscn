@@ -88,11 +88,11 @@ disabled = true
 [node name="ShootTimer" type="Timer" parent="."]
 unique_name_in_owner = true
 wait_time = 2.0
-autostart = true
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 unique_name_in_owner = true
 stream = SubResource("AudioStreamRandomizer_nqaxy")
+volume_db = -2.0
 pitch_scale = 0.6
 
 [node name="Explosions" parent="." instance=ExtResource("5_nqaxy")]

@@ -1,8 +1,9 @@
-[gd_scene load_steps=12 format=3 uid="uid://dmawucxfbyrvp"]
+[gd_scene load_steps=13 format=3 uid="uid://dmawucxfbyrvp"]
 
 [ext_resource type="PackedScene" uid="uid://iw2wohbdu57" path="res://waves/waveLogic/MobSpawner.tscn" id="1_buypi"]
 [ext_resource type="Script" uid="uid://dplyqb1aufxkw" path="res://waves/waveLogic/wave.gd" id="2_njel3"]
-[ext_resource type="Resource" uid="uid://xvvk6geepkg2" path="res://waves/diagonal_beam_wave.tres" id="3_8pr8v"]
+[ext_resource type="Resource" uid="uid://xvvk6geepkg2" path="res://waves/diagonal_beam_wave.tres" id="3_njel3"]
+[ext_resource type="Resource" uid="uid://ccx4krs8bqy7w" path="res://waves/boss_wave.tres" id="4_njel3"]
 [ext_resource type="PackedScene" uid="uid://br05f64km1gja" path="res://engine/ship_reactor.tscn" id="5_oo8pe"]
 [ext_resource type="PackedScene" uid="uid://dgsri73h5qq53" path="res://player/player.tscn" id="6_4gito"]
 [ext_resource type="Texture2D" uid="uid://chuf8wjuqxnwn" path="res://external_assets/kenney_particle_pack/PNG (Transparent)/star_07.png" id="7_fbuy2"]
@@ -34,7 +35,7 @@ turbulence_noise_speed_random = 0.0
 [node name="Testlevel" type="Node2D"]
 
 [node name="MobSpawner" parent="." instance=ExtResource("1_buypi")]
-waves = Array[ExtResource("2_njel3")]([ExtResource("3_8pr8v")])
+waves = Array[ExtResource("2_njel3")]([ExtResource("3_njel3"), ExtResource("4_njel3")])
 
 [node name="ShipReactor" parent="." instance=ExtResource("5_oo8pe")]
 z_index = 1

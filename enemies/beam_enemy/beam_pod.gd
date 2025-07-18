@@ -17,7 +17,7 @@ func _ready() -> void:
 		collider.disabled = true
 		animator.stop()
 		sfx.stop()
-		)
+	)
 	
 	beam_area.area_entered.connect(func(other : Area2D)->void:
 		if other is Player:

@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="Wave" load_steps=4 format=3 uid="uid://ccx4krs8bqy7w"]
+
+[ext_resource type="Script" uid="uid://cad3xfvlk8rmp" path="res://waves/waveLogic/mob.gd" id="1_menfn"]
+[ext_resource type="Script" uid="uid://dplyqb1aufxkw" path="res://waves/waveLogic/wave.gd" id="2_7g4cp"]
+
+[sub_resource type="Resource" id="Resource_menfn"]
+script = ExtResource("1_menfn")
+type = 5
+spawn_position = Vector2(1400, 300)
+target_position = Vector2(900, 310)
+rotation = 0.0
+spawn_health_pickup = false
+metadata/_custom_type_script = "uid://cad3xfvlk8rmp"
+
+[resource]
+script = ExtResource("2_7g4cp")
+mobs = Array[ExtResource("1_menfn")]([SubResource("Resource_menfn")])
+spawn_delay = 1.0
+next_wave_delay = 5.0
+metadata/_custom_type_script = "uid://dplyqb1aufxkw"

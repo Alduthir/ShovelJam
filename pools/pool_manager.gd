@@ -8,29 +8,35 @@ var pools: Dictionary[String, Array] = {}
 
 func _ready() -> void:
 	for scene in pool_entries:
-		if scene:
-			var key := scene.resource_path.get_file().get_basename()
-			if scenes.has(key):
-				push_warning("Duplicate pool key: %s (ignored)" % key)
-				continue
+		create_pool(scene)
 
-			scenes[key] = scene
-			pools[key] = []
+func create_pool(scene: PackedScene) -> void:
+	if scene:
+		var key := scene.resource_path.get_file().get_basename()
+		if scenes.has(key):
+			push_warning("Duplicate pool key: %s (ignored)" % key)
+			return
 
-			for i in pool_entries[scene]:
-				var instance: Node2D = scene.instantiate()
-				disable_instance(instance)
-				add_child(instance)
-				pools[key].append(instance)
-		else:
-			push_error("Invalid scene in pool entry: %s" % str(scene))
+		scenes[key] = scene
+		pools[key] = []
+		
+		var parent : Node2D = Node2D.new()
+		parent.name = key
+		add_child(parent)
+
+		for i in pool_entries[scene]:
+			var instance: Node2D = scene.instantiate()
+			disable_instance(instance)
+			parent.add_child(instance)
+			pools[key].append(instance)
+	else:
+		push_error("Invalid scene in pool entry: %s" % str(scene))
 
 func get_instance(key: PackedScene) -> Node2D:
 	var key_name: String = key.resource_path.get_file().get_basename()
 	
 	if not pools.has(key_name):
-		push_error("No pool found for key: %s" % key)
-		return null
+		create_pool(key)
 
 	for obj: Node2D in pools[key_name]:
 		if not obj.visible:
@@ -38,7 +44,8 @@ func get_instance(key: PackedScene) -> Node2D:
 			return obj
 
 	var instance: Node2D= scenes[key_name].instantiate()
-	add_child(instance)
+	var parent: Node2D = get_node(key_name)
+	parent.add_child(instance)
 	pools[key_name].append(instance)
 	return instance
 
