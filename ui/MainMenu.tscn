@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://dxacd6m6wm7vj"]
+[gd_scene load_steps=7 format=3 uid="uid://dxacd6m6wm7vj"]
 
 [ext_resource type="Script" uid="uid://cv2gjiim8k54w" path="res://ui/main_menu.gd" id="1_b00nv"]
 [ext_resource type="AudioStream" uid="uid://csws4fgomr8mo" path="res://external_assets/Juhani_Junkala_SubspaceAudio/Juhani Junkala [Retro Game Music Pack] Title Screen.wav" id="2_rn8js"]
 [ext_resource type="AudioStream" uid="uid://o7tr44xw4ji2" path="res://external_assets/circlerun/Warm Digital Accept Button.wav" id="2_x262b"]
 [ext_resource type="AudioStream" uid="uid://cwvdnhvw573gc" path="res://external_assets/circlerun/Warm Digital Accept Button HP.wav" id="3_nmrkx"]
 [ext_resource type="AudioStream" uid="uid://c4c6oyc7q3wwa" path="res://external_assets/circlerun/Button Sound 9.wav" id="3_x262b"]
+[ext_resource type="Script" uid="uid://c002l8rsiohdb" path="res://ui/volume_slider.gd" id="4_qo3sn"]
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -65,15 +66,24 @@ layout_mode = 2
 size_flags_vertical = 3
 text = "Play"
 
-[node name="QuitButton" type="Button" parent="VBoxContainer/PanelContainer/VBoxContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/PanelContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
-text = "Quit
-"
+
+[node name="Label" type="Label" parent="VBoxContainer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+text = "Master Volume"
+
+[node name="VolumeSlider" type="HSlider" parent="VBoxContainer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+max_value = 1.0
+step = 0.05
+script = ExtResource("4_qo3sn")
 
 [node name="Music" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true
 stream = ExtResource("2_rn8js")
-volume_db = -10.0
+volume_db = -15.0
 autoplay = true
 
 [node name="SFX" type="AudioStreamPlayer" parent="."]
@@ -84,5 +94,3 @@ pitch_scale = 0.9
 
 [connection signal="mouse_entered" from="VBoxContainer/PanelContainer/VBoxContainer/PlayButton" to="." method="_on_play_button_mouse_entered"]
 [connection signal="pressed" from="VBoxContainer/PanelContainer/VBoxContainer/PlayButton" to="." method="_on_play_button_pressed"]
-[connection signal="mouse_entered" from="VBoxContainer/PanelContainer/VBoxContainer/QuitButton" to="." method="_on_quit_button_mouse_entered"]
-[connection signal="pressed" from="VBoxContainer/PanelContainer/VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]

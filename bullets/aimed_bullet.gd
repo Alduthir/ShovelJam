@@ -43,8 +43,8 @@ func _on_area_entered(area: Area2D) -> void:
 		bullet_sound.play()
 		bullet_sound.finished.connect(bullet_sound.stop)
 		player.take_damage(damage)
-		monitoring = false
-		monitorable = false
+		set_deferred("monitoring", false)
+		set_deferred("monitorable", false)
 		set_process(false)
 		sprite.visible = false
 		var explosion : GPUParticles2D = explosion_scene.instantiate()
