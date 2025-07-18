@@ -47,6 +47,7 @@ func spawn_mob()->void:
 		EnemyType.Type.BOSS:
 			pass
 	
+	mob.spawn_health_pickup = current_wave.mobs[mob_index].spawn_health_pickup
 	mob.rotation_degrees = current_wave.mobs[mob_index].rotation
 	mob.global_position = current_wave.mobs[mob_index].spawn_position
 	mob.has_died.connect(on_enemy_died)
