@@ -18,7 +18,6 @@ func _process(delta: float) -> void:
 		if distance <= 5.0:
 			has_arrived = true
 	elif shot_timer.is_stopped():
-		print("shooting in homing enemy")
 		shoot()
 		shot_timer.start()
 
