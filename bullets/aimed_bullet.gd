@@ -24,7 +24,7 @@ func initialize(start_pos: Vector2) -> void:
 		var player : Node2D = get_tree().get_nodes_in_group("Player")[0]
 		aim_direction = start_pos.direction_to(player.global_position)
 	rotation = aim_direction.angle()
-	visible = true
+	Poolmanager.enable_instance(self)
 
 
 func _process(delta: float) -> void:

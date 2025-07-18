@@ -3,8 +3,9 @@ extends Node
 ## Godot doesn't support specifying nested dicts in other dicts (Dictionary[String, Dictionary[PackedScene, int]]) which is why we will use the PackedScene's name as the key
 @export var pool_entries: Dictionary[PackedScene, int] = {}
 
-var scenes: Dictionary[String, PackedScene] = {}
 var pools: Dictionary[String, Array] = {}
+
+var default_location: Vector2 = Vector2.INF
 
 func _ready() -> void:
 	for scene in pool_entries:
@@ -13,11 +14,10 @@ func _ready() -> void:
 func create_pool(scene: PackedScene) -> void:
 	if scene:
 		var key := scene.resource_path.get_file().get_basename()
-		if scenes.has(key):
+		if pools.has(key):
 			push_warning("Duplicate pool key: %s (ignored)" % key)
 			return
 
-		scenes[key] = scene
 		pools[key] = []
 		
 		var parent : Node2D = Node2D.new()
@@ -43,7 +43,7 @@ func get_instance(key: PackedScene) -> Node2D:
 			enable_instance(obj)
 			return obj
 
-	var instance: Node2D= scenes[key_name].instantiate()
+	var instance: Node2D= key.instantiate()
 	var parent: Node2D = get_node(key_name)
 	parent.add_child(instance)
 	pools[key_name].append(instance)
@@ -54,6 +54,7 @@ func return_instance(node: Node2D) -> void:
 	
 func disable_instance(instance: Node2D) -> void:
 	instance.set_deferred("visible", false)
+	instance.position = default_location
 	instance.set_process(false)
 	instance.set_physics_process(false)
 	instance.set_process_input(false)
@@ -66,7 +67,7 @@ func disable_instance(instance: Node2D) -> void:
 			child.set_deferred("disabled", true)
 
 func enable_instance(instance: Node2D) -> void:
-	instance.visible = true
+	instance.set_deferred("visible", true)
 	instance.set_process(true)
 	instance.set_physics_process(true)
 	instance.set_process_input(true)
@@ -79,3 +80,10 @@ func enable_instance(instance: Node2D) -> void:
 			(child as CanvasItem).visible = true
 		if child is CollisionShape2D:
 			child.set_deferred("disabled", false)
+
+func disable_all() -> void:
+	for pool: Array in pools.values():
+		print(pool)
+		for instance: Node2D in pool:
+			print(instance)
+			disable_instance(instance)

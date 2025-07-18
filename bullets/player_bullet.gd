@@ -11,15 +11,13 @@ extends Area2D
 
 var direction : Vector2 = Vector2.RIGHT
 var damaging : bool = false
-var can_move : bool = true
 
 func _ready() -> void:
 	sprite.modulate = color
 
 func _process(delta: float) -> void:
-	if can_move:
-		var rotated_direction := direction.rotated(rotation)
-		position += rotated_direction * speed * delta
+	var rotated_direction := direction.rotated(rotation)
+	position += rotated_direction * speed * delta
 
 func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
 	Poolmanager.return_instance(self)
@@ -40,10 +38,8 @@ func enable_particle_effects() -> void:
 	explosion.emitting = true
 	smoke.emitting = true
 	visible = false
-	can_move = false
 	smoke.finished.connect(func()->void:
 		explosion.emitting = false
 		smoke.emitting = false
 		Poolmanager.return_instance(self)
-		can_move = true
 	)

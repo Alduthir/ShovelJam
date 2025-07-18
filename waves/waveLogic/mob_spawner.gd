@@ -59,10 +59,10 @@ func spawn_mob()->void:
 		moving_mob.target_position = current_wave.mobs[mob_index].target_position
 		enemies.append(moving_mob)
 		if moving_mob is Boss:
-			var boss := moving_mob as Boss
-			boss.initialize()
+			(moving_mob as Boss).initialize()
 	else:
 		enemies.append(mob)
+	Poolmanager.enable_instance(mob)
 	mob_index += 1
 
 func set_mob_index(new_value : int)->void:

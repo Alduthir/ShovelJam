@@ -19,6 +19,7 @@ func _process(delta: float) -> void:
 		if distance <= 5.0:
 			has_arrived = true
 	elif burst_timer.is_stopped():
+		print("shooting in burst enemy")
 		shoot_burst()
 		burst_timer.start()
 

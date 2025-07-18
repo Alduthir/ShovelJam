@@ -25,6 +25,9 @@ func initialize()->void:
 		)
 
 func _process(delta: float) -> void:
+	if target_position == Vector2.ZERO:
+		return
+	
 	if has_arrived == false:
 		var distance := global_position.distance_to(target_position)
 		var direction := global_position.direction_to(target_position)
@@ -32,6 +35,7 @@ func _process(delta: float) -> void:
 		if distance <= 5.0:
 			has_arrived = true
 	elif burst_timer.is_stopped():
+		print("shooting in boss")
 		shoot_burst()
 		burst_timer.start()
 
@@ -57,10 +61,12 @@ func shoot() -> void:
 	var top_bullet : Node2D = Poolmanager.get_instance(bullet_scene)
 	top_bullet.position = top_shot_marker.global_position
 	shot_audio.play()
+	Poolmanager.enable_instance(top_bullet)
 	
 	#Bottom Shot
 	var bottom_bullet: Node2D = Poolmanager.get_instance(bullet_scene)
 	bottom_bullet.position = bottom_shot_marker.global_position
+	Poolmanager.enable_instance(bottom_bullet)
 	shot_audio.play()
 
 func set_can_rotate_pods(new_value : bool)->void:
