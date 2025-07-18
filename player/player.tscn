@@ -105,6 +105,7 @@ position = Vector2(48, 24)
 
 [node name="Explosions" parent="." instance=ExtResource("5_qjkh3")]
 unique_name_in_owner = true
+script = null
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 unique_name_in_owner = true

@@ -1,8 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://cy88by0rop55u"]
+[gd_scene load_steps=8 format=3 uid="uid://cy88by0rop55u"]
 
 [ext_resource type="Script" uid="uid://b1dpkdmhyjmb1" path="res://bullets/player_bullet.gd" id="1_jglok"]
 [ext_resource type="Texture2D" uid="uid://bweg3w60dlxti" path="res://bullets/bullet.png" id="2_4lwry"]
+[ext_resource type="PackedScene" uid="uid://xfkwh310tgd2" path="res://shared/hit_explosions.tscn" id="4_4lwry"]
 [ext_resource type="AudioStream" uid="uid://cul1p0vrwn8cu" path="res://external_assets/dklon/boom3.wav" id="5_4lwry"]
+[ext_resource type="PackedScene" uid="uid://cpkxmkaq2v6yg" path="res://shared/smoke.tscn" id="5_7il4k"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_sjpon"]
 radius = 7.28011
@@ -30,6 +32,12 @@ shape = SubResource("CircleShape2D_sjpon")
 unique_name_in_owner = true
 stream = SubResource("AudioStreamRandomizer_jglok")
 volume_db = -9.0
+
+[node name="Smoke" parent="." instance=ExtResource("5_7il4k")]
+unique_name_in_owner = true
+
+[node name="Explosions" parent="." instance=ExtResource("4_4lwry")]
+unique_name_in_owner = true
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

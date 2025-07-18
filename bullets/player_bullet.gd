@@ -5,8 +5,8 @@ extends Area2D
 @export var color := Color.SKY_BLUE
 
 @onready var sprite : Sprite2D = %Sprite2D
-@onready var explosion_scene := preload("res://shared/hit_explosions.tscn")
-@onready var smoke_scene := preload("res://shared/smoke.tscn")
+@onready var explosion := %Explosions as GPUParticles2D
+@onready var smoke := %Smoke as GPUParticles2D
 @onready var bullet_sound : AudioStreamPlayer2D = %BulletSound
 
 var direction : Vector2 = Vector2.RIGHT
@@ -33,15 +33,16 @@ func _on_area_entered(area: Area2D) -> void:
 	
 	bullet_sound.play()
 	bullet_sound.finished.connect(bullet_sound.stop)
+	enable_particle_effects()
 	sprite.visible = false
-	var explosion : GPUParticles2D = explosion_scene.instantiate()
-	explosion.position = global_position
+	
+func enable_particle_effects() -> void:
+	explosion.global_position = global_position
 	explosion.emitting = true
-	var smoke : GPUParticles2D = smoke_scene.instantiate()
-	smoke.position = global_position
+	smoke.global_position = global_position
 	smoke.emitting = true
-	add_sibling(explosion)
-	add_sibling(smoke)
+	explosion.reparent(get_tree().root)
+	smoke.reparent(get_tree().root)
 	smoke.finished.connect(func()->void:
 		explosion.queue_free()
 		smoke.queue_free()

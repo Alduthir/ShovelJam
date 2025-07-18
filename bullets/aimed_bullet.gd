@@ -43,18 +43,22 @@ func _on_area_entered(area: Area2D) -> void:
 		bullet_sound.play()
 		bullet_sound.finished.connect(bullet_sound.stop)
 		player.take_damage(damage)
+		enable_particle_effects()
 		set_deferred("monitoring", false)
 		set_deferred("monitorable",  false)
 		set_process(false)
 		sprite.visible = false
-		explosion.position = global_position
-		explosion.emitting = true
-		smoke.position = global_position
-		smoke.emitting = true
-		explosion.reparent(get_tree().root)
-		smoke.reparent(get_tree().root)
-		smoke.finished.connect(func()->void:
-			explosion.queue_free()
-			smoke.queue_free()
-			queue_free()
-		)
+		
+		
+func enable_particle_effects() -> void:
+	explosion.global_position = global_position
+	explosion.emitting = true
+	smoke.global_position = global_position
+	smoke.emitting = true
+	explosion.reparent(get_tree().root)
+	smoke.reparent(get_tree().root)
+	smoke.finished.connect(func()->void:
+		explosion.queue_free()
+		smoke.queue_free()
+		queue_free()
+	)
