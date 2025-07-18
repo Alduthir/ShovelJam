@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://ln8bkksiue3d"]
+
+[ext_resource type="Script" uid="uid://ihc5ub3ta7pv" path="res://pools/pool_manager.gd" id="1_x8vg3"]
+[ext_resource type="PackedScene" uid="uid://cy88by0rop55u" path="res://bullets/player_bullet.tscn" id="2_nvlta"]
+
+[node name="PoolManager" type="Node"]
+script = ExtResource("1_x8vg3")
+pool_entries = Dictionary[PackedScene, int]({
+ExtResource("2_nvlta"): 100
+})

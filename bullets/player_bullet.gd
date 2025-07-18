@@ -20,7 +20,8 @@ func _process(delta: float) -> void:
 	position += rotated_direction * speed * delta
 
 func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
-	queue_free()
+	if visible:
+		Poolmanager.return_instance(self)
 
 func _on_area_entered(area: Area2D) -> void:
 	if damaging:
@@ -29,12 +30,12 @@ func _on_area_entered(area: Area2D) -> void:
 	if area is Enemy:
 		var enemy := area as Enemy
 		enemy.take_damage(damage)
-		set_process(false)
+		Poolmanager.return_instance(self)
 	
-	bullet_sound.play()
-	bullet_sound.finished.connect(bullet_sound.stop)
-	enable_particle_effects()
-	sprite.visible = false
+		bullet_sound.play()
+		bullet_sound.finished.connect(bullet_sound.stop)
+		enable_particle_effects()
+		sprite.visible = false
 	
 func enable_particle_effects() -> void:
 	explosion.global_position = global_position

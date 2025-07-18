@@ -76,19 +76,16 @@ func shoot() -> void:
 		can_shoot = true
 
 func spawn_bullets()-> void:
-	var horizontal_bullet : Node2D = bullet_scene.instantiate()
+	var horizontal_bullet : Node2D = Poolmanager.get_instance(bullet_scene)
 	horizontal_bullet.position = horizontal_bullet_marker.global_position
-	add_sibling(horizontal_bullet)
 	
-	var up_bullet : Node2D = bullet_scene.instantiate()
+	var up_bullet : Node2D = Poolmanager.get_instance(bullet_scene)
 	up_bullet.position = up_bullet_marker.global_position
 	up_bullet.rotation_degrees = -10
-	add_sibling(up_bullet)
 	
-	var down_bullet :Node2D = bullet_scene.instantiate()
+	var down_bullet :Node2D = Poolmanager.get_instance(bullet_scene)
 	down_bullet.position = down_bullet_marker.global_position
 	down_bullet.rotation_degrees = 10
-	add_sibling(down_bullet)
 
 func take_damage(amount : float) -> void:
 	if !can_take_damage:
