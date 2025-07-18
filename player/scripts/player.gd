@@ -87,20 +87,19 @@ func shoot() -> void:
 		can_shoot = true
 
 func spawn_bullets()-> void:
-	#horizontal bullet
-		var bullet : Node2D = bullet_scene.instantiate()
-		bullet.position = horizontal_bullet_marker.global_position
-		add_sibling(bullet)
-	#up bullet
-		bullet = bullet_scene.instantiate()
-		bullet.position = up_bullet_marker.global_position
-		bullet.rotation_degrees = -10
-		add_sibling(bullet)
-	#down bullet
-		bullet = bullet_scene.instantiate()
-		bullet.position = down_bullet_marker.global_position
-		bullet.rotation_degrees = 10
-		add_sibling(bullet)
+	var horizontal_bullet : Node2D = bullet_scene.instantiate()
+	horizontal_bullet.position = horizontal_bullet_marker.global_position
+	add_sibling(horizontal_bullet)
+	
+	var up_bullet : Node2D = bullet_scene.instantiate()
+	up_bullet.position = up_bullet_marker.global_position
+	up_bullet.rotation_degrees = -10
+	add_sibling(up_bullet)
+	
+	var down_bullet :Node2D = bullet_scene.instantiate()
+	down_bullet.position = down_bullet_marker.global_position
+	down_bullet.rotation_degrees = 10
+	add_sibling(down_bullet)
 
 func take_damage(amount : float) -> void:
 	if !can_take_damage:
@@ -119,7 +118,7 @@ func take_damage(amount : float) -> void:
 		explosions.one_shot = true
 		explosions.finished.connect(func()->void:
 			get_tree().change_scene_to_file("res://ui/MainMenu.tscn")
-			)
+		)
 	else:
 		damage_cooldown.start()
 
