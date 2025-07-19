@@ -15,6 +15,13 @@ signal has_died(sender : Enemy)
 func _ready() -> void:
 	max_health = health
 
+func initialize(mob: Mob) -> void:
+	health = max_health
+	dying = false
+	spawn_health_pickup = mob.spawn_health_pickup
+	rotation_degrees = mob.rotation
+	global_position = mob.spawn_position
+
 func take_damage(amount: float)-> void:
 	if dying:
 		return
