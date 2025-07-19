@@ -15,6 +15,11 @@ var damaging : bool = false
 func _ready() -> void:
 	sprite.modulate = color
 
+func initialize(shot_marker: Vector2, shot_rotation: int) -> void:
+	global_position = shot_marker
+	rotation = shot_rotation
+	damaging = false
+
 func _process(delta: float) -> void:
 	var rotated_direction := direction.rotated(rotation)
 	position += rotated_direction * speed * delta
