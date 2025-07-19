@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://0gmqk6pvacyl"]
+[gd_scene load_steps=5 format=3 uid="uid://0gmqk6pvacyl"]
 
 [ext_resource type="Script" uid="uid://yaw53fs6ysyt" path="res://enemies/beam_enemy/beam_enemy.gd" id="1_bcwvd"]
 [ext_resource type="PackedScene" uid="uid://dv620i700bxfe" path="res://enemies/beam_enemy/beam_pod.tscn" id="2_ulw1k"]
+[ext_resource type="PackedScene" uid="uid://bs48mw0qglkar" path="res://shared/death_explosion.tscn" id="3_8aite"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ulw1k"]
 radius = 18.0
@@ -37,4 +38,8 @@ shape = SubResource("CircleShape2D_ulw1k")
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
 
+[node name="Explosions" parent="." instance=ExtResource("3_8aite")]
+unique_name_in_owner = true
+
+[connection signal="screen_entered" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_entered"]
 [connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

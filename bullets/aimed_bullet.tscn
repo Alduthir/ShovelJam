@@ -1,8 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://dntuqbn8l0r61"]
+[gd_scene load_steps=7 format=3 uid="uid://dntuqbn8l0r61"]
 
 [ext_resource type="Script" uid="uid://cv36m2bgli07x" path="res://bullets/aimed_bullet.gd" id="1_nacei"]
 [ext_resource type="Texture2D" uid="uid://bweg3w60dlxti" path="res://bullets/bullet.png" id="2_ybpj4"]
+[ext_resource type="PackedScene" uid="uid://cpkxmkaq2v6yg" path="res://shared/smoke.tscn" id="4_ybpj4"]
 [ext_resource type="AudioStream" uid="uid://ckrufwnop0w71" path="res://external_assets/dklon/boom1.wav" id="5_ybpj4"]
+[ext_resource type="PackedScene" uid="uid://xfkwh310tgd2" path="res://shared/hit_explosions.tscn" id="5_yqjab"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_sjpon"]
 radius = 7.28011
@@ -24,7 +26,13 @@ shape = SubResource("CircleShape2D_sjpon")
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
 
-[node name="BulletSound" type="AudioStreamPlayer2D" parent="."]
+[node name="Smoke" parent="." instance=ExtResource("4_ybpj4")]
+unique_name_in_owner = true
+
+[node name="Explosions" parent="." instance=ExtResource("5_yqjab")]
+unique_name_in_owner = true
+
+[node name="BulletSound" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true
 stream = ExtResource("5_ybpj4")
 volume_db = 5.0

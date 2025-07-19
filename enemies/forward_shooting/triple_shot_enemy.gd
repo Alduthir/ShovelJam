@@ -9,9 +9,9 @@ class_name TripleShot extends MovingEnemy
 @onready var down_bullet_marker : Marker2D = %DownBulletMarker
 @onready var shot_audio : AudioStreamPlayer2D = %AudioStreamPlayer2D
 
-var has_arrived := false
-
 func _process(delta: float) -> void:
+	if target_position == Vector2.ZERO:
+		return
 	if has_arrived == false:
 		var distance := global_position.distance_to(target_position)
 		var direction := global_position.direction_to(target_position)
@@ -26,21 +26,19 @@ func shoot() -> void:
 	shot_audio.play()
 	
 	#horizontal bullet
-	var bullet : Node2D = bullet_scene.instantiate()
-	bullet.position = horizontal_bullet_marker.global_position
-	add_sibling(bullet)
+	var horizontal_bullet : Node2D = Poolmanager.get_instance(bullet_scene)
+	horizontal_bullet.global_position = horizontal_bullet_marker.global_position
+	Poolmanager.enable_instance(horizontal_bullet)
 	
-	#up bullet
-	bullet = bullet_scene.instantiate()
-	bullet.position = up_bullet_marker.global_position
-	bullet.rotation_degrees = -10
-	add_sibling(bullet)
+	var up_bullet : Node2D = Poolmanager.get_instance(bullet_scene)
+	up_bullet.global_position = up_bullet_marker.global_position
+	up_bullet.rotation_degrees = -10
+	Poolmanager.enable_instance(up_bullet)
 	
-	#down bullet
-	bullet = bullet_scene.instantiate()
-	bullet.position = down_bullet_marker.global_position
-	bullet.rotation_degrees = 10
-	add_sibling(bullet)
+	var down_bullet : Node2D = Poolmanager.get_instance(bullet_scene)
+	down_bullet.global_position = down_bullet_marker.global_position
+	down_bullet.rotation_degrees = 10
+	Poolmanager.enable_instance(down_bullet)
 	
 func _on_shot_timer_timeout() -> void:
 	shoot()

@@ -1,6 +1,8 @@
 class_name Player
 extends Area2D
 
+signal finished
+
 @export var speed := 400.0
 @export var bullet_scene : PackedScene
 @export var special_scene : PackedScene
@@ -32,6 +34,7 @@ var is_knocked_back := false
 var knockback_velocity := Vector2.ZERO
 
 func _ready() -> void:
+	PlayerUi.visible = true
 	PlayerUi.current_health = PlayerUi.max_health
 	sprite_size = sprite.get_rect().size
 	
@@ -87,19 +90,17 @@ func shoot() -> void:
 		can_shoot = true
 
 func spawn_bullets()-> void:
-	var horizontal_bullet : Node2D = bullet_scene.instantiate()
-	horizontal_bullet.position = horizontal_bullet_marker.global_position
-	add_sibling(horizontal_bullet)
+	var horizontal_bullet : Node2D = Poolmanager.get_instance(bullet_scene)
+	horizontal_bullet.global_position = horizontal_bullet_marker.global_position
+	horizontal_bullet.rotation_degrees = 0
 	
-	var up_bullet : Node2D = bullet_scene.instantiate()
-	up_bullet.position = up_bullet_marker.global_position
+	var up_bullet : Node2D = Poolmanager.get_instance(bullet_scene)
+	up_bullet.global_position = up_bullet_marker.global_position
 	up_bullet.rotation_degrees = -10
-	add_sibling(up_bullet)
 	
-	var down_bullet :Node2D = bullet_scene.instantiate()
-	down_bullet.position = down_bullet_marker.global_position
+	var down_bullet :Node2D = Poolmanager.get_instance(bullet_scene)
+	down_bullet.global_position = down_bullet_marker.global_position
 	down_bullet.rotation_degrees = 10
-	add_sibling(down_bullet)
 
 func take_damage(amount : float) -> void:
 	if !can_take_damage:
@@ -117,6 +118,7 @@ func take_damage(amount : float) -> void:
 		explosions.emitting = true
 		explosions.one_shot = true
 		explosions.finished.connect(func()->void:
+			finished.emit()
 			get_tree().change_scene_to_file("res://ui/MainMenu.tscn")
 		)
 	else:

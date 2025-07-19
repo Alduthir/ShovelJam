@@ -5,9 +5,9 @@ extends Area2D
 @export var color := Color.PURPLE
 
 @onready var sprite : Sprite2D = %Sprite2D
-@onready var explosion_scene := preload("res://shared/hit_explosions.tscn")
-@onready var smoke_scene := preload("res://shared/smoke.tscn")
-@onready var bullet_sound : AudioStreamPlayer2D = %BulletSound
+@onready var explosion := %Explosions as GPUParticles2D
+@onready var smoke := %Smoke as GPUParticles2D
+@onready var bullet_sound : AudioStreamPlayer = %BulletSound
 
 var direction : Vector2 = Vector2.LEFT
 var damaging : bool = false
@@ -20,7 +20,7 @@ func _process(delta: float) -> void:
 	position += rotated_direction * speed * delta
 
 func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
-	queue_free()
+	Poolmanager.return_instance(self)
 
 func _on_area_entered(area: Area2D) -> void:
 	#Workaround for bullets sometimes triggering area entered twice
@@ -34,25 +34,30 @@ func _on_area_entered(area: Area2D) -> void:
 		var player := area as Player		
 		
 		if player.can_take_damage == false:
-			queue_free()
+			Poolmanager.return_instance(self)
+			return
 		bullet_sound.pitch_scale = randf_range(0.8,1.2)
 		bullet_sound.play()
-		bullet_sound.finished.connect(bullet_sound.stop)
+		bullet_sound.finished.connect(
+			func() -> void:
+				bullet_sound.stop()
+				Poolmanager.return_instance(self)
+		)
 		player.take_damage(damage)
 		set_deferred("monitoring", false)
 		set_deferred("monitorable", false)
 		set_process(false)
 		sprite.visible = false
-		var explosion : GPUParticles2D = explosion_scene.instantiate()
-		explosion.position = global_position
-		explosion.emitting = true
-		var smoke : GPUParticles2D = smoke_scene.instantiate()
-		smoke.position = global_position
-		smoke.emitting = true
-		add_sibling(explosion)
-		add_sibling(smoke)
-		smoke.finished.connect(func()->void:
-			explosion.queue_free()
-			smoke.queue_free()
-			queue_free()
-			)
+		
+		
+# TODO: should maybe setup generic thing that is used on all bullets, or something easily callable to do this so we don't have so much duplication
+func enable_particle_effects() -> void:
+	explosion.global_position = global_position
+	explosion.emitting = true
+	smoke.global_position = global_position
+	smoke.emitting = true
+	smoke.finished.connect(func()->void:
+		explosion.emitting = false
+		smoke.emitting = false
+		Poolmanager.return_instance(self)
+	)

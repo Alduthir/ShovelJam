@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://cuqw47rul42ei"]
+[gd_scene load_steps=7 format=3 uid="uid://cuqw47rul42ei"]
 
 [ext_resource type="Script" uid="uid://bfk041ygm2jha" path="res://enemies/forward_shooting/triple_shot_enemy.gd" id="1_pobd8"]
 [ext_resource type="Texture2D" uid="uid://rum40p2sdy2e" path="res://enemies/forward_shooting/tri_shot_enemy.png" id="2_pobd8"]
 [ext_resource type="AudioStream" uid="uid://dywm04v350a4b" path="res://external_assets/sketcherskt/laserpew.ogg" id="3_yd1f8"]
+[ext_resource type="PackedScene" uid="uid://bs48mw0qglkar" path="res://shared/death_explosion.tscn" id="4_qf60t"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_yd1f8"]
 height = 64.0
@@ -45,5 +46,8 @@ shape = SubResource("CapsuleShape2D_yd1f8")
 unique_name_in_owner = true
 stream = SubResource("AudioStreamRandomizer_qf60t")
 pitch_scale = 2.0
+
+[node name="Explosions" parent="." instance=ExtResource("4_qf60t")]
+unique_name_in_owner = true
 
 [connection signal="timeout" from="ShotTimer" to="." method="_on_shot_timer_timeout"]

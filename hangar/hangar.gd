@@ -14,7 +14,7 @@ const GAME_SCENE := "res://game_scene.tscn"
 @onready var sfx : AudioStreamPlayer = %SFX
 
 func _ready() -> void:
-	PlayerUi.visible = true
+	visible = true
 	ship_reactor.completed_puzzles.clear()
 	music.finished.connect(music.play)
 	animator.play(HOVER)

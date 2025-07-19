@@ -63,3 +63,6 @@ unique_name_in_owner = true
 stream = ExtResource("9_udeyl")
 volume_db = -15.0
 autoplay = true
+
+[connection signal="finished" from="MobSpawner" to="." method="_on_finished"]
+[connection signal="finished" from="Player" to="." method="_on_finished"]
