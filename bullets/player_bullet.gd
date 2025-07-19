@@ -35,7 +35,6 @@ func _on_area_entered(area: Area2D) -> void:
 		var enemy := area as Enemy
 		enemy.take_damage(damage)
 		bullet_sound.play()
-		bullet_sound.finished.connect(bullet_sound.stop)
 		enable_particle_effects()
 		sprite.visible = false
 	
