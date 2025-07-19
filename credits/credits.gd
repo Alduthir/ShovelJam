@@ -16,6 +16,3 @@ func _on_play_again_button_pressed() -> void:
 		get_tree().change_scene_to_file(HANGAR_SCENE)
 	)
 	play_again_button.disabled = true
-
-func _on_quit_button_pressed() -> void:
-	get_tree().quit()

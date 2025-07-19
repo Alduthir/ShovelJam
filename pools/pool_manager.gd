@@ -65,7 +65,7 @@ func disable_instance(instance: Node2D) -> void:
 	for child in instance.get_children():
 		if child is CanvasItem:
 			(child as CanvasItem).visible = false
-		if child is CollisionShape2D:
+		if child is CollisionShape2D or child is CollisionPolygon2D:
 			child.set_deferred("disabled", true)
 
 func enable_instance(instance: Node2D) -> void:
@@ -79,7 +79,7 @@ func enable_instance(instance: Node2D) -> void:
 		child.set_physics_process(true)
 		if child is CanvasItem:
 			(child as CanvasItem).visible = true
-		if child is CollisionShape2D:
+		if child is CollisionShape2D or child is CollisionPolygon2D:
 			child.set_deferred("disabled", false)
 	instance.set_deferred("visible", true)
 

@@ -39,4 +39,24 @@ stream = ExtResource("5_hmo0t")
 volume_db = 5.0
 pitch_scale = 0.8
 
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -74.0
+offset_top = -69.0
+offset_right = 86.0
+offset_bottom = 49.0
+tooltip_text = "Press the button"
+mouse_filter = 1
+
+[node name="Control2" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 91.0
+offset_top = -35.0
+offset_right = 174.0
+offset_bottom = 35.0
+mouse_filter = 1
+mouse_default_cursor_shape = 2
+
 [connection signal="input_event" from="Button" to="." method="_on_button_input_event"]

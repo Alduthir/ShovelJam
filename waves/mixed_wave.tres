@@ -1,0 +1,101 @@
+[gd_resource type="Resource" script_class="Wave" load_steps=13 format=3 uid="uid://85jsmdf4sfct"]
+
+[ext_resource type="Script" uid="uid://cad3xfvlk8rmp" path="res://waves/waveLogic/mob.gd" id="1_qb8ef"]
+[ext_resource type="Script" uid="uid://dplyqb1aufxkw" path="res://waves/waveLogic/wave.gd" id="2_f55ow"]
+
+[sub_resource type="Resource" id="Resource_qb8ef"]
+script = ExtResource("1_qb8ef")
+type = 4
+spawn_position = Vector2(1400, 150)
+target_position = Vector2(500, 400)
+rotation = 45.0
+spawn_health_pickup = false
+metadata/_custom_type_script = "uid://cad3xfvlk8rmp"
+
+[sub_resource type="Resource" id="Resource_f55ow"]
+script = ExtResource("1_qb8ef")
+type = 4
+spawn_position = Vector2(1400, 450)
+target_position = Vector2(500, 400)
+rotation = 0.0
+spawn_health_pickup = false
+metadata/_custom_type_script = "uid://cad3xfvlk8rmp"
+
+[sub_resource type="Resource" id="Resource_xt0co"]
+script = ExtResource("1_qb8ef")
+type = 2
+spawn_position = Vector2(1400, 300)
+target_position = Vector2(600, 200)
+rotation = 0.0
+spawn_health_pickup = false
+metadata/_custom_type_script = "uid://cad3xfvlk8rmp"
+
+[sub_resource type="Resource" id="Resource_xagdg"]
+script = ExtResource("1_qb8ef")
+type = 2
+spawn_position = Vector2(1400, 300)
+target_position = Vector2(600, 300)
+rotation = 0.0
+spawn_health_pickup = false
+metadata/_custom_type_script = "uid://cad3xfvlk8rmp"
+
+[sub_resource type="Resource" id="Resource_faud4"]
+script = ExtResource("1_qb8ef")
+type = 2
+spawn_position = Vector2(1400, 300)
+target_position = Vector2(600, 400)
+rotation = 0.0
+spawn_health_pickup = false
+metadata/_custom_type_script = "uid://cad3xfvlk8rmp"
+
+[sub_resource type="Resource" id="Resource_i7ret"]
+script = ExtResource("1_qb8ef")
+type = 4
+spawn_position = Vector2(1400, 150)
+target_position = Vector2(500, 150)
+rotation = 0.0
+spawn_health_pickup = false
+metadata/_custom_type_script = "uid://cad3xfvlk8rmp"
+
+[sub_resource type="Resource" id="Resource_k7bf0"]
+script = ExtResource("1_qb8ef")
+type = 4
+spawn_position = Vector2(1400, 300)
+target_position = Vector2(500, 300)
+rotation = 0.0
+spawn_health_pickup = false
+metadata/_custom_type_script = "uid://cad3xfvlk8rmp"
+
+[sub_resource type="Resource" id="Resource_hnl1s"]
+script = ExtResource("1_qb8ef")
+type = 4
+spawn_position = Vector2(1400, 450)
+target_position = Vector2(500, 450)
+rotation = 0.0
+spawn_health_pickup = false
+metadata/_custom_type_script = "uid://cad3xfvlk8rmp"
+
+[sub_resource type="Resource" id="Resource_sme0c"]
+script = ExtResource("1_qb8ef")
+type = 3
+spawn_position = Vector2(1400, 300)
+target_position = Vector2(1000, 100)
+rotation = 0.0
+spawn_health_pickup = true
+metadata/_custom_type_script = "uid://cad3xfvlk8rmp"
+
+[sub_resource type="Resource" id="Resource_vqn88"]
+script = ExtResource("1_qb8ef")
+type = 3
+spawn_position = Vector2(1400, 300)
+target_position = Vector2(1000, 500)
+rotation = 0.0
+spawn_health_pickup = true
+metadata/_custom_type_script = "uid://cad3xfvlk8rmp"
+
+[resource]
+script = ExtResource("2_f55ow")
+mobs = Array[ExtResource("1_qb8ef")]([SubResource("Resource_qb8ef"), SubResource("Resource_f55ow"), SubResource("Resource_xt0co"), SubResource("Resource_xagdg"), SubResource("Resource_faud4"), SubResource("Resource_i7ret"), SubResource("Resource_k7bf0"), SubResource("Resource_hnl1s"), SubResource("Resource_sme0c"), SubResource("Resource_vqn88")])
+spawn_delay = 0.5
+next_wave_delay = 6.0
+metadata/_custom_type_script = "uid://dplyqb1aufxkw"

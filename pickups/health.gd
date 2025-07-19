@@ -6,7 +6,7 @@ extends Area2D
 @export var amount_to_heal_max : float = 10.0
 
 @onready var amount_to_heal : float = randf_range(amount_to_heal_min, amount_to_heal_max)
-
+@onready var sfx : AudioStreamPlayer = %AudioStreamPlayer
 var direction : Vector2 = Vector2.LEFT
 
 
@@ -16,5 +16,6 @@ func _process(delta: float) -> void:
 
 func _on_area_entered(area: Area2D) -> void:
 	if area is Player:
+		sfx.play()
 		PlayerUi.heal(amount_to_heal)
 		Poolmanager.return_instance(self)

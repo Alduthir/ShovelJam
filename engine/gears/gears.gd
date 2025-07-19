@@ -3,7 +3,7 @@ class_name Gears extends Node2D
 var speed := 400.0
 var is_dragging := false
 var degrees_rotated := 0.0 : set = update_rotated
-var required_rotation := 2500.0
+var required_rotation := 1500.0
 var is_completed := false
 
 signal puzzle_completed
