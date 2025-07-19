@@ -17,7 +17,7 @@ func create_pool(scene: PackedScene) -> void:
 		if pools.has(key):
 			push_warning("Duplicate pool key: %s (ignored)" % key)
 			return
-
+ 
 		pools[key] = []
 		
 		var parent : Node2D = Node2D.new()

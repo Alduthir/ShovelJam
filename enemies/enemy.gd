@@ -8,8 +8,12 @@ class_name Enemy extends Area2D
 
 var dying := false
 var spawn_health_pickup : bool = false
+var max_health: float
 
 signal has_died(sender : Enemy)
+
+func _ready() -> void:
+	max_health = health
 
 func take_damage(amount: float)-> void:
 	if dying:
