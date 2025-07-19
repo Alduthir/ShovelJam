@@ -7,7 +7,7 @@
 script = ExtResource("1_menfn")
 type = 5
 spawn_position = Vector2(1400, 300)
-target_position = Vector2(900, 310)
+target_position = Vector2(1000, 310)
 rotation = 0.0
 spawn_health_pickup = false
 metadata/_custom_type_script = "uid://cad3xfvlk8rmp"

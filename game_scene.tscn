@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://bms73m1kyij77"]
+[gd_scene load_steps=18 format=3 uid="uid://bms73m1kyij77"]
 
 [ext_resource type="PackedScene" uid="uid://br05f64km1gja" path="res://engine/ship_reactor.tscn" id="1_6e45b"]
 [ext_resource type="PackedScene" uid="uid://iw2wohbdu57" path="res://waves/waveLogic/MobSpawner.tscn" id="1_mj2jn"]
@@ -10,7 +10,10 @@
 [ext_resource type="Resource" uid="uid://d0vh3vvmewp42" path="res://waves/horizontal_beam_wave.tres" id="6_miq82"]
 [ext_resource type="Resource" uid="uid://xvvk6geepkg2" path="res://waves/diagonal_beam_wave.tres" id="7_j5hk1"]
 [ext_resource type="Texture2D" uid="uid://chuf8wjuqxnwn" path="res://external_assets/kenney_particle_pack/PNG (Transparent)/star_07.png" id="8_e35lh"]
+[ext_resource type="Resource" uid="uid://bntmr4vqo3il0" path="res://waves/protected_burst_wave.tres" id="8_mlphb"]
+[ext_resource type="Resource" uid="uid://85jsmdf4sfct" path="res://waves/mixed_wave.tres" id="9_opqoc"]
 [ext_resource type="AudioStream" uid="uid://bjp5pfk2gcdei" path="res://external_assets/Juhani_Junkala_SubspaceAudio/Juhani Junkala [Retro Game Music Pack] Level 1.wav" id="9_udeyl"]
+[ext_resource type="Resource" uid="uid://ccx4krs8bqy7w" path="res://waves/boss_wave.tres" id="10_bpcsf"]
 
 [sub_resource type="Gradient" id="Gradient_e35lh"]
 colors = PackedColorArray(1, 1, 0.686275, 1, 1, 1, 1, 1)
@@ -38,7 +41,7 @@ turbulence_noise_speed_random = 0.0
 script = ExtResource("1_udeyl")
 
 [node name="MobSpawner" parent="." instance=ExtResource("1_mj2jn")]
-waves = Array[ExtResource("2_6e45b")]([ExtResource("3_udeyl"), ExtResource("4_e35lh"), ExtResource("6_miq82"), ExtResource("7_j5hk1")])
+waves = Array[ExtResource("2_6e45b")]([ExtResource("3_udeyl"), ExtResource("4_e35lh"), ExtResource("6_miq82"), ExtResource("7_j5hk1"), ExtResource("8_mlphb"), ExtResource("9_opqoc"), ExtResource("10_bpcsf")])
 
 [node name="ShipReactor" parent="." instance=ExtResource("1_6e45b")]
 z_index = 1

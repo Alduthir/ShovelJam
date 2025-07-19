@@ -14,12 +14,13 @@ random_pitch = 1.1
 streams_count = 1
 stream_0/stream = ExtResource("4_8d0e3")
 
-[node name="Boss" type="Area2D"]
+[node name="Boss" type="Area2D" node_paths=PackedStringArray("beam_pods")]
 collision_layer = 4
 collision_mask = 3
 script = ExtResource("1_ubujh")
-shots_in_burst = 5
-shot_cooldown = 0.2
+shots_in_burst = 6
+shot_cooldown = 0.3
+beam_pods = [NodePath("BeamPod"), NodePath("BeamPod2"), NodePath("BeamPod3")]
 health = 3000.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

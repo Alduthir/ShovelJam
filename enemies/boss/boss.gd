@@ -20,6 +20,7 @@ func initialize()->void:
 			can_rotate_pods = true
 		)
 	for child : Timer in find_children("ShootTimer"):
+		child.start()
 		child.timeout.connect(func()->void:
 			can_rotate_pods = false
 		)
