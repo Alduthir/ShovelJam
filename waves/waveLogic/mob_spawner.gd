@@ -29,7 +29,7 @@ func spawn_wave()->void:
 	next_wave_timer.wait_time = current_wave.next_wave_delay
 	
 	if current_wave.mobs.is_empty():
-		print_debug("ERROR! wave :%d  has no mobs!" % wave_index)
+		push_error("Wave :%d  has no mobs!" % wave_index)
 
 	next_mob_timer.start()
 	pass
@@ -51,6 +51,7 @@ func spawn_mob()->void:
 		EnemyType.Type.BOSS:
 			mob = Poolmanager.get_instance(boss)
 	
+	mob.health = mob.max_health
 	mob.spawn_health_pickup = current_wave.mobs[mob_index].spawn_health_pickup
 	mob.rotation_degrees = current_wave.mobs[mob_index].rotation
 	mob.global_position = current_wave.mobs[mob_index].spawn_position

@@ -58,13 +58,13 @@ func shoot_burst() -> void:
 func shoot() -> void:
 	#Top Shot
 	var top_bullet : Node2D = Poolmanager.get_instance(bullet_scene)
-	top_bullet.position = top_shot_marker.global_position
+	top_bullet.initialize(top_shot_marker.global_position)
 	shot_audio.play()
 	Poolmanager.enable_instance(top_bullet)
 	
 	#Bottom Shot
 	var bottom_bullet: Node2D = Poolmanager.get_instance(bullet_scene)
-	bottom_bullet.position = bottom_shot_marker.global_position
+	bottom_bullet.initialize(bottom_shot_marker.global_position)
 	Poolmanager.enable_instance(bottom_bullet)
 	shot_audio.play()
 

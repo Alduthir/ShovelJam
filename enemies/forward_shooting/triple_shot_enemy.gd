@@ -27,17 +27,15 @@ func shoot() -> void:
 	
 	#horizontal bullet
 	var horizontal_bullet : Node2D = Poolmanager.get_instance(bullet_scene)
-	horizontal_bullet.global_position = horizontal_bullet_marker.global_position
+	horizontal_bullet.initialize(horizontal_bullet_marker.global_position, 0)
 	Poolmanager.enable_instance(horizontal_bullet)
 	
 	var up_bullet : Node2D = Poolmanager.get_instance(bullet_scene)
-	up_bullet.global_position = up_bullet_marker.global_position
-	up_bullet.rotation_degrees = -10
+	up_bullet.initialize(up_bullet_marker.global_position, -10)
 	Poolmanager.enable_instance(up_bullet)
 	
 	var down_bullet : Node2D = Poolmanager.get_instance(bullet_scene)
-	down_bullet.global_position = down_bullet_marker.global_position
-	down_bullet.rotation_degrees = 10
+	down_bullet.initialize(down_bullet_marker.global_position, 10)
 	Poolmanager.enable_instance(down_bullet)
 	
 func _on_shot_timer_timeout() -> void:
