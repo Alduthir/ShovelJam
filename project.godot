@@ -107,8 +107,6 @@ special={
 
 [physics]
 
-common/physics_ticks_per_second=40
-2d/solver/solver_iterations=12
 common/physics_interpolation=true
 
 [rendering]

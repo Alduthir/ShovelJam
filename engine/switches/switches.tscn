@@ -23,3 +23,14 @@ position = Vector2(40, 64)
 
 [node name="Switch6" parent="." instance=ExtResource("1_m5y1i")]
 position = Vector2(72, 64)
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -15.0
+offset_top = -16.0
+offset_right = 95.0
+offset_bottom = 96.0
+tooltip_text = "Switch On"
+mouse_filter = 1
+mouse_default_cursor_shape = 2
