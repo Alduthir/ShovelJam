@@ -18,7 +18,7 @@ type = 4
 spawn_position = Vector2(1400, 100)
 target_position = Vector2(500, 400)
 rotation = 65.0
-spawn_health_pickup = null
+spawn_health_pickup = false
 metadata/_custom_type_script = "uid://cad3xfvlk8rmp"
 
 [sub_resource type="Resource" id="Resource_trmwi"]
@@ -27,7 +27,7 @@ type = 4
 spawn_position = Vector2(1400, 500)
 target_position = Vector2(500, 400)
 rotation = 45.0
-spawn_health_pickup = null
+spawn_health_pickup = false
 metadata/_custom_type_script = "uid://cad3xfvlk8rmp"
 
 [sub_resource type="Resource" id="Resource_4ujvf"]
@@ -36,7 +36,7 @@ type = 4
 spawn_position = Vector2(1400, 400)
 target_position = Vector2(500, 400)
 rotation = 65.0
-spawn_health_pickup = null
+spawn_health_pickup = false
 metadata/_custom_type_script = "uid://cad3xfvlk8rmp"
 
 [sub_resource type="Resource" id="Resource_o1fwf"]
@@ -45,7 +45,7 @@ type = 3
 spawn_position = Vector2(1400, 200)
 target_position = Vector2(500, 400)
 rotation = 0.0
-spawn_health_pickup = null
+spawn_health_pickup = false
 metadata/_custom_type_script = "uid://cad3xfvlk8rmp"
 
 [sub_resource type="Resource" id="Resource_qbmug"]
@@ -54,7 +54,7 @@ type = 4
 spawn_position = Vector2(1400, 300)
 target_position = Vector2(500, 400)
 rotation = 65.0
-spawn_health_pickup = null
+spawn_health_pickup = false
 metadata/_custom_type_script = "uid://cad3xfvlk8rmp"
 
 [resource]
