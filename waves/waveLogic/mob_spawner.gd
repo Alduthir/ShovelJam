@@ -51,10 +51,7 @@ func spawn_mob()->void:
 		EnemyType.Type.BOSS:
 			mob = Poolmanager.get_instance(boss)
 	
-	mob.health = mob.max_health
-	mob.spawn_health_pickup = current_wave.mobs[mob_index].spawn_health_pickup
-	mob.rotation_degrees = current_wave.mobs[mob_index].rotation
-	mob.global_position = current_wave.mobs[mob_index].spawn_position
+	mob.initialize(current_wave.mobs[mob_index])
 	mob.has_died.connect(on_enemy_died)
 	if mob is MovingEnemy:
 		var moving_mob := mob as MovingEnemy
@@ -62,7 +59,7 @@ func spawn_mob()->void:
 		moving_mob.target_position = current_wave.mobs[mob_index].target_position
 		enemies.append(moving_mob)
 		if moving_mob is Boss:
-			(moving_mob as Boss).initialize()
+			(moving_mob as Boss).initialize_boss()
 	else:
 		enemies.append(mob)
 	Poolmanager.enable_instance(mob)

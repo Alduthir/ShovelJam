@@ -13,7 +13,7 @@ var aim_pods_at : Vector2 = Vector2.ZERO
 
 @export var beam_pods : Array[BeamPod]
 
-func initialize()->void:
+func initialize_boss()->void:
 	for child : BeamPod in beam_pods:
 		var animatedSprite : AnimatedSprite2D = child.find_child("Beam")
 		animatedSprite.animation_finished.connect(func()->void:
