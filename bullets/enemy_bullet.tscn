@@ -1,10 +1,12 @@
-[gd_scene load_steps=7 format=3 uid="uid://c3qaut3rpoyrt"]
+[gd_scene load_steps=9 format=3 uid="uid://c3qaut3rpoyrt"]
 
 [ext_resource type="Script" uid="uid://3rrq2j8s5yar" path="res://bullets/enemy_bullet.gd" id="1_v5fu0"]
 [ext_resource type="Texture2D" uid="uid://bweg3w60dlxti" path="res://bullets/bullet.png" id="2_3il18"]
+[ext_resource type="Material" uid="uid://shc44r0efrv4" path="res://shared/materials/bullet_smoke.tres" id="4_uy0w8"]
 [ext_resource type="PackedScene" uid="uid://cpkxmkaq2v6yg" path="res://shared/smoke.tscn" id="4_v5fu0"]
 [ext_resource type="AudioStream" uid="uid://c0s7a26nuis8g" path="res://external_assets/dklon/boom2.wav" id="5_3il18"]
 [ext_resource type="PackedScene" uid="uid://xfkwh310tgd2" path="res://shared/hit_explosions.tscn" id="5_c0w2n"]
+[ext_resource type="Material" uid="uid://cxmddp7425602" path="res://shared/materials/bullet_explosions.tres" id="6_xcksc"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_sjpon"]
 radius = 7.28011
@@ -26,9 +28,11 @@ shape = SubResource("CircleShape2D_sjpon")
 
 [node name="Smoke" parent="." instance=ExtResource("4_v5fu0")]
 unique_name_in_owner = true
+process_material = ExtResource("4_uy0w8")
 
 [node name="Explosions" parent="." instance=ExtResource("5_c0w2n")]
 unique_name_in_owner = true
+process_material = ExtResource("6_xcksc")
 
 [node name="BulletSound" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true

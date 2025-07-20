@@ -19,9 +19,10 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-PlayerUi="*res://ui/PlayerUi.tscn"
+ParticlesCache="*res://shared/ParticlesCache.gd"
 CollisionLayers="*res://shared/CollisionLayers.gd"
 EnemyType="*res://shared/enemy_type.gd"
+PlayerUi="*res://ui/PlayerUi.tscn"
 Poolmanager="*res://pools/PoolManager.tscn"
 
 [debug]
