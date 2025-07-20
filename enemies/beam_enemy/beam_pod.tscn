@@ -1,8 +1,9 @@
-[gd_scene load_steps=13 format=3 uid="uid://dv620i700bxfe"]
+[gd_scene load_steps=14 format=3 uid="uid://dv620i700bxfe"]
 
 [ext_resource type="Texture2D" uid="uid://dg51c8u7fe36h" path="res://enemies/beam_enemy/beampod.png" id="1_ssfjt"]
 [ext_resource type="Texture2D" uid="uid://c5yu224ddrbsn" path="res://bullets/beam_horizontal.png" id="2_najc3"]
 [ext_resource type="Script" uid="uid://dxokj5goccowb" path="res://enemies/beam_enemy/beam_pod.gd" id="2_oo1v4"]
+[ext_resource type="Material" uid="uid://ddkusqqyhq43s" path="res://shared/materials/death_explosion.tres" id="5_eurml"]
 [ext_resource type="PackedScene" uid="uid://bs48mw0qglkar" path="res://shared/death_explosion.tscn" id="5_nqaxy"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_oo1v4"]
@@ -88,6 +89,7 @@ wait_time = 2.0
 
 [node name="Explosions" parent="." instance=ExtResource("5_nqaxy")]
 unique_name_in_owner = true
+process_material = ExtResource("5_eurml")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true
